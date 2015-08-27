@@ -6,13 +6,9 @@ namespace Minesweeper
 {
     class Player : IComparable
     {
-        public Player(string name, int score)
-        {
-            this.name = name;
-            this.score = score;
-        }
         private string name;
         private int score;
+
         public string Name
         {
             get { return this.name; }
@@ -21,6 +17,13 @@ namespace Minesweeper
         {
             get { return this.score; }
         }
+
+        public Player(string name, int score)
+        {
+            this.name = name;
+            this.score = score;
+        }
+        
         public int CompareTo(object obj)
         {
             if (!(obj is Player))
@@ -30,6 +33,7 @@ namespace Minesweeper
             }
             return -1 * this.score.CompareTo(((Player)obj).score);
         }
+
         public override string ToString()
         {
             string result = this.name + " --> " + this.score;
