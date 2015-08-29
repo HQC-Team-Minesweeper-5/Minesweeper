@@ -6,8 +6,8 @@ namespace Minesweeper
 {
     class Player : IComparable
     {
-        private string name;
-        private int score;
+        private readonly string name;
+        private readonly int score;
 
         public string Name
         {
