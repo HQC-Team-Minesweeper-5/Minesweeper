@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Minesweeper
 {
-    class Player : IComparable
+    public class Player : IComparable
     {
         private readonly string name;
         private readonly int score;
