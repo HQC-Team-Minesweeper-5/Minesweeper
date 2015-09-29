@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-
 namespace Minesweeper
 {
-    class Game
+    using System;
+    using System.Collections.Generic;
+
+    public class Game
     {
         private const int MaxRows = 5;
         private const int MaxColumns = 10;
@@ -12,6 +12,11 @@ namespace Minesweeper
 
         private static Board board;
         private static List<Player> topPlayers;
+
+        public static void Main(string[] args)
+        {
+            Menu();
+        }
 
         private static void InitializeGameBoard()
         {
@@ -66,7 +71,7 @@ namespace Minesweeper
                 Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
             }
         }
-
+                
         private static void Menu()
         {
             InitializeTopPlayers();
@@ -139,6 +144,7 @@ namespace Minesweeper
                                 string name = Console.ReadLine();
                                 var player = new Player(name, score);
                                 TopAdd(ref player);
+
                                 // pokazvame klasiraneto
                                 Top();
                             }
@@ -182,11 +188,6 @@ namespace Minesweeper
                     continue;
                 }
             }
-        }
-
-        static void Main(string[] args)
-        {
-            Menu();
         }
     }
 }

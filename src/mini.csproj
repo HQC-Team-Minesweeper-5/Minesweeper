@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Game.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Field.cs" />
     <Compile Include="Player.cs" />
   </ItemGroup>
