@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Minesweeper
+﻿namespace Minesweeper
 {
+    using System;
+
     public class Player : IComparable
     {
         private readonly string name;
@@ -13,6 +11,7 @@ namespace Minesweeper
         {
             get { return this.name; }
         }
+
         public int Score
         {
             get { return this.score; }
