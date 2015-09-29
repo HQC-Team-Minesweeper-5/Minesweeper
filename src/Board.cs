@@ -7,6 +7,8 @@ namespace Minesweeper
         private readonly int rows;
         private readonly int columns;
         private readonly int minesCount;
+
+        //TODO: make the filed a simple matrix instead of a jagged array
         private readonly Field[][] fields;
 
         public Board(int rows, int columns, int minesCount)
@@ -32,63 +34,20 @@ namespace Minesweeper
             Mines.SetMines(fields, minesCount, rows, columns);
         }
 
+        public Field[][] Fields
+        {
+            get
+            {
+                return this.fields;
+            }
+        }
+
         public enum Status
         {
             SteppedOnAMine,
             AlreadyOpened,
             SuccessfullyOpened,
             AllFieldsAreOpened
-        }
-
-        public void PrintGameBoard()
-        {
-            Console.Write("    ");
-
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-            Console.Write("   _");
-
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
-
-            for (int i = 0; i < this.rows; i++)
-            {
-                Console.Write(i);
-                Console.Write(" | ");
-
-                for (int j = 0; j < this.columns; j++)
-                {
-                    Field currentField = this.fields[i][j];
-                    if (currentField.Status == Field.FieldStatus.Opened)
-                    {
-                        Console.Write(this.fields[i][j].Value);
-                        Console.Write(" ");
-                    }
-                    else
-                    {
-                        Console.Write("? ");
-                    }
-                }
-
-                Console.WriteLine("|");
-            }
-
-            Console.Write("   _");
-
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
         }
 
         public Status OpenField(int row, int column)
@@ -121,59 +80,112 @@ namespace Minesweeper
             return status;
         }
 
-        public void PrintAllFields()
-        {
-            Console.Write("    ");
+        ////TODO: Move to Printer class
+        //public void PrintGameBoard()
+        //{
+        //    Console.Write("    ");
 
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write(i + " ");
-            }
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write(i + " ");
+        //    }
 
-            Console.WriteLine();
-            Console.Write("   _");
+        //    Console.WriteLine();
+        //    Console.Write("   _");
 
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write("__");
-            }
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write("__");
+        //    }
 
-            Console.WriteLine();
+        //    Console.WriteLine();
 
-            for (int i = 0; i < this.rows; i++)
-            {
-                Console.Write(i);
-                Console.Write(" | ");
-                for (int j = 0; j < this.columns; j++)
-                {
-                    Field currentField = this.fields[i][j];
-                    if (currentField.Status == Field.FieldStatus.Opened)
-                    {
-                        Console.Write(this.fields[i][j].Value + " ");
-                    }
-                    else if (currentField.Status == Field.FieldStatus.IsAMine)
-                    {
-                        Console.Write("* ");
-                    }
-                    else
-                    {
-                        currentField.Value = Mines.CountSurroundingNumberOfMines(fields, i, j);
-                        Console.Write(this.fields[i][j].Value + " ");
-                    }
-                }
+        //    for (int i = 0; i < this.rows; i++)
+        //    {
+        //        Console.Write(i);
+        //        Console.Write(" | ");
 
-                Console.WriteLine("|");
-            }
+        //        for (int j = 0; j < this.columns; j++)
+        //        {
+        //            Field currentField = this.fields[i][j];
+        //            if (currentField.Status == Field.FieldStatus.Opened)
+        //            {
+        //                Console.Write(this.fields[i][j].Value);
+        //                Console.Write(" ");
+        //            }
+        //            else
+        //            {
+        //                Console.Write("? ");
+        //            }
+        //        }
 
-            Console.Write("   _");
+        //        Console.WriteLine("|");
+        //    }
 
-            for (int i = 0; i < this.columns; i++)
-            {
-                Console.Write("__");
-            }
+        //    Console.Write("   _");
 
-            Console.WriteLine();
-        }
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write("__");
+        //    }
+
+        //    Console.WriteLine();
+        //}
+
+        ////TODO: Move to Printer class
+        //public void PrintAllFields()
+        //{
+        //    Console.Write("    ");
+
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write(i + " ");
+        //    }
+
+        //    Console.WriteLine();
+        //    Console.Write("   _");
+
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write("__");
+        //    }
+
+        //    Console.WriteLine();
+
+        //    for (int i = 0; i < this.rows; i++)
+        //    {
+        //        Console.Write(i);
+        //        Console.Write(" | ");
+        //        for (int j = 0; j < this.columns; j++)
+        //        {
+        //            Field currentField = this.fields[i][j];
+        //            if (currentField.Status == Field.FieldStatus.Opened)
+        //            {
+        //                Console.Write(this.fields[i][j].Value + " ");
+        //            }
+        //            else if (currentField.Status == Field.FieldStatus.IsAMine)
+        //            {
+        //                Console.Write("* ");
+        //            }
+        //            else
+        //            {
+        //                currentField.Value = Mines.CountSurroundingNumberOfMines(fields, i, j);
+        //                Console.Write(this.fields[i][j].Value + " ");
+        //            }
+        //        }
+
+        //        Console.WriteLine("|");
+        //    }
+
+        //    Console.Write("   _");
+
+        //    for (int i = 0; i < this.columns; i++)
+        //    {
+        //        Console.Write("__");
+        //    }
+
+        //    Console.WriteLine();
+        //}
 
         public int CountOpenedFields()
         {

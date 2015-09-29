@@ -69,6 +69,7 @@
     <Compile Include="Field.cs" />
     <Compile Include="Mines.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
