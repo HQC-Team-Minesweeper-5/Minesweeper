@@ -67,6 +67,7 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Field.cs" />
+    <Compile Include="Mines.cs" />
     <Compile Include="Player.cs" />
   </ItemGroup>
   <ItemGroup>
