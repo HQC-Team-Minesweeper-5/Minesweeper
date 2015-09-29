@@ -13,60 +13,6 @@ namespace Minesweeper
         private static Board board;
         private static List<Player> topPlayers;
 
-        private static void InitializeGameBoard()
-        {
-            board = new Board(MaxRows, MaxColumns, MaxMines);
-        }
-
-        private static void InitializeTopPlayers()
-        {
-            topPlayers = new List<Player>();
-            topPlayers.Capacity = MaxTopPlayers;
-        }
-
-        private static bool CheckHighScores(int score)
-        {
-            if (topPlayers.Capacity > topPlayers.Count)
-            {
-                return true;
-            }
-
-            foreach (Player currentPlayer in topPlayers)
-            {
-                if (currentPlayer.Score < score)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static void TopAdd(ref Player player)
-        {
-            if (topPlayers.Capacity > topPlayers.Count)
-            {
-                topPlayers.Add(player);
-                topPlayers.Sort();
-            }
-            else
-            {
-                topPlayers.RemoveAt(topPlayers.Capacity - 1);
-                topPlayers.Add(player);
-                topPlayers.Sort();
-            }
-        }
-
-        private static void Top()
-        {
-            Console.WriteLine(value: "Scoreboard");
-
-            for (int i = 0; i < topPlayers.Count; i++)
-            {
-                Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
-            }
-        }
-                
         public static void Menu()
         {
             InitializeTopPlayers();
@@ -149,7 +95,7 @@ namespace Minesweeper
                         }
                         else
                         {
-                            Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);     
+                            Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
                         }
                     }
                     catch (Exception)
@@ -182,6 +128,60 @@ namespace Minesweeper
                 {
                     continue;
                 }
+            }
+        }
+
+        private static void InitializeGameBoard()
+        {
+            board = new Board(MaxRows, MaxColumns, MaxMines);
+        }
+
+        private static void InitializeTopPlayers()
+        {
+            topPlayers = new List<Player>();
+            topPlayers.Capacity = MaxTopPlayers;
+        }
+
+        private static bool CheckHighScores(int score)
+        {
+            if (topPlayers.Capacity > topPlayers.Count)
+            {
+                return true;
+            }
+
+            foreach (Player currentPlayer in topPlayers)
+            {
+                if (currentPlayer.Score < score)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void TopAdd(ref Player player)
+        {
+            if (topPlayers.Capacity > topPlayers.Count)
+            {
+                topPlayers.Add(player);
+                topPlayers.Sort();
+            }
+            else
+            {
+                topPlayers.RemoveAt(topPlayers.Capacity - 1);
+                topPlayers.Add(player);
+                topPlayers.Sort();
+            }
+        }
+
+        private static void Top()
+        {
+            Console.WriteLine(value: "Scoreboard");
+
+            for (int i = 0; i < topPlayers.Count; i++)
+            {
+                Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
             }
         }
     }
