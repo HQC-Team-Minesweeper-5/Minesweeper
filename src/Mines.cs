@@ -61,5 +61,25 @@
 
             return minesCount;
         }
+
+        public static void SetMines(Field[][] field, int minesCount, int rows, int columns)
+        {
+            var random = new Random();
+
+            for (int i = 0; i < minesCount; i++)
+            {
+                int row = random.Next(0, rows);
+                int column = random.Next(0, columns);
+
+                if (field[row][column].Status == Field.FieldStatus.IsAMine)
+                {
+                    i--;
+                }
+                else
+                {
+                    field[row][column].Status = Field.FieldStatus.IsAMine;
+                }
+            }
+        }
     }
 }

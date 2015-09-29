@@ -31,7 +31,7 @@ namespace Minesweeper
                 }
             }
 
-            this.SetMines();
+            Mines.SetMines(fields, minesCount, rows, columns);
         }
 
         public enum Status
@@ -192,32 +192,6 @@ namespace Minesweeper
             }
 
             return count;
-        }
-
-
-
-        private int GenerateRandomNumber(int minValue, int maxValue)
-        {
-            int number = this.random.Next(minValue, maxValue);
-            return number;
-        }
-
-        private void SetMines()
-        {
-            for (int i = 0; i < this.minesCount; i++)
-            {
-                int row = this.GenerateRandomNumber(0, this.rows);
-                int column = this.GenerateRandomNumber(0, this.columns);
-
-                if (this.fields[row][column].Status == Field.FieldStatus.IsAMine)
-                {
-                    i--;
-                }
-                else
-                {
-                    this.fields[row][column].Status = Field.FieldStatus.IsAMine;
-                }
-            }
         }
 
         private bool CheckIfWin()
