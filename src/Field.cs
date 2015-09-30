@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Minesweeper
 {
-    class Field
+    public class Field
     {
         private int value;
         private FieldStatus status;
