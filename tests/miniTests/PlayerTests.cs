@@ -2,7 +2,7 @@
 using Minesweeper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace miniTests
+namespace Mines.Tests
 {
     [TestClass]
     public class PlayerTests

@@ -70,6 +70,7 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="Mines.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TopPlayers.cs" />
   </ItemGroup>
