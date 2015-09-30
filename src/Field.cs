@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Minesweeper
 {
-    // Implement it as a pattern
+    // TODO: Implement it as a pattern, probably prototype (i.e implement IClonable)
     public class Field
     {
         private int value;
