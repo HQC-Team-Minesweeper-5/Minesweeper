@@ -3,7 +3,7 @@ namespace Minesweeper
     using System;
     using System.Collections.Generic;
 
-    public class Game
+    public static class Game
     {
         private const int MaxRows = 5;
         private const int MaxColumns = 10;
@@ -12,11 +12,6 @@ namespace Minesweeper
 
         private static Board board;
         private static List<Player> topPlayers;
-
-        public static void Main(string[] args)
-        {
-            Menu();
-        }
 
         private static void InitializeGameBoard()
         {
@@ -72,7 +67,7 @@ namespace Minesweeper
             }
         }
                 
-        private static void Menu()
+        public static void Menu()
         {
             InitializeTopPlayers();
 
