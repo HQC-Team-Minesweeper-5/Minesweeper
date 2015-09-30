@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini", "mini.csproj", "{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mines", "Mines.csproj", "{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniTests", "..\tests\miniTests\miniTests.csproj", "{AFE1F7DD-2571-43FE-9F46-EED9C290EF7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mines.Tests", "..\tests\miniTests\Mines.Tests.csproj", "{AFE1F7DD-2571-43FE-9F46-EED9C290EF7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
