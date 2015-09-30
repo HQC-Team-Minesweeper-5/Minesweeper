@@ -8,54 +8,26 @@
         public static int CountSurroundingNumberOfMines(Field[,] field, int row, int column)
         {
             int minesCount = 0;
-            int rows = field.GetLength(0);
-            int columns = field.GetLength(1);
 
-            if ((row > 0) && (column > 0) &&
-                (field[row - 1, column - 1].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
+            int minX = 0;
+            int maxX = field.GetLength(0) - 1;
+            int minY = 0;
+            int maxY = field.GetLength(1) - 1;
 
-            if ((row > 0) &&
-                (field[row - 1, column].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
+            int startPosX = (row - 1 < minX) ? row : row - 1;
+            int startPosY = (column - 1 < minY) ? column : column - 1;
+            int endPosX = (row + 1 > maxX) ? row : row + 1;
+            int endPosY = (column + 1 > maxY) ? column : column + 1;
 
-            if ((row > 0) && (column < columns - 1) &&
-                (field[row - 1, column + 1].Status == Field.FieldStatus.IsAMine))
+            for (int rowNum = startPosX; rowNum <= endPosX; rowNum++)
             {
-                minesCount++;
-            }
-
-            if ((column > 0) &&
-                (field[row, column - 1].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
-
-            if ((column < columns - 1) &&
-                (field[row, column + 1].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
-
-            if ((row < rows - 1) && (column > 0) &&
-                (field[row + 1, column - 1].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
-
-            if ((row < rows - 1) && (field[row + 1, column].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
-            }
-
-            if ((row < rows - 1) && (column < columns - 1) &&
-                (field[row + 1, column + 1].Status == Field.FieldStatus.IsAMine))
-            {
-                minesCount++;
+                for (int colNum = startPosY; colNum <= endPosY; colNum++)
+                {
+                    if (field[rowNum, colNum].Status == Field.FieldStatus.IsAMine)
+                    {
+                        minesCount++;
+                    }
+                }
             }
 
             return minesCount;
