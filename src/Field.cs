@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Minesweeper
 {
+    // Implement it as a pattern
     public class Field
     {
         private int value;

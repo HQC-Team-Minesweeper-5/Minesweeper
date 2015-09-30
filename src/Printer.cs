@@ -5,7 +5,7 @@
 
     public class Printer
     {
-        public static void PrintGameBoard(Field[][] field, int rows, int columns)
+        public static void PrintGameBoard(Field[,] field, int rows, int columns)
         {
             Console.Write("    ");
 
@@ -31,11 +31,11 @@
 
                 for (int j = 0; j < columns; j++)
                 {
-                    Field currentField = field[i][j];
-                    
+                    Field currentField = field[i, j];
+
                     if (currentField.Status == Field.FieldStatus.Opened)
                     {
-                        Console.Write(field[i][j].Value);
+                        Console.Write(field[i, j].Value);
                         Console.Write(" ");
                     }
                     else
@@ -57,7 +57,7 @@
             Console.WriteLine();
         }
 
-        public static void PrintAllFields(Field[][] field, int rows, int columns)
+        public static void PrintAllFields(Field[,] field, int rows, int columns)
         {
             Console.Write("    ");
 
@@ -82,10 +82,10 @@
                 Console.Write(" | ");
                 for (int j = 0; j < columns; j++)
                 {
-                    Field currentField = field[i][j];
+                    Field currentField = field[i, j];
                     if (currentField.Status == Field.FieldStatus.Opened)
                     {
-                        Console.Write(field[i][j].Value + " ");
+                        Console.Write(field[i, j].Value + " ");
                     }
                     else if (currentField.Status == Field.FieldStatus.IsAMine)
                     {
@@ -94,7 +94,7 @@
                     else
                     {
                         currentField.Value = Mines.CountSurroundingNumberOfMines(field, i, j);
-                        Console.Write(field[i][j].Value + " ");
+                        Console.Write(field[i, j].Value + " ");
                     }
                 }
 

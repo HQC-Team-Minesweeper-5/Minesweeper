@@ -32,7 +32,8 @@ namespace Minesweeper
                         "Use 'top' to view the scoreboard, 'restart' to start a new game" +
                         "and 'exit' to quit the game.");
 
-                    Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
+                    //Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
+                    Printer.PrintGameBoard(board.PlayingBoard, MaxRows, MaxColumns);
                 }
                 else if (str == "exit")
                 {
@@ -50,7 +51,8 @@ namespace Minesweeper
                         Board.Status status = board.OpenField(choosenRow, chosenColumn);
                         if (status == Board.Status.SteppedOnAMine)
                         {
-                            Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
+                            //Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
+                            Printer.PrintAllFields(board.PlayingBoard, MaxRows, MaxColumns);
 
                             int score = board.CountOpenedFields();
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
@@ -75,7 +77,9 @@ namespace Minesweeper
                         }
                         else if (status == Board.Status.AllFieldsAreOpened)
                         {
-                            Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
+                            //Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
+                            Printer.PrintAllFields(board.PlayingBoard, MaxRows, MaxColumns);
+
                             int score = board.CountOpenedFields();
                             Console.WriteLine(value: "Congratulations! You win!!");
 
@@ -95,7 +99,8 @@ namespace Minesweeper
                         }
                         else
                         {
-                            Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
+                            //Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
+                            Printer.PrintGameBoard(board.PlayingBoard, MaxRows, MaxColumns);
                         }
                     }
                     catch (Exception)
