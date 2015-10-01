@@ -44,7 +44,7 @@ namespace Minesweeper
             }
             else
             {
-                field.Value = Mines.CountSurroundingNumberOfMines(this.playingBoard, row, column);
+                field.Value = Mines.CountSurroundingMines(this.playingBoard, row, column);
                 field.Status = Field.FieldStatus.Opened;
                 if (this.CheckIfWin())
                 {

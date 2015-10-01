@@ -5,7 +5,7 @@
 
     public class Mines
     {
-        public static int CountSurroundingNumberOfMines(Field[,] field, int row, int column)
+        public static int CountSurroundingMines(Field[,] field, int row, int column)
         {
             int minesCount = 0;
 

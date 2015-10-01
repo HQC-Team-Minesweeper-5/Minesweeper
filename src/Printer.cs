@@ -93,7 +93,7 @@
                     }
                     else
                     {
-                        currentField.Value = Mines.CountSurroundingNumberOfMines(field, i, j);
+                        currentField.Value = Mines.CountSurroundingMines(field, i, j);
                         Console.Write(field[i, j].Value + " ");
                     }
                 }
