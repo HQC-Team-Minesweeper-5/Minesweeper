@@ -5,7 +5,7 @@ using System.Text;
 namespace Minesweeper
 {
     // TODO: Implement it as a pattern, probably prototype (i.e implement IClonable)
-    public class Field
+    public class Field : ICloneable
     {
         private int value;
         private FieldStatus status;
@@ -27,6 +27,11 @@ namespace Minesweeper
         {
             this.value = 0;
             this.status = FieldStatus.Closed;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

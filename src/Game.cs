@@ -1,7 +1,7 @@
 namespace Minesweeper
 {
+    using Enumerations;
     using System;
-    using System.Collections.Generic;
 
     public static class Game
     {
@@ -52,8 +52,8 @@ namespace Minesweeper
                 {
                     try
                     {
-                        Board.Status status = board.OpenField(choosenRow, chosenColumn);
-                        if (status == Board.Status.SteppedOnAMine)
+                        Status status = board.OpenField(choosenRow, chosenColumn);
+                        if (status == Status.SteppedOnAMine)
                         {
                             //Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
                             Printer.PrintAllFields(board.PlayingBoard, MaxRows, MaxColumns);
@@ -75,11 +75,11 @@ namespace Minesweeper
                             str = "restart";
                             continue;
                         }
-                        else if (status == Board.Status.AlreadyOpened)
+                        else if (status == Status.AlreadyOpened)
                         {
                             Console.WriteLine(value: "Illegal move!");
                         }
-                        else if (status == Board.Status.AllFieldsAreOpened)
+                        else if (status == Status.AllFieldsAreOpened)
                         {
                             //Printer.PrintAllFields(board.Fields, MaxRows, MaxColumns);
                             Printer.PrintAllFields(board.PlayingBoard, MaxRows, MaxColumns);

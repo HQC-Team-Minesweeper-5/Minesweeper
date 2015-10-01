@@ -1,39 +1,24 @@
 namespace Minesweeper
 {
-    using System;
+    using Enumerations;
 
     public class Board
     {
         private readonly int rows;
         private readonly int columns;
-        private readonly int minesCount;
+        private readonly int maxMines;
         private readonly Field[,] playingBoard;
 
         public Board(int rows, int columns, int minesCount)
         {
             this.rows = rows;
             this.columns = columns;
-            this.minesCount = minesCount;
+            this.maxMines = minesCount;
             this.playingBoard = new Field[rows, columns];
 
-            for (int i = 0; i < this.playingBoard.GetLength(0); i++)
-            {
-                for (int j = 0; j < this.playingBoard.GetLength(1); j++)
-                {
-                    this.playingBoard[i, j] = new Field();
-                }
-            }
-
+            this.PopulateField();
             Mines.SetMines(this.playingBoard, minesCount);
-        }
-
-        public enum Status
-        {
-            SteppedOnAMine,
-            AlreadyOpened,
-            SuccessfullyOpened,
-            AllFieldsAreOpened
-        }
+        }        
 
         public Field[,] PlayingBoard
         {
@@ -92,6 +77,17 @@ namespace Minesweeper
             return count;
         }
 
+        private void PopulateField()
+        {
+            for (int i = 0; i < this.rows; i++)
+            {
+                for (int j = 0; j < this.columns; j++)
+                {
+                    this.playingBoard[i, j] = new Field();
+                }
+            }
+        }
+
         private bool CheckIfWin()
         {
             int openedFields = 0;
@@ -107,7 +103,7 @@ namespace Minesweeper
                 }
             }
 
-            if ((openedFields + this.minesCount) == (this.rows * this.columns))
+            if ((openedFields + this.maxMines) == (this.rows * this.columns))
             {
                 return true;
             }
