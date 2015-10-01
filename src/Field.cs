@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Minesweeper
 {
+    using Enumerations;
+    using System;
+
     // TODO: Implement it as a pattern, probably prototype (i.e implement IClonable)
     public class Field : ICloneable
     {
         private int value;
         private FieldStatus status;
-
-        public enum FieldStatus { Closed, Opened, IsAMine }
-
+        
         public int Value
         {
             get { return this.value; }

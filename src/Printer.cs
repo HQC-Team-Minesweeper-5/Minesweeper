@@ -1,5 +1,6 @@
 ﻿namespace Minesweeper
 {
+    using Enumerations;
     using System;
     using System.Linq;
 
@@ -33,7 +34,7 @@
                 {
                     Field currentField = field[i, j];
 
-                    if (currentField.Status == Field.FieldStatus.Opened)
+                    if (currentField.Status == FieldStatus.Opened)
                     {
                         Console.Write(field[i, j].Value);
                         Console.Write(" ");
@@ -83,11 +84,11 @@
                 for (int j = 0; j < columns; j++)
                 {
                     Field currentField = field[i, j];
-                    if (currentField.Status == Field.FieldStatus.Opened)
+                    if (currentField.Status == FieldStatus.Opened)
                     {
                         Console.Write(field[i, j].Value + " ");
                     }
-                    else if (currentField.Status == Field.FieldStatus.IsAMine)
+                    else if (currentField.Status == FieldStatus.IsAMine)
                     {
                         Console.Write("* ");
                     }

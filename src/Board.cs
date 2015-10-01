@@ -34,18 +34,18 @@ namespace Minesweeper
 
             Status status;
 
-            if (field.Status == Field.FieldStatus.IsAMine)
+            if (field.Status == FieldStatus.IsAMine)
             {
                 status = Status.SteppedOnAMine;
             }
-            else if (field.Status == Field.FieldStatus.Opened)
+            else if (field.Status == FieldStatus.Opened)
             {
                 status = Status.AlreadyOpened;
             }
             else
             {
                 field.Value = Mines.CountSurroundingMines(this.playingBoard, row, column);
-                field.Status = Field.FieldStatus.Opened;
+                field.Status = FieldStatus.Opened;
                 if (this.CheckIfWin())
                 {
                     status = Status.AllFieldsAreOpened;
@@ -67,7 +67,7 @@ namespace Minesweeper
             {
                 for (int j = 0; j < this.playingBoard.GetLength(1); j++)
                 {
-                    if (this.playingBoard[i, j].Status == Field.FieldStatus.Opened)
+                    if (this.playingBoard[i, j].Status == FieldStatus.Opened)
                     {
                         count++;
                     }
@@ -96,7 +96,7 @@ namespace Minesweeper
             {
                 for (int j = 0; j < this.playingBoard.GetLength(1); j++)
                 {
-                    if (this.playingBoard[i, j].Status == Field.FieldStatus.Opened)
+                    if (this.playingBoard[i, j].Status == FieldStatus.Opened)
                     {
                         openedFields++;
                     }

@@ -1,5 +1,6 @@
 ﻿namespace Minesweeper
 {
+    using Enumerations;
     using System;
     using System.Linq;
 
@@ -23,7 +24,7 @@
             {
                 for (int colNum = startPosY; colNum <= endPosY; colNum++)
                 {
-                    if (field[rowNum, colNum].Status == Field.FieldStatus.IsAMine)
+                    if (field[rowNum, colNum].Status == FieldStatus.IsAMine)
                     {
                         minesCount++;
                     }
@@ -42,13 +43,13 @@
                 int row = random.Next(0, field.GetLength(0));
                 int column = random.Next(0, field.GetLength(1));
 
-                if (field[row, column].Status == Field.FieldStatus.IsAMine)
+                if (field[row, column].Status == FieldStatus.IsAMine)
                 {
                     i--;
                 }
                 else
                 {
-                    field[row, column].Status = Field.FieldStatus.IsAMine;
+                    field[row, column].Status = FieldStatus.IsAMine;
                 }
             }
         }
