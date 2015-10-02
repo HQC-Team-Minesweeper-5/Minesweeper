@@ -1,5 +1,6 @@
-﻿namespace Minesweeper
+﻿namespace Minesweeper.CLI
 {
+    using Logic;
     using System;
 
     public class Startup

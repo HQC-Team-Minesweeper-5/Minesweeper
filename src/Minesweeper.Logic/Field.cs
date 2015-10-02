@@ -1,4 +1,4 @@
-namespace Minesweeper
+namespace Minesweeper.Logic
 {
     using Enumerations;
     using System;
@@ -14,6 +14,7 @@ namespace Minesweeper
             get { return this.value; }
             set { this.value = value; }
         }
+
         public FieldStatus Status
         {
             get { return this.status; }

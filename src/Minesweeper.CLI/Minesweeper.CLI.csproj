@@ -62,21 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="Enumerations\FieldStatus.cs" />
-    <Compile Include="Enumerations\Status.cs" />
-    <Compile Include="Game.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Field.cs" />
-    <Compile Include="Initializer.cs" />
-    <Compile Include="Mines.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Printer.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="TopPlayers.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +83,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Minesweeper.Logic\Minesweeper.Logic.csproj">
+      <Project>{b305bb3d-d1e1-4f15-9740-3d347ad23031}</Project>
+      <Name>Minesweeper.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

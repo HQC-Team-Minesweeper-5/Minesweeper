@@ -1,4 +1,4 @@
-namespace Minesweeper
+namespace Minesweeper.Logic
 {
     using Enumerations;
 
@@ -28,19 +28,19 @@ namespace Minesweeper
             }
         }
 
-        public Status OpenField(int row, int column)
+        public BoardStatus OpenField(int row, int column)
         {
             Field field = this.playingBoard[row, column];
 
-            Status status;
+            BoardStatus status;
 
             if (field.Status == FieldStatus.IsAMine)
             {
-                status = Status.SteppedOnAMine;
+                status = BoardStatus.SteppedOnAMine;
             }
             else if (field.Status == FieldStatus.Opened)
             {
-                status = Status.AlreadyOpened;
+                status = BoardStatus.AlreadyOpened;
             }
             else
             {
@@ -48,11 +48,11 @@ namespace Minesweeper
                 field.Status = FieldStatus.Opened;
                 if (this.CheckIfWin())
                 {
-                    status = Status.AllFieldsAreOpened;
+                    status = BoardStatus.AllFieldsAreOpened;
                 }
                 else
                 {
-                    status = Status.SuccessfullyOpened;
+                    status = BoardStatus.SuccessfullyOpened;
                 }
             }
 

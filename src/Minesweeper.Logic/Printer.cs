@@ -1,4 +1,4 @@
-﻿namespace Minesweeper
+﻿namespace Minesweeper.Logic
 {
     using Enumerations;
     using System;

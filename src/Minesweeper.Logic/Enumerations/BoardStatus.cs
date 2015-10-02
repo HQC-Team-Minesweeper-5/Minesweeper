@@ -1,6 +1,6 @@
 ﻿namespace Minesweeper.Enumerations
 {
-    public enum Status
+    public enum BoardStatus
     {
         SteppedOnAMine,
         AlreadyOpened,

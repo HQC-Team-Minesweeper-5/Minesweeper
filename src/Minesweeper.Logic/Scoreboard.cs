@@ -1,26 +1,26 @@
-﻿namespace Minesweeper
+﻿namespace Minesweeper.Logic
 {
     using System;
     using System.Collections.Generic;
 
-    internal static class TopPlayers
+    internal static class Scoreboard
     {
-        internal static List<Player> Players { get; set; }
+        internal static List<Player> TopPlayers { get; set; }
 
         internal static void Initialize(int maxTopPlayers)
         {
-            Players = new List<Player>();
-            Players.Capacity = maxTopPlayers;
+            TopPlayers = new List<Player>();
+            TopPlayers.Capacity = maxTopPlayers;
         }
 
         internal static bool CheckHighScores(int score)
         {
-            if (Players.Capacity > Players.Count)
+            if (TopPlayers.Capacity > TopPlayers.Count)
             {
                 return true;
             }
 
-            foreach (Player currentPlayer in Players)
+            foreach (Player currentPlayer in TopPlayers)
             {
                 if (currentPlayer.Score < score)
                 {
@@ -35,24 +35,24 @@
         {
             Console.WriteLine(value: "Scoreboard");
 
-            for (int i = 0; i < Players.Count; i++)
+            for (int i = 0; i < TopPlayers.Count; i++)
             {
-                Console.WriteLine((int)(i + 1) + ". " + Players[i]);
+                Console.WriteLine((int)(i + 1) + ". " + TopPlayers[i]);
             }
         }
 
         internal static void Add(ref Player player)
         {
-            if (Players.Capacity > Players.Count)
+            if (TopPlayers.Capacity > TopPlayers.Count)
             {
-                Players.Add(player);
-                Players.Sort();
+                TopPlayers.Add(player);
+                TopPlayers.Sort();
             }
             else
             {
-                Players.RemoveAt(Players.Capacity - 1);
-                Players.Add(player);
-                Players.Sort();
+                TopPlayers.RemoveAt(TopPlayers.Capacity - 1);
+                TopPlayers.Add(player);
+                TopPlayers.Sort();
             }
         }
     }

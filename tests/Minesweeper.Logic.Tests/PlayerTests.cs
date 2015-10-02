@@ -1,9 +1,7 @@
-﻿using System;
-using Minesweeper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Mines.Tests
+﻿namespace Minesweeper.Logic.Tests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class PlayerTests
     {
