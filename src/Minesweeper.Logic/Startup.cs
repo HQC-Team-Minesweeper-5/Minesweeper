@@ -1,4 +1,4 @@
-﻿namespace Minesweeper.CLI
+﻿namespace Minesweeper.Logic
 {
     using Logic;
     using System;
