@@ -1,6 +1,6 @@
 namespace Minesweeper.Logic
 {
-    using Minesweeper.Enumerations;
+    using Minesweeper.Logic.Enumerations;
     using System;
 
     // TODO: Implement it as a pattern, probably prototype (i.e implement IClonable)

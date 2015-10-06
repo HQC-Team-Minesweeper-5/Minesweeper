@@ -1,6 +1,6 @@
 namespace Minesweeper.Logic
 {
-    using Minesweeper.Enumerations;
+    using Minesweeper.Logic.Enumerations;
 
     public class Board
     {

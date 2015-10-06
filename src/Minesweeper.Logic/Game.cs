@@ -1,7 +1,7 @@
 namespace Minesweeper.Logic
 {
     using System;
-    using Minesweeper.Enumerations;
+    using Minesweeper.Logic.Enumerations;
 
     public class Game
     {
