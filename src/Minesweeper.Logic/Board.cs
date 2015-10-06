@@ -1,6 +1,6 @@
 namespace Minesweeper.Logic
 {
-    using Enumerations;
+    using Minesweeper.Enumerations;
 
     public class Board
     {
@@ -28,31 +28,32 @@ namespace Minesweeper.Logic
             }
         }
 
-        public BoardStatus OpenField(int row, int column)
+        public GameStatus OpenField(int row, int column)
         {
             Field field = this.playingBoard[row, column];
 
-            BoardStatus status;
+            GameStatus status;
 
             if (field.Status == FieldStatus.IsAMine)
             {
-                status = BoardStatus.SteppedOnAMine;
+                status = GameStatus.GameOver;
             }
             else if (field.Status == FieldStatus.Opened)
             {
-                status = BoardStatus.AlreadyOpened;
+                status = GameStatus.GameOn;
             }
             else
             {
                 field.Value = Mines.CountSurroundingMines(this.playingBoard, row, column);
                 field.Status = FieldStatus.Opened;
+
                 if (this.CheckIfWin())
                 {
-                    status = BoardStatus.AllFieldsAreOpened;
+                    status = GameStatus.YouWin;
                 }
                 else
                 {
-                    status = BoardStatus.SuccessfullyOpened;
+                    status = GameStatus.GameOn;
                 }
             }
 

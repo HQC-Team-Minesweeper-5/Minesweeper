@@ -7,7 +7,8 @@
     {
         public static void Main(string[] args)
         {
-            Game.Menu();
+            Game minesweeper = new Game();
+            minesweeper.StartNewGame();
         }
     }
 }

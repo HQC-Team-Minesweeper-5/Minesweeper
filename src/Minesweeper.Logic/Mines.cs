@@ -1,6 +1,6 @@
 ﻿namespace Minesweeper.Logic
 {
-    using Enumerations;
+    using Minesweeper.Enumerations;
     using System;
     using System.Linq;
 

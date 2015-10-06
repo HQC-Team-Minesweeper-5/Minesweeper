@@ -5,6 +5,7 @@
 
     internal static class Scoreboard
     {
+        // TODO: Scoreboard should read/write game results to a file
         internal static List<Player> TopPlayers { get; set; }
 
         internal static void Initialize(int maxTopPlayers)
@@ -13,22 +14,29 @@
             TopPlayers.Capacity = maxTopPlayers;
         }
 
-        internal static bool CheckHighScores(int score)
+        internal static void AddToHighScores(int score)
+        {
+            Console.WriteLine("Please enter your name for the top scoreboard: ");
+            string name = Console.ReadLine();
+            var player = new Player(name, score);
+            Scoreboard.Add(ref player);
+            Scoreboard.PrintScoreboard();
+        }
+
+        internal static void CheckHighScores(int score)
         {
             if (TopPlayers.Capacity > TopPlayers.Count)
             {
-                return true;
+                AddToHighScores(score);
             }
 
             foreach (Player currentPlayer in TopPlayers)
             {
                 if (currentPlayer.Score < score)
                 {
-                    return true;
+                    AddToHighScores(score);
                 }
             }
-
-            return false;
         }
 
         internal static void PrintScoreboard()
