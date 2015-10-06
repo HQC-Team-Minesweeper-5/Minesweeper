@@ -3,6 +3,7 @@ namespace Minesweeper.Logic
     using Enumerations;
     using System;
 
+
     public static class Game
     {
         private const int MaxRows = 5;
@@ -20,14 +21,13 @@ namespace Minesweeper.Logic
         public static void Menu()
         {
 			Scoreboard.Initialize(MaxTopPlayers);
-
-            string str = "restart";
+            GameActions CurrentGameAction = GameActions.Restart;
             int choosenRow = 0;
             int chosenColumn = 0;
 
-            while (str != "exit")
+            while (CurrentGameAction != GameActions.Exit)
             {
-                if (str == "restart")
+                if (CurrentGameAction == GameActions.Restart)
                 {
                     InitializeGameBoard();
 
@@ -39,16 +39,16 @@ namespace Minesweeper.Logic
                     //Printer.PrintGameBoard(board.Fields, MaxRows, MaxColumns);
                     Printer.PrintGameBoard(board.PlayingBoard, MaxRows, MaxColumns);
                 }
-                else if (str == "exit")
+                else if (CurrentGameAction == GameActions.Exit)
                 {
                     Console.WriteLine(value: "Good bye!");
                     Console.Read();
                 }
-                else if (str == "top")
+                else if (CurrentGameAction == GameActions.Top)
                 {
 					Scoreboard.PrintScoreboard();
                 }
-                else if (str == "coordinates")
+                else if (CurrentGameAction == GameActions.Coordinates)
                 {
                     try
                     {
@@ -72,7 +72,7 @@ namespace Minesweeper.Logic
 								Scoreboard.PrintScoreboard();
                             }
 
-                            str = "restart";
+                            CurrentGameAction = GameActions.Restart;
                             continue;
                         }
                         else if (status == BoardStatus.AlreadyOpened)
@@ -98,7 +98,7 @@ namespace Minesweeper.Logic
 								Scoreboard.PrintScoreboard();
                             }
 
-                            str = "restart";
+                            CurrentGameAction = GameActions.Restart;
                             continue;
                         }
                         else
@@ -115,11 +115,11 @@ namespace Minesweeper.Logic
 
                 Console.Write(Environment.NewLine + "Enter row and column: ");
 
-                str = Console.ReadLine();
+                string inputRow = Console.ReadLine();
                 try
                 {
-                    choosenRow = int.Parse(str);
-                    str = "coordinates";
+                    choosenRow = int.Parse(inputRow);
+                    CurrentGameAction = GameActions.Coordinates;
                 }
                 catch
                 {
@@ -127,11 +127,11 @@ namespace Minesweeper.Logic
                     continue;
                 }
 
-                str = Console.ReadLine();
+                string inputCol = Console.ReadLine();
                 try
                 {
-                    chosenColumn = int.Parse(str);
-                    str = "coordinates";
+                    chosenColumn = int.Parse(inputCol);
+                    CurrentGameAction = GameActions.Coordinates;
                 }
                 catch (Exception)
                 {

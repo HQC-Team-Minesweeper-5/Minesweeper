@@ -47,6 +47,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Enumerations\BoardStatus.cs" />
     <Compile Include="Enumerations\FieldStatus.cs" />
+    <Compile Include="Enumerations\GameActions.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Mines.cs" />

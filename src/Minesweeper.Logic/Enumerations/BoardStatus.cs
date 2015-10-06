@@ -1,4 +1,4 @@
-﻿namespace Minesweeper.Enumerations
+﻿namespace Minesweeper.Logic.Enumerations
 {
     public enum BoardStatus
     {
