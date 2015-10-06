@@ -7,7 +7,7 @@
     {
         public static void Main(string[] args)
         {
-            Game minesweeper = new Game();
+            Game minesweeper = Game.Instance();
             minesweeper.StartNewGame();
         }
     }

@@ -3,8 +3,11 @@ namespace Minesweeper.Logic
     using System;
     using Minesweeper.Logic.Enumerations;
 
-    public class Game
+    public sealed class Game
     {
+        private static volatile Game _instance;
+        private static object _lockThis = new object();
+
         private const int MaxRows = 5;
         private const int MaxColumns = 10;
         private const int MaxMines = 15;
@@ -16,11 +19,26 @@ namespace Minesweeper.Logic
         private readonly Board gameBoard;
         private GameStatus gameStatus;
 
-        public Game()
+        private Game()
         {
-            // TODO: Implement as a singleton
             this.gameStatus = GameStatus.GameOn;
             this.gameBoard = new Board(MaxRows, MaxColumns, MaxMines);
+        }
+
+        public static Game Instance()
+        {
+            if (_instance == null)
+            {
+                lock (_lockThis)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new Game();
+                    }
+                }
+            }
+
+            return _instance;
         }
 
         public void StartNewGame()
