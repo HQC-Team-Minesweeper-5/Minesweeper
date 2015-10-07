@@ -60,7 +60,6 @@
                         }
                         else
                         {
-                            currentField.Value = Mines.CountSurroundingMines(playingField.Field, i, j);
                             this.sb.Append(playingField.Field[i, j].Value + " ");
                         }
                     }

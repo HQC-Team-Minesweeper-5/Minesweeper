@@ -11,6 +11,7 @@
             this.field = new MineCell[rows, cols];
             this.FillPlayingFieldWithMineCells(this.field);
             Mines.SetMines(this.field, minesCount);
+            Mines.CalculateFieldValues(this.field);
         }
 
         public MineCell[,] Field

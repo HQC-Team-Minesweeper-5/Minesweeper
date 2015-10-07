@@ -5,6 +5,44 @@
 
     internal class Mines
     {
+        internal static void SetMines(MineCell[,] field, int minesCount)
+        {
+            var random = new Random();
+
+            for (int i = 0; i < minesCount; i++)
+            {
+                int row = random.Next(0, field.GetLength(0));
+                int column = random.Next(0, field.GetLength(1));
+
+                if (field[row, column].Status == FieldStatus.IsAMine)
+                {
+                    i--;
+                }
+                else
+                {
+                    field[row, column].Status = FieldStatus.IsAMine;
+                }
+            }
+        }
+
+        // TODO: Check if this shouldn't be somewhere else ;)
+        internal static void CalculateFieldValues(MineCell[,] field)
+        {
+            int row = field.GetLength(0);
+            int col = field.GetLength(1);
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    if (field[i, j].Status != FieldStatus.IsAMine)
+                    {
+                        field[i, j].Value = CountSurroundingMines(field, i, j);
+                    }
+                }
+            }
+        }
+
         internal static int CountSurroundingMines(MineCell[,] field, int row, int column)
         {
             int minesCount = 0;
@@ -31,26 +69,6 @@
             }
 
             return minesCount;
-        }
-
-        internal static void SetMines(MineCell[,] field, int minesCount)
-        {
-            var random = new Random();
-
-            for (int i = 0; i < minesCount; i++)
-            {
-                int row = random.Next(0, field.GetLength(0));
-                int column = random.Next(0, field.GetLength(1));
-
-                if (field[row, column].Status == FieldStatus.IsAMine)
-                {
-                    i--;
-                }
-                else
-                {
-                    field[row, column].Status = FieldStatus.IsAMine;
-                }
-            }
         }
 
         internal static int CountOpenMines(MineCell[,] playingField)
