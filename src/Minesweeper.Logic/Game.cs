@@ -75,7 +75,7 @@ namespace Minesweeper.Logic
                                 isValidIntCol = int.TryParse(inputCoordinates[1], out chosenColumn);
                             }
 
-                            areCoordinatesValid = isValidIntRow && isValidIntCol && choosenRow >= 0 && choosenRow <= MaxRows && chosenColumn >= 0 && chosenColumn <= MaxColumns;
+                            areCoordinatesValid = isValidIntRow && isValidIntCol && choosenRow >= 0 && choosenRow < MaxRows && chosenColumn >= 0 && chosenColumn < MaxColumns;
 
                             if (!areCoordinatesValid)
                             {
