@@ -17,11 +17,14 @@ namespace Minesweeper.Logic
         private static object lockThis = new object();
         private readonly PlayingField gameBoard;
         private GameStatus gameStatus;
+        private Printer printer;
 
         private Game()
         {
             this.gameStatus = GameStatus.GameOn;
             this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
+            this.printer = new Printer();
+            this.StartNewGame();
         }
 
         public static Game Instance()
@@ -40,7 +43,7 @@ namespace Minesweeper.Logic
             return gameInstance;
         }
 
-        internal void StartNewGame()
+        private void StartNewGame()
         {
             int choosenRow = 0;
             int chosenColumn = 0;
@@ -55,7 +58,7 @@ namespace Minesweeper.Logic
                 switch (this.gameStatus)
                 {
                     case GameStatus.GameOn:
-                        Printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns); // TODO: Refactor to remove MaxRows and MaxColums from PrintGameBoard
+                        this.printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns); // TODO: Refactor to remove MaxRows and MaxColums from PrintGameBoard
 
                         bool areCoordinatesValid;
                         int score;
@@ -85,7 +88,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.GameOver:
-                        Printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
+                        this.printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
                         score = Mines.CountOpenMines(this.gameBoard.Field);
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
@@ -97,7 +100,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.YouWin:
-                        Printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
+                        this.printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
                         Console.WriteLine("Congratulations General, you won the game!");
                         this.gameStatus = GameStatus.GameOver;
                         break;

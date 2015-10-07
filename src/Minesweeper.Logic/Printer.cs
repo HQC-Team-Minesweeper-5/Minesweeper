@@ -1,34 +1,26 @@
 ﻿namespace Minesweeper.Logic
 {
     using System;
-    using System.Linq;
+    using System.Text;
     using Minesweeper.Logic.Enumerations;
 
     public class Printer
     {
-        public static void PrintGameBoard(MineCell[,] field, int rows, int columns)
+        private StringBuilder sb;
+
+        internal Printer()
         {
-            Console.Write("    ");
+            this.sb = new StringBuilder();
+        }
 
-            for (int i = 0; i < columns; i++)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-            Console.Write("   _");
-
-            for (int i = 0; i < columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
+        public void PrintGameBoard(MineCell[,] field, int rows, int columns)
+        {
+            this.PrintTopPlayingField(rows, columns);
 
             for (int i = 0; i < rows; i++)
             {
-                Console.Write(i);
-                Console.Write(" | ");
+                this.sb.Append(i);
+                this.sb.Append(" | ");
 
                 for (int j = 0; j < columns; j++)
                 {
@@ -36,80 +28,94 @@
 
                     if (currentField.Status == FieldStatus.Opened)
                     {
-                        Console.Write(field[i, j].Value);
-                        Console.Write(" ");
+                        this.sb.Append(field[i, j].Value);
+                        this.sb.Append(" ");
                     }
                     else
                     {
-                        Console.Write("? ");
+                        this.sb.Append("? ");
                     }
                 }
 
-                Console.WriteLine("|");
+                this.sb.Append("|");
+                this.sb.AppendLine();
             }
 
-            Console.Write("   _");
+            this.sb.Append("   =");
 
             for (int i = 0; i < columns; i++)
             {
-                Console.Write("__");
+                this.sb.Append("==");
             }
 
-            Console.WriteLine();
+            this.sb.AppendLine();
+
+            Console.WriteLine(this.sb.ToString());
+            this.sb.Clear();
         }
 
-        public static void PrintAllFields(MineCell[,] field, int rows, int columns)
+        public void PrintAllFields(MineCell[,] field, int rows, int columns)
         {
-            Console.Write("    ");
-
-            for (int i = 0; i < columns; i++)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-            Console.Write("   _");
-
-            for (int i = 0; i < columns; i++)
-            {
-                Console.Write("__");
-            }
-
-            Console.WriteLine();
+            this.PrintTopPlayingField(rows, columns);
 
             for (int i = 0; i < rows; i++)
             {
-                Console.Write(i);
-                Console.Write(" | ");
+                this.sb.Append(i);
+                this.sb.Append(" | ");
                 for (int j = 0; j < columns; j++)
                 {
                     MineCell currentField = field[i, j];
                     if (currentField.Status == FieldStatus.Opened)
                     {
-                        Console.Write(field[i, j].Value + " ");
+                        this.sb.Append(field[i, j].Value + " ");
                     }
                     else if (currentField.Status == FieldStatus.IsAMine)
                     {
-                        Console.Write("* ");
+                        this.sb.Append("* ");
                     }
                     else
                     {
                         currentField.Value = Mines.CountSurroundingMines(field, i, j);
-                        Console.Write(field[i, j].Value + " ");
+                        this.sb.Append(field[i, j].Value + " ");
                     }
                 }
 
-                Console.WriteLine("|");
+                this.sb.Append("|");
+                this.sb.AppendLine();
             }
 
-            Console.Write("   _");
+            this.PrintLine(columns);
+
+            this.sb.AppendLine();
+            Console.WriteLine(this.sb.ToString());
+            this.sb.Clear();
+        }
+
+        private void PrintTopPlayingField(int rows, int columns)
+        {
+            this.sb.AppendLine();
+            this.sb.Append("    ");
 
             for (int i = 0; i < columns; i++)
             {
-                Console.Write("__");
+                this.sb.Append(i + " ");
             }
 
-            Console.WriteLine();
+            this.sb.AppendLine();
+
+            this.PrintLine(columns);
+        }
+
+        private void PrintLine(int columns)
+        {
+            this.sb.Append("   =");
+
+            for (int i = 0; i < columns; i++)
+            {
+                this.sb.Append("==");
+            }
+
+            this.sb.AppendLine();
         }
     }
 }
