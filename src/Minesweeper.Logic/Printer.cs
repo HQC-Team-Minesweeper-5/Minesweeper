@@ -6,7 +6,7 @@
 
     public class Printer
     {
-        public static void PrintGameBoard(Field[,] field, int rows, int columns)
+        public static void PrintGameBoard(MineCell[,] field, int rows, int columns)
         {
             Console.Write("    ");
 
@@ -32,7 +32,7 @@
 
                 for (int j = 0; j < columns; j++)
                 {
-                    Field currentField = field[i, j];
+                    MineCell currentField = field[i, j];
 
                     if (currentField.Status == FieldStatus.Opened)
                     {
@@ -58,7 +58,7 @@
             Console.WriteLine();
         }
 
-        public static void PrintAllFields(Field[,] field, int rows, int columns)
+        public static void PrintAllFields(MineCell[,] field, int rows, int columns)
         {
             Console.Write("    ");
 
@@ -83,7 +83,7 @@
                 Console.Write(" | ");
                 for (int j = 0; j < columns; j++)
                 {
-                    Field currentField = field[i, j];
+                    MineCell currentField = field[i, j];
                     if (currentField.Status == FieldStatus.Opened)
                     {
                         Console.Write(field[i, j].Value + " ");

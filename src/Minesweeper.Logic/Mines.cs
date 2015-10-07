@@ -6,7 +6,7 @@
 
     public class Mines
     {
-        public static int CountSurroundingMines(Field[,] field, int row, int column)
+        public static int CountSurroundingMines(MineCell[,] field, int row, int column)
         {
             int minesCount = 0;
 
@@ -34,7 +34,7 @@
             return minesCount;
         }
 
-        public static void SetMines(Field[,] field, int minesCount)
+        public static void SetMines(MineCell[,] field, int minesCount)
         {
             var random = new Random();
 
@@ -52,6 +52,26 @@
                     field[row, column].Status = FieldStatus.IsAMine;
                 }
             }
+        }
+
+        public static int CountOpenMines(MineCell[,] playingField)
+        {
+            int openedMines = 0;
+            int rows = playingField.GetLength(0);
+            int cols = playingField.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (playingField[i, j].Status == FieldStatus.Opened)
+                    {
+                        openedMines++;
+                    }
+                }
+            }
+
+            return openedMines;
         }
     }
 }

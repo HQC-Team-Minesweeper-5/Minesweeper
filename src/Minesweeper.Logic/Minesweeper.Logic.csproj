@@ -45,14 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
+    <Compile Include="MineField.cs" />
     <Compile Include="Enumerations\BoardStatus.cs" />
     <Compile Include="Enumerations\FieldStatus.cs" />
     <Compile Include="Enumerations\GameStatus.cs" />
-    <Compile Include="Field.cs" />
+    <Compile Include="MineCell.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Mines.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayingField.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoreboard.cs" />

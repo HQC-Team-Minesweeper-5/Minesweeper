@@ -16,13 +16,13 @@ namespace Minesweeper.Logic
         private const string InvalidCoordinatesText = "Illegal move";
         private const string GameEndMessage = "Your score: ";
 
-        private readonly Board gameBoard;
+        private readonly PlayingField gameBoard;
         private GameStatus gameStatus;
 
         private Game()
         {
             this.gameStatus = GameStatus.GameOn;
-            this.gameBoard = new Board(MaxRows, MaxColumns, MaxMines);
+            this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
         }
 
         public static Game Instance()
@@ -56,7 +56,7 @@ namespace Minesweeper.Logic
                 switch (this.gameStatus)
                 {
                     case GameStatus.GameOn:
-                        Printer.PrintGameBoard(this.gameBoard.PlayingBoard, MaxRows, MaxColumns); // TODO: Refactor to remove MaxRows and MaxColums from PrintGameBoard
+                        Printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns); // TODO: Refactor to remove MaxRows and MaxColums from PrintGameBoard
 
                         bool areCoordinatesValid;
                         int score;
@@ -82,12 +82,13 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        this.gameStatus = this.gameBoard.OpenField(choosenRow, chosenColumn);
+                        this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
                         break;
 
                     case GameStatus.GameOver:
-                        Printer.PrintAllFields(this.gameBoard.PlayingBoard, MaxRows, MaxColumns);
-                        score = this.gameBoard.CountOpenedFields();
+                        Printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
+                        //score = this.gameBoard.CountOpenedFields();
+                        score = Mines.CountOpenMines(this.gameBoard.Field);
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
                         this.gameStatus = GameStatus.Restart;
@@ -98,7 +99,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.YouWin:
-                        Printer.PrintAllFields(this.gameBoard.PlayingBoard, MaxRows, MaxColumns);
+                        Printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
                         Console.WriteLine("Congratulations General, you won the game!");
                         this.gameStatus = GameStatus.GameOver;
                         break;

@@ -3,8 +3,7 @@ namespace Minesweeper.Logic
     using Minesweeper.Logic.Enumerations;
     using System;
 
-    // TODO: Implement it as a pattern, probably prototype (i.e implement IClonable)
-    public class Field : ICloneable
+    public class MineCell : ICloneable
     {
         private int value;
         private FieldStatus status;
@@ -21,7 +20,7 @@ namespace Minesweeper.Logic
             set { this.status = value; }
         }
 
-        public Field()
+        public MineCell()
         {
             this.value = 0;
             this.status = FieldStatus.Closed;
@@ -29,7 +28,7 @@ namespace Minesweeper.Logic
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return this.MemberwiseClone() as MineCell;
         }
     }
 }
