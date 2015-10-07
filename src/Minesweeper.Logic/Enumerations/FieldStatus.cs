@@ -1,6 +1,7 @@
 ﻿namespace Minesweeper.Logic.Enumerations
 {
-    public enum FieldStatus {
+    public enum FieldStatus 
+    {
         Closed,
         Opened,
         IsAMine

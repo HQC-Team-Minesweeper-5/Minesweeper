@@ -1,8 +1,8 @@
 ﻿namespace Minesweeper.Logic
 {
-    using Minesweeper.Logic.Enumerations;
     using System;
     using System.Linq;
+    using Minesweeper.Logic.Enumerations;
 
     public class Printer
     {

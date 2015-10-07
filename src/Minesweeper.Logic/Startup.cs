@@ -1,6 +1,5 @@
 ﻿namespace Minesweeper.Logic
 {
-    using Logic;
     using System;
 
     public class Startup

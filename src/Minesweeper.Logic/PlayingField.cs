@@ -9,8 +9,8 @@
         internal PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new MineCell[rows, cols];
-            FillPlayingFieldWithMineCells(this.field);
-            Mines.SetMines(field, minesCount);
+            this.FillPlayingFieldWithMineCells(this.field);
+            Mines.SetMines(this.field, minesCount);
         }
 
         public MineCell[,] Field

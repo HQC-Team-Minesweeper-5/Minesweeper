@@ -5,9 +5,6 @@ namespace Minesweeper.Logic
 
     public sealed class Game
     {
-        private static volatile Game _instance;
-        private static object _lockThis = new object();
-
         private const int MaxRows = 5;
         private const int MaxColumns = 10;
         private const int MaxMines = 15;
@@ -16,6 +13,8 @@ namespace Minesweeper.Logic
         private const string InvalidCoordinatesText = "Illegal move";
         private const string GameEndMessage = "Your score: ";
 
+        private static volatile Game gameInstance;
+        private static object lockThis = new object();
         private readonly PlayingField gameBoard;
         private GameStatus gameStatus;
 
@@ -27,21 +26,21 @@ namespace Minesweeper.Logic
 
         public static Game Instance()
         {
-            if (_instance == null)
+            if (gameInstance == null)
             {
-                lock (_lockThis)
+                lock (lockThis)
                 {
-                    if (_instance == null)
+                    if (gameInstance == null)
                     {
-                        _instance = new Game();
+                        gameInstance = new Game();
                     }
                 }
             }
 
-            return _instance;
+            return gameInstance;
         }
 
-        public void StartNewGame()
+        internal void StartNewGame()
         {
             int choosenRow = 0;
             int chosenColumn = 0;
@@ -87,7 +86,6 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         Printer.PrintAllFields(this.gameBoard.Field, MaxRows, MaxColumns);
-                        //score = this.gameBoard.CountOpenedFields();
                         score = Mines.CountOpenMines(this.gameBoard.Field);
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);

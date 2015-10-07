@@ -1,12 +1,11 @@
 ﻿namespace Minesweeper.Logic
 {
-    using Minesweeper.Logic.Enumerations;
     using System;
-    using System.Linq;
+    using Minesweeper.Logic.Enumerations;
 
-    public class Mines
+    internal class Mines
     {
-        public static int CountSurroundingMines(MineCell[,] field, int row, int column)
+        internal static int CountSurroundingMines(MineCell[,] field, int row, int column)
         {
             int minesCount = 0;
 
@@ -34,7 +33,7 @@
             return minesCount;
         }
 
-        public static void SetMines(MineCell[,] field, int minesCount)
+        internal static void SetMines(MineCell[,] field, int minesCount)
         {
             var random = new Random();
 
@@ -54,7 +53,7 @@
             }
         }
 
-        public static int CountOpenMines(MineCell[,] playingField)
+        internal static int CountOpenMines(MineCell[,] playingField)
         {
             int openedMines = 0;
             int rows = playingField.GetLength(0);

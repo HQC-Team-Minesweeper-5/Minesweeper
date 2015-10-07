@@ -1,13 +1,19 @@
 namespace Minesweeper.Logic
 {
-    using Minesweeper.Logic.Enumerations;
     using System;
+    using Minesweeper.Logic.Enumerations;
 
     public class MineCell : ICloneable
     {
         private int value;
         private FieldStatus status;
-        
+
+        public MineCell()
+        {
+            this.value = 0;
+            this.status = FieldStatus.Closed;
+        }
+
         public int Value
         {
             get { return this.value; }
@@ -18,12 +24,6 @@ namespace Minesweeper.Logic
         {
             get { return this.status; }
             set { this.status = value; }
-        }
-
-        public MineCell()
-        {
-            this.value = 0;
-            this.status = FieldStatus.Closed;
         }
 
         public object Clone()
