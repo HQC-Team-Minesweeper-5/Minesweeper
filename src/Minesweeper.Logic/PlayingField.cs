@@ -38,7 +38,6 @@
             }
             else
             {
-                field.Value = MineCalculator.CountSurroundingMines(this.field, row, column);
                 field.Status = FieldStatus.Opened;
                 status = GameStatus.GameOn;
             }
