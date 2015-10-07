@@ -58,7 +58,7 @@ namespace Minesweeper.Logic
                 switch (this.gameStatus)
                 {
                     case GameStatus.GameOn:
-                        this.printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns, this.gameStatus); // TODO: Refactor to remove MaxRows and MaxColums from PrintGameBoard
+                        this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
 
                         bool areCoordinatesValid;
                         int score;
@@ -88,7 +88,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.GameOver:
-                        this.printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns, this.gameStatus);
+                        this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
                         score = Mines.CountOpenMines(this.gameBoard.Field);
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
@@ -100,7 +100,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.YouWin:
-                        this.printer.PrintGameBoard(this.gameBoard.Field, MaxRows, MaxColumns, this.gameStatus);
+                        this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
                         Console.WriteLine("Congratulations General, you won the game!");
                         this.gameStatus = GameStatus.GameOver;
                         break;

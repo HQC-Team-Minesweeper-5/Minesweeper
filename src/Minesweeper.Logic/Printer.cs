@@ -15,8 +15,11 @@
             this.sb = new StringBuilder();
         }
 
-        internal void PrintGameBoard(MineCell[,] field, int rows, int columns, GameStatus gamestatus)
+        internal void PrintPlayingField(PlayingField playingField, GameStatus gamestatus)
         {
+            int rows = playingField.Field.GetLength(0);
+            int columns = playingField.Field.GetLength(1);
+
             this.sb.AppendLine();
             this.sb.Append("    ");
 
@@ -35,13 +38,13 @@
 
                 for (int j = 0; j < columns; j++)
                 {
-                    MineCell currentField = field[i, j];
+                    MineCell currentField = playingField.Field[i, j];
 
                     if (gamestatus == GameStatus.GameOn)
                     {
                         if (currentField.Status == FieldStatus.Opened)
                         {
-                            this.sb.Append(field[i, j].Value);
+                            this.sb.Append(playingField.Field[i, j].Value);
                             this.sb.Append(" ");
                         }
                         else
@@ -57,8 +60,8 @@
                         }
                         else
                         {
-                            currentField.Value = Mines.CountSurroundingMines(field, i, j);
-                            this.sb.Append(field[i, j].Value + " ");
+                            currentField.Value = Mines.CountSurroundingMines(playingField.Field, i, j);
+                            this.sb.Append(playingField.Field[i, j].Value + " ");
                         }
                     }
                 }
