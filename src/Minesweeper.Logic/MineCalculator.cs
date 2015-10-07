@@ -1,31 +1,9 @@
 ﻿namespace Minesweeper.Logic
 {
-    using System;
     using Minesweeper.Logic.Enumerations;
 
-    internal class Mines
+    internal static class MineCalculator
     {
-        internal static void SetMines(MineCell[,] field, int minesCount)
-        {
-            var random = new Random();
-
-            for (int i = 0; i < minesCount; i++)
-            {
-                int row = random.Next(0, field.GetLength(0));
-                int column = random.Next(0, field.GetLength(1));
-
-                if (field[row, column].Status == FieldStatus.IsAMine)
-                {
-                    i--;
-                }
-                else
-                {
-                    field[row, column].Status = FieldStatus.IsAMine;
-                }
-            }
-        }
-
-        // TODO: Check if this shouldn't be somewhere else ;)
         internal static void CalculateFieldValues(MineCell[,] field)
         {
             int row = field.GetLength(0);

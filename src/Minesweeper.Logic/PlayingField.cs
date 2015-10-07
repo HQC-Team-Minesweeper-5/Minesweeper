@@ -1,5 +1,6 @@
 ﻿namespace Minesweeper.Logic
 {
+    using System;
     using Minesweeper.Logic.Enumerations;
 
     public class PlayingField
@@ -10,8 +11,8 @@
         {
             this.field = new MineCell[rows, cols];
             this.FillPlayingFieldWithMineCells(this.field);
-            Mines.SetMines(this.field, minesCount);
-            Mines.CalculateFieldValues(this.field);
+            this.SetMines(this.field, minesCount);
+            MineCalculator.CalculateFieldValues(this.field);
         }
 
         public MineCell[,] Field
@@ -37,7 +38,7 @@
             }
             else
             {
-                field.Value = Mines.CountSurroundingMines(this.field, row, column);
+                field.Value = MineCalculator.CountSurroundingMines(this.field, row, column);
                 field.Status = FieldStatus.Opened;
                 status = GameStatus.GameOn;
             }
@@ -57,6 +58,26 @@
                 for (int j = 0; j < cols; j++)
                 {
                     playingField[i, j] = mine.Clone() as MineCell;
+                }
+            }
+        }
+
+        private void SetMines(MineCell[,] field, int minesCount)
+        {
+            var random = new Random();
+
+            for (int i = 0; i < minesCount; i++)
+            {
+                int row = random.Next(0, field.GetLength(0));
+                int column = random.Next(0, field.GetLength(1));
+
+                if (field[row, column].Status == FieldStatus.IsAMine)
+                {
+                    i--;
+                }
+                else
+                {
+                    field[row, column].Status = FieldStatus.IsAMine;
                 }
             }
         }

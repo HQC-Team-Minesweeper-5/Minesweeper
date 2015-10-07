@@ -89,7 +89,7 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
-                        score = Mines.CountOpenMines(this.gameBoard.Field);
+                        score = MineCalculator.CountOpenMines(this.gameBoard.Field);
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
                         this.gameStatus = GameStatus.Restart;
