@@ -16,14 +16,13 @@ namespace Minesweeper.Logic
 
         private static volatile Game gameInstance;
         private static object lockThis = new object();
-        private readonly PlayingField gameBoard;
+        private PlayingField gameBoard;
         private GameStatus gameStatus;
         private Printer printer;
 
         private Game()
         {
             this.gameStatus = GameStatus.GameOn;
-            this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
             this.printer = new Printer();
             this.StartNewGame();
         }
@@ -46,6 +45,7 @@ namespace Minesweeper.Logic
 
         private void StartNewGame()
         {
+            this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
             int choosenRow = 0;
             int chosenColumn = 0;
             string inputCommand;
