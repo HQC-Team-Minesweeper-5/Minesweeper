@@ -12,6 +12,7 @@ namespace Minesweeper.Logic
         private const string GameWelcomeText = "Welcome to the game “Minesweeper. Try to reveal all cells without mines. Use 'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
         private const string InvalidCoordinatesText = "Illegal move";
         private const string GameEndMessage = "Your score: ";
+        private const string RestartMessage = "Press 'enter' for new game";
 
         private static volatile Game gameInstance;
         private static object lockThis = new object();
@@ -95,10 +96,6 @@ namespace Minesweeper.Logic
                         this.gameStatus = GameStatus.Restart;
                         break;
 
-                    case GameStatus.Restart:
-                        this.StartNewGame();
-                        break;
-
                     case GameStatus.YouWin:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
                         Console.WriteLine("Congratulations General, you won the game!");
@@ -108,7 +105,13 @@ namespace Minesweeper.Logic
                     default:
                         throw new Exception("Invalid game state!");
                 }
+
             }
+            Console.WriteLine("{0}",RestartMessage);
+            Console.ReadLine();
+            Console.Clear();
+            this.gameStatus = GameStatus.GameOn;
+            this.StartNewGame();
         }
     }
 }
