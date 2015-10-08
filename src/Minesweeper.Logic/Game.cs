@@ -45,7 +45,6 @@ namespace Minesweeper.Logic
             string inputCommand;
             string[] inputCoordinates;
 
-            Scoreboard.Initialize(MaxTopPlayers);  // TODO: Find more appropriate place for the scoreboard
             Console.WriteLine(GameWelcomeText);
 
             while (this.gameStatus != GameStatus.Restart)
@@ -104,7 +103,8 @@ namespace Minesweeper.Logic
                         score = this.gameBoard.OpenCellsCounter;
                         Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
-                        Scoreboard.CheckHighScores(score);
+
+                        Scoreboard.HighScore(this.gameBoard.OpenCellsCounter);
                         this.gameStatus = GameStatus.Restart;
                         break;
 

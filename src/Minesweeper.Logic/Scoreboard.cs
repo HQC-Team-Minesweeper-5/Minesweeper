@@ -2,65 +2,94 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    internal static class Scoreboard
+    internal class Scoreboard
     {
-        // TODO: Scoreboard should read/write game results to a file
-        internal static List<Player> TopPlayers { get; set; }
+        // TODO: refactor
+        private const int MaxPlayersInHighscore = 3;
 
-        internal static void Initialize(int maxTopPlayers)
+        public static void HighScore(int score)
         {
-            TopPlayers = new List<Player>();
-            TopPlayers.Capacity = maxTopPlayers;
-        }
-
-        internal static void AddToHighScores(int score)
-        {
-            Console.WriteLine("Please enter your name for the top scoreboard: ");
-            string name = Console.ReadLine();
-            var player = new Player(name, score);
-            Scoreboard.Add(ref player);
-            Scoreboard.PrintScoreboard();
-        }
-
-        internal static void CheckHighScores(int score)
-        {
-            if (TopPlayers.Capacity > TopPlayers.Count)
+            try
             {
-                AddToHighScores(score);
-            }
+                // Read high scores from file
+                string[] scores = System.IO.File.ReadAllLines("HighScore.txt");
+                List<Score> tempScore = new List<Score>();
 
-            foreach (Player currentPlayer in TopPlayers)
-            {
-                if (currentPlayer.Score < score)
+                for (int i = 0; i < scores.Length; i++)
                 {
-                    AddToHighScores(score);
+                    string[] temp = scores[i].Split('\t');
+                    if (temp != null)
+                    {
+                        tempScore.Add(new Score(temp[0], int.Parse(temp[1]), DateTime.Parse(temp[2])));
+                    }
                 }
-            }
-        }
 
-        internal static void PrintScoreboard()
-        {
-            Console.WriteLine(value: "Scoreboard");
+                // Check if current score must be included in the highscore
+                if (tempScore.Count < MaxPlayersInHighscore)
+                {
+                    string playerName = string.Empty;
 
-            for (int i = 0; i < TopPlayers.Count; i++)
-            {
-                Console.WriteLine((int)(i + 1) + ". " + TopPlayers[i]);
-            }
-        }
+                    do
+                    {
+                        Console.Write("Input your name:  ");
+                        playerName = Console.ReadLine();
 
-        internal static void Add(ref Player player)
-        {
-            if (TopPlayers.Capacity > TopPlayers.Count)
-            {
-                TopPlayers.Add(player);
-                TopPlayers.Sort();
+                        if (playerName.IndexOf('-') >= 0)
+                        {
+                            throw new FormatException("Invalid Name! Do not use '-");
+                        }
+                    }
+                    while (playerName.Length < 3);
+
+                    Score current = new Score(playerName, score, DateTime.Now);
+                    tempScore.Add(current);
+                    tempScore.Sort((x1, x2) => x1.CompareTo(x2));
+                }
+                else
+                {
+                    foreach (Score currentScore in tempScore)
+                    {
+                        if (currentScore.Points < score)
+                        {
+                            string playerName = string.Empty;
+
+                            do
+                            {
+                                Console.Write("Input your name:  ");
+                                playerName = Console.ReadLine();
+
+                                if (playerName.IndexOf('\t') >= 0)
+                                {
+                                    throw new FormatException("Invalid Name! Do not use 'tab' in player name");
+                                }
+                            }
+                            while (playerName.Length < 3);
+
+                            Score current = new Score(playerName, score, DateTime.Now);
+                            tempScore.Add(current);
+                            tempScore.Sort((x1, x2) => x1.CompareTo(x2));
+                            tempScore.RemoveAt(MaxPlayersInHighscore);
+                            break;
+                        }
+                    }
+                }
+
+                Console.Clear();
+                List<string> output = new List<string>();
+
+                foreach (var item in tempScore)
+                {
+                    output.Add(item.ToString());
+                    Console.WriteLine(item.ToString());
+                }
+
+                System.IO.File.WriteAllLines("HighScore.txt", output.ToArray());
             }
-            else
+            catch (FormatException ex)
             {
-                TopPlayers.RemoveAt(TopPlayers.Capacity - 1);
-                TopPlayers.Add(player);
-                TopPlayers.Sort();
+                Console.WriteLine(ex.Message);
             }
         }
     }
