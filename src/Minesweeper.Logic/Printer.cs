@@ -8,6 +8,7 @@
     {
         private const string MineOpened = "* ";
         private const string MineClosed = "? ";
+        private const string Flag = "F";
         private StringBuilder sb;
 
         internal Printer()
@@ -45,6 +46,11 @@
                         if (currentField.Status == FieldStatus.Opened)
                         {
                             this.sb.Append(playingField.Field[i, j].Value);
+                            this.sb.Append(" ");
+                        }
+                        else if(currentField.Status == FieldStatus.Flagged)
+                        {
+                            this.sb.Append(Flag);
                             this.sb.Append(" ");
                         }
                         else

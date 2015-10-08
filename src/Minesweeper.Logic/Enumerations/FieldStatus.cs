@@ -4,6 +4,7 @@
     {
         Closed,
         Opened,
-        IsAMine
+        IsAMine,
+        Flagged
     }
 }

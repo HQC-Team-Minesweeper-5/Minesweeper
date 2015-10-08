@@ -37,7 +37,7 @@ namespace Minesweeper.Logic
                 //{
                 //    if (gameInstance == null)
                 //    {
-                        gameInstance = new Game();
+                gameInstance = new Game();
                 //    }
                 //}
             }
@@ -51,6 +51,7 @@ namespace Minesweeper.Logic
             this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
             int choosenRow = 0;
             int chosenColumn = 0;
+            bool flag = false;
             string inputCommand;
             string[] inputCoordinates;
             this.initialState = true;
@@ -89,15 +90,23 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
+                        if (inputCoordinates.Length > 2 && inputCoordinates[2] == "f")
+                        {
+                            this.gameBoard.SetFlag(choosenRow, chosenColumn);
+                        }
+                        else
+                        {
+                            this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
+                        }
 
+                        // Initializes mines & calculates field values if the game has just started
                         if (initialState)
                         {
                             this.gameBoard.SetMines(MaxMines);
                             MineCalculator.CalculateFieldValues(this.gameBoard.Field);
                             initialState = false;
                         }
-        
+
                         break;
 
                     case GameStatus.GameOver:
@@ -120,7 +129,7 @@ namespace Minesweeper.Logic
 
             }
 
-            Console.WriteLine("{0}",RestartMessage);
+            Console.WriteLine("{0}", RestartMessage);
             Console.ReadLine();
             Console.Clear();
             this.gameStatus = GameStatus.GameOn;

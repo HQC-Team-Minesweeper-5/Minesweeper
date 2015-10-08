@@ -36,6 +36,11 @@
             {
                 status = GameStatus.GameOn;
             }
+            else if (field.Status == FieldStatus.Flagged)
+            {
+                Console.WriteLine("This field has been flagged as a mine!");
+                status = GameStatus.GameOn;
+            }
             else
             {
                 field.Status = FieldStatus.Opened;
@@ -43,6 +48,13 @@
             }
 
             return status;
+        }
+
+        internal void SetFlag(int row, int column)
+        {
+            MineCell field = this.field[row, column];
+
+            field.Status = FieldStatus.Flagged;
         }
 
         private void FillPlayingFieldWithMineCells(MineCell[,] emptyPlayingField)
