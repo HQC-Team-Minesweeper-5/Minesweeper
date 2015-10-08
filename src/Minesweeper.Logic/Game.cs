@@ -14,11 +14,13 @@ namespace Minesweeper.Logic
         private const string GameEndMessage = "Your score: ";
         private const string RestartMessage = "Press 'enter' for new game";
 
-        private static volatile Game gameInstance;
-        private static object lockThis = new object();
+        private static Game gameInstance;
+        //private static volatile Game gameInstance;
+        //private static object lockThis = new object();
         private PlayingField gameBoard;
         private GameStatus gameStatus;
         private Printer printer;
+        private bool initialState;
 
         private Game()
         {
@@ -31,18 +33,19 @@ namespace Minesweeper.Logic
         {
             if (gameInstance == null)
             {
-                lock (lockThis)
-                {
-                    if (gameInstance == null)
-                    {
+                //lock (lockThis)
+                //{
+                //    if (gameInstance == null)
+                //    {
                         gameInstance = new Game();
-                    }
-                }
+                //    }
+                //}
             }
 
             return gameInstance;
         }
 
+        // State pattern?
         private void StartNewGame()
         {
             this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
@@ -50,6 +53,7 @@ namespace Minesweeper.Logic
             int chosenColumn = 0;
             string inputCommand;
             string[] inputCoordinates;
+            this.initialState = true;
 
             Scoreboard.Initialize(MaxTopPlayers);  // TODO: Find more appropriate place for the scoreboard
             Console.WriteLine(GameWelcomeText);
@@ -86,6 +90,14 @@ namespace Minesweeper.Logic
                         while (!areCoordinatesValid);
 
                         this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
+
+                        if (initialState)
+                        {
+                            this.gameBoard.SetMines(MaxMines);
+                            MineCalculator.CalculateFieldValues(this.gameBoard.Field);
+                            initialState = false;
+                        }
+        
                         break;
 
                     case GameStatus.GameOver:
@@ -107,6 +119,7 @@ namespace Minesweeper.Logic
                 }
 
             }
+
             Console.WriteLine("{0}",RestartMessage);
             Console.ReadLine();
             Console.Clear();

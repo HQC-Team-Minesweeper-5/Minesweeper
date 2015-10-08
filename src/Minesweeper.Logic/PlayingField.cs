@@ -11,11 +11,11 @@
         {
             this.field = new MineCell[rows, cols];
             this.FillPlayingFieldWithMineCells(this.field);
-            this.SetMines(this.field, minesCount);
-            MineCalculator.CalculateFieldValues(this.field);
+            //this.SetMines(this.field, minesCount);
+            //MineCalculator.CalculateFieldValues(this.field);
         }
 
-        public MineCell[,] Field
+        internal MineCell[,] Field
         {
             get
             {
@@ -61,22 +61,26 @@
             }
         }
 
-        private void SetMines(MineCell[,] field, int minesCount)
+        internal void SetMines(int minesCount)
         {
             var random = new Random();
 
             for (int i = 0; i < minesCount; i++)
             {
-                int row = random.Next(0, field.GetLength(0));
-                int column = random.Next(0, field.GetLength(1));
+                int row = random.Next(0, this.field.GetLength(0));
+                int column = random.Next(0, this.field.GetLength(1));
 
-                if (field[row, column].Status == FieldStatus.IsAMine)
+                if (this.field[row, column].Status == FieldStatus.Opened)
+                {
+                    continue;
+                }
+                if (this.field[row, column].Status == FieldStatus.IsAMine)
                 {
                     i--;
                 }
                 else
                 {
-                    field[row, column].Status = FieldStatus.IsAMine;
+                    this.field[row, column].Status = FieldStatus.IsAMine;
                 }
             }
         }
