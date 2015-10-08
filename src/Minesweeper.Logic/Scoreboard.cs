@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     internal class Scoreboard
@@ -14,6 +15,12 @@
             try
             {
                 // Read high scores from file
+                if (!File.Exists("HighScore.txt"))
+                {
+                    TextWriter tw = new StreamWriter("HighScore.txt", true);
+                    tw.Close();
+                }
+
                 string[] scores = System.IO.File.ReadAllLines("HighScore.txt");
                 List<Score> tempScore = new List<Score>();
 
