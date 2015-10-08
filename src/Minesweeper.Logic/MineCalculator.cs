@@ -13,7 +13,7 @@
             {
                 for (int j = 0; j < col; j++)
                 {
-                    if (field[i, j].Status != FieldStatus.IsAMine)
+                    if (!field[i, j].IsMine)
                     {
                         field[i, j].Value = CountSurroundingMines(field, i, j);
                     }
@@ -39,7 +39,7 @@
             {
                 for (int colNum = startPosY; colNum <= endPosY; colNum++)
                 {
-                    if (field[rowNum, colNum].Status == FieldStatus.IsAMine)
+                    if (field[rowNum, colNum].IsMine)
                     {
                         minesCount++;
                     }

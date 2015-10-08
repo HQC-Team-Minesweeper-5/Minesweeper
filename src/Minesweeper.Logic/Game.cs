@@ -5,9 +5,9 @@ namespace Minesweeper.Logic
 
     public sealed class Game
     {
-        private const int MaxRows = 5;
-        private const int MaxColumns = 10;
-        private const int MaxMines = 15;
+        private const int MaxRows = 9;
+        private const int MaxColumns = 9;
+        private const int MaxMines = 10;
         private const int MaxTopPlayers = 5;
         private const string GameWelcomeText = "Welcome to the game “Minesweeper. Try to reveal all cells without mines. Use 'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
         private const string InvalidCoordinatesText = "Illegal move";
@@ -51,7 +51,6 @@ namespace Minesweeper.Logic
             this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
             int choosenRow = 0;
             int chosenColumn = 0;
-            bool flag = false;
             string inputCommand;
             string[] inputCoordinates;
             this.initialState = true;
@@ -90,11 +89,11 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        if (inputCoordinates.Length > 2 && inputCoordinates[2] == "f")
+                        if (inputCoordinates.Length > 2 && inputCoordinates[2] == "f" || inputCoordinates.Length > 2 && inputCoordinates[2] == "F")
                         {
                             this.gameBoard.SetFlag(choosenRow, chosenColumn);
                         }
-                        else if (inputCoordinates.Length > 2 && inputCoordinates[2] == "r")
+                        else if (inputCoordinates.Length > 2 && inputCoordinates[2] == "r" || inputCoordinates.Length > 2 && inputCoordinates[2] == "R")
                         {
                             this.gameBoard.RemoveFlag(choosenRow, chosenColumn);
                         }
@@ -121,6 +120,7 @@ namespace Minesweeper.Logic
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
                         score = MineCalculator.CountOpenMines(this.gameBoard.Field);
+                        Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
                         this.gameStatus = GameStatus.Restart;

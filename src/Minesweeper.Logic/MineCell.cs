@@ -6,6 +6,7 @@ namespace Minesweeper.Logic
     public class MineCell : ICloneable
     {
         private int value;
+        private bool isMine;
         private FieldStatus status;
 
         public MineCell()
@@ -24,6 +25,12 @@ namespace Minesweeper.Logic
         {
             get { return this.status; }
             set { this.status = value; }
+        }
+
+        public bool IsMine
+        {
+            get { return this.isMine; }
+            set { this.isMine = value; }
         }
 
         public object Clone()

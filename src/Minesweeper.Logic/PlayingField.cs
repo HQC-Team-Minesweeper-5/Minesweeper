@@ -36,7 +36,7 @@
             MineCell field = this.field[row, column];
             GameStatus status;
 
-            if (field.Status == FieldStatus.IsAMine)
+            if (field.IsMine)
             {
                 status = GameStatus.GameOver;
             }
@@ -99,17 +99,13 @@
                 int row = random.Next(0, this.field.GetLength(0));
                 int column = random.Next(0, this.field.GetLength(1));
 
-                if (this.field[row, column].Status == FieldStatus.Opened)
-                {
-                    continue;
-                }
-                if (this.field[row, column].Status == FieldStatus.IsAMine)
+                if (this.field[row, column].IsMine == true)
                 {
                     i--;
                 }
                 else
                 {
-                    this.field[row, column].Status = FieldStatus.IsAMine;
+                    this.field[row, column].IsMine = true;
                 }
             }
         }

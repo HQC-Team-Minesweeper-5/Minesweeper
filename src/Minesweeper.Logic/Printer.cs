@@ -58,11 +58,22 @@
                             this.sb.Append(MineClosed);
                         }
                     }
-                    else
+                    else if (gamestatus == GameStatus.GameOver)
                     {
-                        if (currentField.Status == FieldStatus.IsAMine)
+                        if (currentField.IsMine)
                         {
                             this.sb.Append(MineOpened);
+                        }
+                        else
+                        {
+                            this.sb.Append(playingField.Field[i, j].Value + " ");
+                        }
+                    }
+                    else
+                    {
+                        if (currentField.IsMine == true || currentField.Status == FieldStatus.Flagged)
+                        {
+                            this.sb.Append(Flag);
                         }
                         else
                         {
