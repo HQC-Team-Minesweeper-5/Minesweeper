@@ -111,6 +111,11 @@ namespace Minesweeper.Logic
                             initialState = false;
                         }
 
+                        if (gameBoard.OpenCellsCounter == MaxRows * MaxColumns - MaxMines)
+                        {
+                            this.gameStatus = GameStatus.YouWin;
+                        }
+
                         break;
 
                     case GameStatus.GameOver:

@@ -6,13 +6,13 @@
     public class PlayingField
     {
         private readonly MineCell[,] field;
+        private int openCellsCounter;
 
         internal PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new MineCell[rows, cols];
             this.FillPlayingFieldWithMineCells(this.field);
-            //this.SetMines(this.field, minesCount);
-            //MineCalculator.CalculateFieldValues(this.field);
+            this.openCellsCounter = 0;
         }
 
         internal MineCell[,] Field
@@ -20,6 +20,14 @@
             get
             {
                 return this.field;
+            }
+        }
+
+        internal int OpenCellsCounter
+        {
+            get
+            {
+                return this.openCellsCounter;
             }
         }
 
@@ -45,6 +53,7 @@
             {
                 field.Status = FieldStatus.Opened;
                 status = GameStatus.GameOn;
+                openCellsCounter++;
             }
 
             return status;
