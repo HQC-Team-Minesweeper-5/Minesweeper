@@ -57,6 +57,13 @@
             field.Status = FieldStatus.Flagged;
         }
 
+        internal void RemoveFlag(int row, int column)
+        {
+            MineCell field = this.field[row, column];
+
+            field.Status = FieldStatus.Closed;
+        }
+
         private void FillPlayingFieldWithMineCells(MineCell[,] emptyPlayingField)
         {
             int rows = emptyPlayingField.GetLength(0);

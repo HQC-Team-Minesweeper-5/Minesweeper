@@ -94,6 +94,10 @@ namespace Minesweeper.Logic
                         {
                             this.gameBoard.SetFlag(choosenRow, chosenColumn);
                         }
+                        else if (inputCoordinates.Length > 2 && inputCoordinates[2] == "r")
+                        {
+                            this.gameBoard.RemoveFlag(choosenRow, chosenColumn);
+                        }
                         else
                         {
                             this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
