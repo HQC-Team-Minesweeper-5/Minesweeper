@@ -61,6 +61,7 @@
         {
             MineCell field = this.field[row, column];
 
+            // TODO: fix bug - what is the status of the field after flag removal? Maybe we can use Memento pattern here
             field.Status = FieldStatus.Closed;
         }
 
