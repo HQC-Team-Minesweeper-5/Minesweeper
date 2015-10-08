@@ -15,12 +15,9 @@ namespace Minesweeper.Logic
         private const string RestartMessage = "Press 'enter' for new game";
 
         private static Game gameInstance;
-        //private static volatile Game gameInstance;
-        //private static object lockThis = new object();
         private PlayingField gameBoard;
         private GameStatus gameStatus;
         private Printer printer;
-        private bool initialState;
 
         private Game()
         {
@@ -33,13 +30,7 @@ namespace Minesweeper.Logic
         {
             if (gameInstance == null)
             {
-                //lock (lockThis)
-                //{
-                //    if (gameInstance == null)
-                //    {
                 gameInstance = new Game();
-                //    }
-                //}
             }
 
             return gameInstance;
@@ -53,7 +44,6 @@ namespace Minesweeper.Logic
             int chosenColumn = 0;
             string inputCommand;
             string[] inputCoordinates;
-            this.initialState = true;
 
             Scoreboard.Initialize(MaxTopPlayers);  // TODO: Find more appropriate place for the scoreboard
             Console.WriteLine(GameWelcomeText);
@@ -89,11 +79,11 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        if (inputCoordinates.Length > 2 && inputCoordinates[2] == "f" || inputCoordinates.Length > 2 && inputCoordinates[2] == "F")
+                        if ((inputCoordinates.Length > 2 && inputCoordinates[2] == "f") || (inputCoordinates.Length > 2 && inputCoordinates[2] == "F"))
                         {
                             this.gameBoard.SetFlag(choosenRow, chosenColumn);
                         }
-                        else if (inputCoordinates.Length > 2 && inputCoordinates[2] == "r" || inputCoordinates.Length > 2 && inputCoordinates[2] == "R")
+                        else if ((inputCoordinates.Length > 2 && inputCoordinates[2] == "r") || (inputCoordinates.Length > 2 && inputCoordinates[2] == "R"))
                         {
                             this.gameBoard.RemoveFlag(choosenRow, chosenColumn);
                         }
@@ -102,15 +92,7 @@ namespace Minesweeper.Logic
                             this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
                         }
 
-                        // Initializes mines & calculates field values if the game has just started
-                        if (initialState)
-                        {
-                            this.gameBoard.SetMines(MaxMines);
-                            MineCalculator.CalculateFieldValues(this.gameBoard.Field);
-                            initialState = false;
-                        }
-
-                        if (gameBoard.OpenCellsCounter == MaxRows * MaxColumns - MaxMines)
+                        if (this.gameBoard.OpenCellsCounter == (MaxRows * MaxColumns) - MaxMines)
                         {
                             this.gameStatus = GameStatus.YouWin;
                         }
@@ -119,7 +101,7 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
-                        score = MineCalculator.CountOpenMines(this.gameBoard.Field);
+                        score = this.gameBoard.OpenCellsCounter;
                         Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
                         Scoreboard.CheckHighScores(score);
@@ -135,7 +117,6 @@ namespace Minesweeper.Logic
                     default:
                         throw new Exception("Invalid game state!");
                 }
-
             }
 
             Console.WriteLine("{0}", RestartMessage);

@@ -7,11 +7,14 @@
     {
         private readonly MineCell[,] field;
         private int openCellsCounter;
+        private bool initialState = true;
+        private int minesCount;
 
         internal PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new MineCell[rows, cols];
             this.FillPlayingFieldWithMineCells(this.field);
+            this.minesCount = minesCount;
             this.openCellsCounter = 0;
         }
 
@@ -52,13 +55,21 @@
             else
             {
                 field.Status = FieldStatus.Opened;
-                status = GameStatus.GameOn;
+
+                if (this.initialState)
+                {
+                    this.SetMines(this.minesCount);
+                    MineCalculator.CalculateFieldValues(this.Field);
+                    this.initialState = false;
+                }
 
                 if (field.Value == 0)
                 {
-                    //TODO: implement auto open of neighbouring cells
+                    this.OpenSurroundingCells(row, column);
                 }
-                openCellsCounter++;
+
+                status = GameStatus.GameOn;
+                this.openCellsCounter++;
             }
 
             return status;
@@ -94,7 +105,7 @@
             }
         }
 
-        internal void SetMines(int minesCount)
+        private void SetMines(int minesCount)
         {
             var random = new Random();
 
@@ -110,6 +121,32 @@
                 else
                 {
                     this.field[row, column].IsMine = true;
+                }
+            }
+        }
+
+        private void OpenSurroundingCells(int row, int column)
+        {
+            int minX = 0;
+            int maxX = this.field.GetLength(0) - 1;
+            int minY = 0;
+            int maxY = this.field.GetLength(1) - 1;
+
+            int startPosX = (row - 1 < minX) ? row : row - 1;
+            int startPosY = (column - 1 < minY) ? column : column - 1;
+            int endPosX = (row + 1 > maxX) ? row : row + 1;
+            int endPosY = (column + 1 > maxY) ? column : column + 1;
+
+            for (int rowNum = startPosX; rowNum <= endPosX; rowNum++)
+            {
+                for (int colNum = startPosY; colNum <= endPosY; colNum++)
+                {
+                    if (this.field[rowNum, colNum].Status == FieldStatus.Opened)
+                    {
+                        continue;
+                    }
+
+                    this.OpenCell(rowNum, colNum);
                 }
             }
         }

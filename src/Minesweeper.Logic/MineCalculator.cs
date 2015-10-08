@@ -48,25 +48,5 @@
 
             return minesCount;
         }
-
-        internal static int CountOpenMines(MineCell[,] playingField)
-        {
-            int openedMines = 0;
-            int rows = playingField.GetLength(0);
-            int cols = playingField.GetLength(1);
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (playingField[i, j].Status == FieldStatus.Opened)
-                    {
-                        openedMines++;
-                    }
-                }
-            }
-
-            return openedMines;
-        }
     }
 }
