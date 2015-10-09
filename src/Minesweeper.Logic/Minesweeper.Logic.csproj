@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleUserInput.cs" />
+    <Compile Include="Coordinates.cs" />
+    <Compile Include="Interfaces\IUserInput.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="MineCalculator.cs" />
     <Compile Include="MineField.cs" />

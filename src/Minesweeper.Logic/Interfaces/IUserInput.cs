@@ -7,7 +7,7 @@
         int ChoosenColumn { get; set; }
 
         // This maybe can be removed later
-        public string[] InputCoordinates { get; set; }
+        string[] InputCoordinates { get; set; }
 
         void HandleUserInput();
     }

@@ -2,6 +2,7 @@ namespace Minesweeper.Logic
 {
     using System;
     using Minesweeper.Logic.Enumerations;
+    using Minesweeper.Logic.Interfaces;
 
     public sealed class Game
     {
@@ -18,11 +19,14 @@ namespace Minesweeper.Logic
         private PlayingField gameBoard;
         private GameStatus gameStatus;
         private Printer printer;
-
+        private Coordinates coordinates;
+        private IUserInput userInput;
         private Game()
         {
             this.gameStatus = GameStatus.GameOn;
             this.printer = new Printer();
+            this.coordinates = new Coordinates(MaxRows, MaxColumns);
+            this.userInput = new ConsoleUserInput();
             this.StartNewGame();
         }
 
@@ -39,14 +43,9 @@ namespace Minesweeper.Logic
         // State pattern?
         private void StartNewGame()
         {
-            int choosenRow = 0;
-            int chosenColumn = 0;
-            string inputCommand;
-            string[] inputCoordinates;
             this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
 
             Console.WriteLine(GameWelcomeText);
-
             while (this.gameStatus != GameStatus.Restart)
             {
                 switch (this.gameStatus)
@@ -58,19 +57,8 @@ namespace Minesweeper.Logic
                         int score;
                         do
                         {
-                            Console.Write("\r\nEnter coordinates in format [Row Col]: ");
-                            inputCommand = Console.ReadLine();
-                            inputCoordinates = inputCommand.Split(' ');
-                            bool isValidIntRow = int.TryParse(inputCoordinates[0], out choosenRow);
-                            bool isValidIntCol = false;
-
-                            if (isValidIntRow && inputCoordinates.Length > 1)
-                            {
-                                isValidIntCol = int.TryParse(inputCoordinates[1], out chosenColumn);
-                            }
-
-                            areCoordinatesValid = isValidIntRow && isValidIntCol && choosenRow >= 0 && choosenRow < MaxRows && chosenColumn >= 0 && chosenColumn < MaxColumns;
-
+                            userInput.HandleUserInput();
+                            areCoordinatesValid = coordinates.AreCordinatesInRange(userInput.ChoosenRow, userInput.ChoosenColumn);
                             if (!areCoordinatesValid)
                             {
                                 Console.WriteLine(InvalidCoordinatesText);
@@ -78,17 +66,17 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        if ((inputCoordinates.Length > 2 && inputCoordinates[2].ToLower() == "f"))
+                        if ((userInput.InputCoordinates.Length > 2 && userInput.InputCoordinates[2].ToLower() == "f"))
                         {
-                            this.gameBoard.SetFlag(choosenRow, chosenColumn);
+                            this.gameBoard.SetFlag(coordinates.ChoosenRow, coordinates.ChoosenColumn);
                         }
-                        else if ((inputCoordinates.Length > 2 && inputCoordinates[2].ToLower() == "r"))
+                        else if ((userInput.InputCoordinates.Length > 2 && userInput.InputCoordinates[2].ToLower() == "r"))
                         {
-                            this.gameBoard.RemoveFlag(choosenRow, chosenColumn);
+                            this.gameBoard.RemoveFlag(coordinates.ChoosenRow, coordinates.ChoosenColumn);
                         }
                         else
                         {
-                            this.gameStatus = this.gameBoard.OpenCell(choosenRow, chosenColumn);
+                            this.gameStatus = this.gameBoard.OpenCell(coordinates.ChoosenRow, coordinates.ChoosenColumn);
                         }
 
                         if (this.gameBoard.OpenCellsCounter == (MaxRows * MaxColumns) - MaxMines)
