@@ -39,11 +39,11 @@ namespace Minesweeper.Logic
         // State pattern?
         private void StartNewGame()
         {
-            this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
             int choosenRow = 0;
             int chosenColumn = 0;
             string inputCommand;
             string[] inputCoordinates;
+            this.gameBoard = new PlayingField(MaxRows, MaxColumns, MaxMines);
 
             Console.WriteLine(GameWelcomeText);
 
@@ -78,11 +78,11 @@ namespace Minesweeper.Logic
                         }
                         while (!areCoordinatesValid);
 
-                        if ((inputCoordinates.Length > 2 && inputCoordinates[2] == "f") || (inputCoordinates.Length > 2 && inputCoordinates[2] == "F"))
+                        if ((inputCoordinates.Length > 2 && inputCoordinates[2].ToLower() == "f"))
                         {
                             this.gameBoard.SetFlag(choosenRow, chosenColumn);
                         }
-                        else if ((inputCoordinates.Length > 2 && inputCoordinates[2] == "r") || (inputCoordinates.Length > 2 && inputCoordinates[2] == "R"))
+                        else if ((inputCoordinates.Length > 2 && inputCoordinates[2].ToLower() == "r"))
                         {
                             this.gameBoard.RemoveFlag(choosenRow, chosenColumn);
                         }
@@ -96,6 +96,7 @@ namespace Minesweeper.Logic
                             this.gameStatus = GameStatus.YouWin;
                         }
 
+                        Console.Clear();
                         break;
 
                     case GameStatus.GameOver:
@@ -109,7 +110,6 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.YouWin:
-                        this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
                         Console.WriteLine("Congratulations General, you won the game!");
                         this.gameStatus = GameStatus.GameOver;
                         break;
