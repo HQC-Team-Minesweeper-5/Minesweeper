@@ -15,23 +15,11 @@ namespace Minesweeper.Logic
             this.status = FieldStatus.Closed;
         }
 
-        public int Value
-        {
-            get { return this.value; }
-            set { this.value = value; }
-        }
+        public int Value { get; set; }
 
-        public FieldStatus Status
-        {
-            get { return this.status; }
-            set { this.status = value; }
-        }
+        public FieldStatus Status { get; set; }
 
-        public bool IsMine
-        {
-            get { return this.isMine; }
-            set { this.isMine = value; }
-        }
+        public bool IsMine { get; set; }
 
         public object Clone()
         {
