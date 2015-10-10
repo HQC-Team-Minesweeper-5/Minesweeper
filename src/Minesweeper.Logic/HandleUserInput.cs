@@ -57,6 +57,9 @@
                             playingField.RemoveFlag(row, col);
                             break;
                         }
+                        else{
+                            Console.WriteLine(InvalidCoordinatesText);
+                        }
                     }
                     else if (isValidIntRow && isValidIntCol)
                     {
