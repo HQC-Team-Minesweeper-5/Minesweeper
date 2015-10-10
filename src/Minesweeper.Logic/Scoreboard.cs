@@ -80,17 +80,24 @@
         {
             string playerName;
 
-            do
-            {
+            while (true)
+            { 
                 Console.Write("Input your name:  ");
                 playerName = Console.ReadLine();
 
                 if (playerName.IndexOf('\t') >= 0)
                 {
-                    throw new FormatException("Invalid Name! Do not use 'tab' in player name");
+                    Console.WriteLine("Invalid Name! Do not use 'tab' in player name");
+                }
+                else if (playerName.Length < 3)
+                {
+                    Console.WriteLine("Invalid name! It must be at least 3 symbols long");
+                }
+                else
+                {
+                    break;
                 }
             }
-            while (playerName.Length < 3);
 
             Score current = new Score(playerName, currentPlayerScore, DateTime.Now);
             tempScore.Add(current);
