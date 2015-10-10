@@ -4,11 +4,18 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
+    
+    /// <summary>
+    /// A static class that reads and writes into the scoreboard file
+    /// </summary>
     internal static class Scoreboard
     {
         private const int MaxPlayersInHighscore = 3;
 
+        /// <summary>
+        /// Takes the currect score and compares it with the existing ones, then decides if it should save it or not
+        /// </summary>
+        /// <param name="currentPlayerScore">The player score for the current game</param>
         public static void HighScore(int currentPlayerScore)
         {
             try
@@ -36,6 +43,10 @@
             }
         }
 
+        /// <summary>
+        /// Helper method that reads the highscore file 
+        /// </summary>
+        /// <returns>A list of all the saved scores</returns>
         private static List<Score> ReadHighScore()
         {
             if (!File.Exists("HighScore.txt"))
@@ -60,6 +71,10 @@
             return tempScore;
         }
 
+        /// <summary>
+        /// Helper method that rewriters the saved highscores
+        /// </summary>
+        /// <param name="scoreBoard">The new scores to be written</param>
         private static void WriteHighScore(IEnumerable<Score> scoreBoard)
         {
             Console.Clear();
@@ -74,7 +89,12 @@
             System.IO.File.WriteAllLines("HighScore.txt", output.ToArray());
         }
         
-        private static void AddPlayerToHighScore(List<Score> tempScore, int currentPlayerScore)
+        /// <summary>
+        /// Adds a player to the highscore
+        /// </summary>
+        /// <param name="scoreBoard">All currently saved highscores</param>
+        /// <param name="currentPlayerScore">The highscore of the current player</param>
+        private static void AddPlayerToHighScore(List<Score> scoreBoard, int currentPlayerScore)
         {
             string playerName;
 
@@ -98,8 +118,8 @@
             }
 
             Score current = new Score(playerName, currentPlayerScore, DateTime.Now);
-            tempScore.Add(current);
-            tempScore.Sort((x1, x2) => x1.CompareTo(x2));
+            scoreBoard.Add(current);
+            scoreBoard.Sort((x1, x2) => x1.CompareTo(x2));
         }
     }
 }
