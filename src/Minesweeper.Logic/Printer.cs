@@ -6,9 +6,9 @@
 
     internal class Printer
     {
-        private const string MineOpened = "* ";
-        private const string MineClosed = "? ";
-        private const string Flag = "F";
+        private const string MineOpened = "*  ";
+        private const string MineClosed = "X  ";
+        private const string Flag = "F  ";
         private StringBuilder sb;
 
         internal Printer()
@@ -26,7 +26,7 @@
 
             for (int i = 0; i < columns; i++)
             {
-                this.sb.Append(i + " ");
+                this.sb.Append(String.Format("{0}", i).PadLeft(2, ' ') + " ");
             }
 
             this.sb.AppendLine();
@@ -34,7 +34,7 @@
 
             for (int i = 0; i < rows; i++)
             {
-                this.sb.Append(i);
+                this.sb.Append(String.Format("{0}", i).PadLeft(2, ' '));
                 this.sb.Append(" | ");
 
                 for (int j = 0; j < columns; j++)
@@ -46,12 +46,11 @@
                         if (currentField.Status == FieldStatus.Opened)
                         {
                             this.sb.Append(playingField.Field[i, j].Value);
-                            this.sb.Append(" ");
+                            this.sb.Append("  ");
                         }
                         else if (currentField.Status == FieldStatus.Flagged)
                         {
                             this.sb.Append(Flag);
-                            this.sb.Append(" ");
                         }
                         else
                         {
@@ -66,7 +65,7 @@
                         }
                         else
                         {
-                            this.sb.Append(playingField.Field[i, j].Value + " ");
+                            this.sb.Append(playingField.Field[i, j].Value + "  ");
                         }
                     }
                     else
@@ -77,7 +76,7 @@
                         }
                         else
                         {
-                            this.sb.Append(playingField.Field[i, j].Value + " ");
+                            this.sb.Append(playingField.Field[i, j].Value + "  ");
                         }
                     }
                 }
@@ -93,10 +92,10 @@
 
         private void PrintLine(int columns)
         {
-            this.sb.Append("   =");
+            this.sb.Append("    =");
             for (int i = 0; i < columns; i++)
             {
-                this.sb.Append("==");
+                this.sb.Append("===");
             }
 
             this.sb.AppendLine();
