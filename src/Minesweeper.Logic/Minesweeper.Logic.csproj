@@ -49,6 +49,7 @@
     <Compile Include="Coordinates.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MenuPrinter.cs" />
+    <Compile Include="OpenCellSaver.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="MineCalculator.cs" />
     <Compile Include="Enumerations\BoardStatus.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Structures\CellCoordinates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

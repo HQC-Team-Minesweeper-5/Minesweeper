@@ -1,14 +1,18 @@
 ﻿namespace Minesweeper.Logic
 {
     using System;
+    using System.Collections.Generic;
     using Minesweeper.Logic.Enumerations;
+    using Minesweeper.Logic.Structures;
 
     public class PlayingField
     {
+        private List<CellCoordinates> newCells;
         private readonly MineCell[,] field;
         private int openCellsCounter;
         private bool initialState = true;
         private int minesCount;
+        private int howDeepAmI = 0;
 
         internal PlayingField(int rows, int cols, int minesCount)
         {
@@ -49,7 +53,14 @@
             }
             else
             {
+
+                int currDeepness = howDeepAmI;
+                if (currDeepness == 0)
+                {
+                    newCells = new List<CellCoordinates>();
+                }
                 field.Status = FieldStatus.Opened;
+                newCells.Add(new CellCoordinates(row, column));
 
                 if (this.initialState)
                 {
@@ -60,9 +71,15 @@
 
                 if (field.Value == 0)
                 {
+                    howDeepAmI++;
                     this.OpenSurroundingCells(row, column);
+                    howDeepAmI--;
                 }
 
+                if (currDeepness == 0)
+                {
+                    Game.Instance().openCellSaver.addCells(newCells);
+                }
                 this.openCellsCounter++;
             }
         }

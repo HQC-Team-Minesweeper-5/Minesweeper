@@ -22,10 +22,10 @@ namespace Minesweeper.Logic
         private Printer printer;
         private Coordinates coordinates;
         private HandleUserInput userInput;
+        public OpenCellSaver openCellSaver;
 
         private Game()
         {
-            //Facade
             PrepareGameResourses();
         }
 
@@ -56,6 +56,7 @@ namespace Minesweeper.Logic
             this.printer = new Printer();
             this.coordinates = new Coordinates(numberOfRows, numberOfCols);
             this.userInput = new HandleUserInput();
+            this.openCellSaver = new OpenCellSaver();
         }
 
         // State pattern?
@@ -85,7 +86,7 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
-                        
+
                         score = this.gameBoard.OpenCellsCounter;
                         Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
@@ -101,7 +102,7 @@ namespace Minesweeper.Logic
                         Console.ReadKey();
 
                         this.gameStatus = GameStatus.Restart;
-                        
+
                         break;
 
                     default:

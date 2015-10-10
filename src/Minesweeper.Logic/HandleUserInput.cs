@@ -1,6 +1,9 @@
 ﻿namespace Minesweeper.Logic
 {
     using System;
+    using Minesweeper.Logic.Structures;
+    using Minesweeper.Logic.Enumerations;
+    using System.Collections.Generic;
 
     public class HandleUserInput
     {
@@ -35,6 +38,24 @@
                             Game.Instance().ChangeToGameOver();
                             isValid = true;
                             break;
+                        case "undo":
+                            List<CellCoordinates> lastTurnCells= Game.Instance().openCellSaver.getLastCells();
+
+                            if (lastTurnCells == null)
+                            {
+                                //Console.WriteLine("You have no moves to undo!");
+                            }
+                            else
+                            {
+                                foreach (var cell in lastTurnCells)
+                                {
+                                    playingField.Field[cell.row, cell.col].Status = FieldStatus.Closed;
+                                }
+                                Game.Instance().openCellSaver.RemoveCells();
+                            }
+                            isValid = true;
+                            break;
+
                         default:
                             Console.WriteLine(InvalidCoordinatesText);
                             break;
@@ -57,7 +78,8 @@
                             playingField.RemoveFlag(row, col);
                             break;
                         }
-                        else{
+                        else
+                        {
                             Console.WriteLine(InvalidCoordinatesText);
                         }
                     }
