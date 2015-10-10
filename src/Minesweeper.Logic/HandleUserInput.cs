@@ -42,8 +42,8 @@
                 }
                 else
                 {
-                    bool isValidIntRow = int.TryParse(this.InputCoordinates[0], out row) && row < fieldRows;
-                    bool isValidIntCol = int.TryParse(this.InputCoordinates[1], out col) && col < fieldCows;
+                    bool isValidIntRow = int.TryParse(this.InputCoordinates[0], out row) && row < fieldRows && row >= 0;
+                    bool isValidIntCol = int.TryParse(this.InputCoordinates[1], out col) && col < fieldCows && col >= 0;
 
                     if (isValidIntRow && isValidIntCol && this.InputCoordinates.Length > 2)
                     {
