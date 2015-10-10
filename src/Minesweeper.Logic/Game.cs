@@ -43,9 +43,9 @@ namespace Minesweeper.Logic
 
         private void PrepareGameResourses()
         {
-            MenuPrinter.ConsoleSetUp(consoleHeight, consoleWidth);
-            SelectLevel(MenuPrinter.GameLevelSelector(consoleWidth));
-            MenuPrinter.PrintBackground(consoleHeight, consoleWidth);
+            MenuPrinter.ConsoleSetUp();
+            SelectLevel(MenuPrinter.GameLevelSelector());
+            MenuPrinter.PrintBackground();
 
             if (numberOfMines != 0)
             {
