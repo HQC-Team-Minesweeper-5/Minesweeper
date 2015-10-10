@@ -79,7 +79,7 @@
 
                 if (currDeepness == 0)
                 {
-                    Game.Instance().openCellSaver.addCells(newCells);
+                    Game.Instance().OpenCellSaver.addCells(newCells);
                 }
                 this.openCellsCounter++;
             }
@@ -90,7 +90,7 @@
 
             newCells = new List<CellCoordinates>();
             newCells.Add(new CellCoordinates(row, column));
-            Game.Instance().openCellSaver.addCells(newCells);
+            Game.Instance().OpenCellSaver.addCells(newCells);
 
             MineCell field = this.field[row, column];
 
@@ -104,7 +104,7 @@
         {
             newCells = new List<CellCoordinates>();
             newCells.Add(new CellCoordinates(row, column));
-            Game.Instance().openCellSaver.addCells(newCells);
+            Game.Instance().OpenCellSaver.addCells(newCells);
 
             MineCell field = this.field[row, column];
 

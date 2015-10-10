@@ -19,13 +19,20 @@
 
         public static void PrintBackground()
         {
+            string gameTitle = "Minesweeper";
+            string score = String.Format("Score: {0}", 4);
+            string mines = String.Format("Mines: {0}/{1}", 23, 25);
+
+            int padleft = 34;
+
             Console.WriteLine(new string(' ', ConsoleWidth * ConsoleHeight));
             Console.BackgroundColor = ConsoleColor.Black;
-            string gameTitle = " Minesweeper - v 5";
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, 0);
-            Console.Write((gameTitle).PadLeft(((ConsoleWidth - gameTitle.Length) / 2) + gameTitle.Length).PadRight(ConsoleWidth));
+            Console.Write(score.PadRight(padleft, ' '));
+            Console.Write(gameTitle);
+            Console.Write(mines.PadLeft(padleft + 1, ' '));
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
         }
@@ -60,6 +67,7 @@
 
                 PrintMenu(select, menuText, ConsoleWidth);
             }
+
 
             switch (select)
             {

@@ -39,7 +39,7 @@
                             isValid = true;
                             break;
                         case "undo":
-                            List<CellCoordinates> lastTurnCells= Game.Instance().openCellSaver.getLastCells();
+                            List<CellCoordinates> lastTurnCells= Game.Instance().OpenCellSaver.getLastCells();
 
                             if (lastTurnCells == null)
                             {
@@ -56,7 +56,7 @@
                                         playingField.Field[cell.row, cell.col].Status = FieldStatus.Closed;
                                     }
                                 }
-                                Game.Instance().openCellSaver.RemoveCells();
+                                Game.Instance().OpenCellSaver.RemoveCells();
                             }
                             isValid = true;
                             break;
