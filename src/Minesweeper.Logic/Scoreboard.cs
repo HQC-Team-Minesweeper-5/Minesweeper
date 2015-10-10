@@ -13,10 +13,8 @@
         {
             try
             {
-                // Read high scores from file
                 List<Score> highScore = ReadHighScore();
 
-                // Check if current score must be included in the highscore
                 if (highScore.Count < MaxPlayersInHighscore)
                 {
                     AddPlayerToHighScore(highScore, currentPlayerScore);

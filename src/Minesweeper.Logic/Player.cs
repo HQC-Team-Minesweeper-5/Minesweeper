@@ -4,24 +4,15 @@
 
     public class Player : IComparable
     {
-        private readonly string name;
-        private readonly int score;
-
         public Player(string name, int score)
         {
-            this.name = name;
-            this.score = score;
+            this.Name = name;
+            this.Score = score;
         }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; }
 
-        public int Score
-        {
-            get { return this.score; }
-        }
+        public int Score { get; }
 
         public int CompareTo(object obj)
         {
@@ -31,12 +22,12 @@
                    "A Player object is required for comparison.");
             }
 
-            return -1 * this.score.CompareTo(((Player)obj).score);
+            return -1 * this.Score.CompareTo(((Player)obj).Score);
         }
 
         public override string ToString()
         {
-            string result = this.name + " --> " + this.score;
+            string result = this.Name + " --> " + this.Score;
             return result;
         }
     }
