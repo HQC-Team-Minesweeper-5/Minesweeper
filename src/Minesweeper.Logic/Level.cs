@@ -1,5 +1,8 @@
 ﻿namespace Minesweeper.Logic
 {
+    /// <summary>
+    /// Util class that holds the params of the chosen level in the begining of the game
+    /// </summary>
     public class Level
     {
         public Level(int numberOfRows, int numberOfCols, int numberOfMines)
