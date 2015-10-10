@@ -26,6 +26,23 @@ namespace Minesweeper.Logic
 
         private Game()
         {
+            //Facade
+            PrepareGameResourses();
+            this.StartNewGame();
+        }
+
+        public static Game Instance()
+        {
+            if (gameInstance == null)
+            {
+                gameInstance = new Game();
+            }
+
+            return gameInstance;
+        }
+
+        private void PrepareGameResourses()
+        {
             MenuPrinter.ConsoleSetUp(consoleHeight, consoleWidth);
             SelectLevel(MenuPrinter.GameLevelSelector(consoleWidth));
             MenuPrinter.PrintBackground(consoleHeight, consoleWidth);
@@ -43,17 +60,6 @@ namespace Minesweeper.Logic
             this.printer = new Printer();
             this.coordinates = new Coordinates(numberOfRows, numberOfCols);
             this.userInput = new ConsoleUserInput();
-            this.StartNewGame();
-        }
-
-        public static Game Instance()
-        {
-            if (gameInstance == null)
-            {
-                gameInstance = new Game();
-            }
-
-            return gameInstance;
         }
 
         // State pattern?
