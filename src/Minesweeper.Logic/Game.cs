@@ -117,10 +117,11 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
-                        Console.ReadKey();
+                        
                         score = this.gameBoard.OpenCellsCounter;
                         Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
+                        Console.ReadKey();
 
                         Scoreboard.HighScore(this.gameBoard.OpenCellsCounter);
                         this.gameStatus = GameStatus.Restart;
@@ -128,7 +129,11 @@ namespace Minesweeper.Logic
 
                     case GameStatus.YouWin:
                         Console.WriteLine("Congratulations General, you won the game!");
-                        this.gameStatus = GameStatus.GameOver;
+                        Scoreboard.HighScore(this.gameBoard.OpenCellsCounter);
+                        Console.ReadKey();
+
+                        this.gameStatus = GameStatus.Restart;
+                        
                         break;
 
                     default:
