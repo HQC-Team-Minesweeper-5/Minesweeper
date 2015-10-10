@@ -4,8 +4,6 @@
     {
         private int maxRows;
         private int maxColumns;
-        private int choosenRow;
-        private int choosenColumn;
 
         public Coordinates(int maxRows, int maxColumns)
         {
@@ -13,17 +11,9 @@
             this.maxColumns = maxColumns;
         }
 
-        public int ChoosenRow
-        {
-            get { return this.choosenRow; }
-            private set { this.choosenRow = value; }
-        }
+        public int ChoosenRow { get; private set; }
 
-        public int ChoosenColumn
-        {
-            get { return this.choosenColumn; }
-            private set { this.choosenColumn = value; }
-        }
+        public int ChoosenColumn { get; private set; }
 
         public bool AreCordinatesInRange(int choosenRow, int choosenColumn)
         {
