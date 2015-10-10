@@ -97,7 +97,11 @@ namespace Minesweeper.Logic
 
                     case GameStatus.YouWin:
                         Console.WriteLine("Congratulations General, you won the game!");
-                        this.gameStatus = GameStatus.GameOver;
+                        Scoreboard.HighScore(this.gameBoard.OpenCellsCounter);
+                        Console.ReadKey();
+
+                        this.gameStatus = GameStatus.Restart;
+                        
                         break;
 
                     default:
