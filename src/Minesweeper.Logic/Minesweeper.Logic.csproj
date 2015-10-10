@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="HandleUserInput.cs" />
     <Compile Include="Coordinates.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="MenuPrinter.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="MineCalculator.cs" />

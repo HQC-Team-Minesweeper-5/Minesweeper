@@ -121,29 +121,11 @@ namespace Minesweeper.Logic
             this.gameStatus = GameStatus.GameOver;
         }
 
-        private void SelectLevel(int level)
+        private void SelectLevel(Level level)
         {
-            switch (level)
-            {
-                case 1:
-                    numberOfRows = 9;
-                    numberOfCols = 9;
-                    numberOfMines = 10;
-                    break;
-                case 2:
-                    numberOfRows = 14;
-                    numberOfCols = 14;
-                    numberOfMines = 30;
-                    break;
-                case 3:
-                    numberOfRows = 14;
-                    numberOfCols = 20;
-                    numberOfMines = 70;
-                    break;
-                default:
-                    numberOfMines = 0;
-                    break;
-            }
+            this.numberOfRows = level.NumberOfRows;
+            this.numberOfCols = level.NumberOfCols;
+            this.numberOfMines = level.NumberOfMines;
         }
     }
 }
