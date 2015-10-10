@@ -2,45 +2,42 @@
 {
     using Enumerations;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    internal static class MenuPrinter
+    internal class MenuPrinter
     {
-        static public void ConsoleSetUp(int h, int w)
+        private const int ConsoleHeight = 29;
+        private const int ConsoleWidth = 80;
+
+        public static void ConsoleSetUp()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            Console.SetWindowSize(w, h);
-            Console.BufferHeight = h;
-            Console.BufferWidth = w;
+            Console.SetWindowSize(ConsoleWidth, ConsoleHeight);
+            Console.BufferHeight = ConsoleHeight;
+            Console.BufferWidth = ConsoleWidth;
             Console.CursorVisible = false;
         }
 
-        static public void PrintBackground(int h, int w)
+        public static void PrintBackground()
         {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(new string(' ', w * h));
+            Console.WriteLine(new string(' ', ConsoleWidth * ConsoleHeight));
             Console.BackgroundColor = ConsoleColor.Black;
             string gameTitle = " Minesweeper - v 5";
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, 0);
-            Console.Write((gameTitle).PadLeft(((w - gameTitle.Length) / 2) + gameTitle.Length).PadRight(w));
+            Console.Write((gameTitle).PadLeft(((ConsoleWidth - gameTitle.Length) / 2) + gameTitle.Length).PadRight(ConsoleWidth));
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        static public int GameLevelSelector(int w)
+        public int GameLevelSelector()
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", "Exit" };
             int select = 0;
-            PrintMenu(select, menuText, w);
+            PrintMenu(select, menuText, ConsoleWidth);
 
             while (true)
             {
-
                 ConsoleKeyInfo userInput = Console.ReadKey();
 
                 // Move up selection
@@ -61,7 +58,7 @@
                     break;
                 }
 
-                PrintMenu(select, menuText, w);
+                PrintMenu(select, menuText, ConsoleWidth);
             }
 
             switch (select)
