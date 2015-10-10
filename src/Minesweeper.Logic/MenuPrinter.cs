@@ -8,7 +8,7 @@
         private const int ConsoleHeight = 29;
         private const int ConsoleWidth = 80;
 
-        public static void ConsoleSetUp()
+        public void ConsoleSetUp()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.SetWindowSize(ConsoleWidth, ConsoleHeight);
@@ -17,11 +17,15 @@
             Console.CursorVisible = false;
         }
 
-        public static void PrintBackground()
+        public void PrintBackground()
         {
+            int numberOfMines = Game.Instance().NumberOfMines;
+            int numberOfFlags = Game.Instance().NumberOfFlags;
+            int gameScore = Game.Instance().GameBoard.OpenCellsCounter;
+
             string gameTitle = "Minesweeper";
-            string score = String.Format("Score: {0}", 4);
-            string mines = String.Format("Mines: {0}/{1}", 23, 25);
+            string score = String.Format("Score: {0}", gameScore);
+            string mines = String.Format("Mines: {0}/{1}", numberOfMines - numberOfFlags, numberOfMines);
 
             int padleft = 34;
 
@@ -37,7 +41,7 @@
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public static Level GameLevelSelector()
+        public Level GameLevelSelector()
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", " Exit" };
             int select = 0;
@@ -84,7 +88,7 @@
             }
         }
 
-        static public void PrintMenu(int s, string[] menu, int w)
+        public void PrintMenu(int s, string[] menu, int w)
         {
             Console.Clear();
             var total = w;

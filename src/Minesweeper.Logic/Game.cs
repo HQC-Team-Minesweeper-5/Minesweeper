@@ -14,7 +14,6 @@ namespace Minesweeper.Logic
 
         private int numberOfRows;
         private int numberOfCols;
-        private int numberOfMines;
 
         private GameStatus gameStatus;
         private Printer printer;
@@ -23,12 +22,21 @@ namespace Minesweeper.Logic
 
         private Game()
         {
-            this.PrepareGameResourses();
+
+            this.printer = new Printer();
+            this.userInput = new HandleUserInput();
+            this.OpenCellSaver = new OpenCellSaver();
+            this.coordinates = new Coordinates(this.numberOfRows, this.numberOfCols);
+            this.gameStatus = GameStatus.GameOn;
         }
 
-        public PlayingField GameBoard { get; set; }
+        public PlayingField GameBoard { get; private set; }
 
-        public OpenCellSaver OpenCellSaver { get; set; }
+        public OpenCellSaver OpenCellSaver { get; private set; }
+
+        public int NumberOfMines { get; private set; }
+
+        public int NumberOfFlags { get; set; }
 
         public static Game Instance()
         {
@@ -42,7 +50,7 @@ namespace Minesweeper.Logic
         
         public void StartNewGame()
         {
-            this.GameBoard = new PlayingField(this.numberOfRows, this.numberOfCols, this.numberOfMines);
+            this.PrepareGameResourses();
             Console.WriteLine(GameWelcomeText);
 
             while (this.gameStatus != GameStatus.Restart)
@@ -82,12 +90,30 @@ namespace Minesweeper.Logic
             this.gameStatus = GameStatus.GameOver;
         }
 
+        private void SelectLevel(Level level)
+        {
+            this.numberOfRows = level.NumberOfRows;
+            this.numberOfCols = level.NumberOfCols;
+            this.NumberOfMines = level.NumberOfMines;
+        }
+
+        private void PrepareGameResourses()
+        {
+            MenuPrinter menuPrinter = new MenuPrinter();
+
+            this.SelectLevel(menuPrinter.GameLevelSelector());
+            this.GameBoard = new PlayingField(this.numberOfRows, this.numberOfCols, this.NumberOfMines);
+
+            menuPrinter.ConsoleSetUp();
+            menuPrinter.PrintBackground();
+        }
+
         private void DisplayGameOnSection()
         {
             this.printer.PrintPlayingField(this.GameBoard, this.gameStatus);
             this.userInput.HandleInput(this.GameBoard);
 
-            if (this.GameBoard.OpenCellsCounter == (this.numberOfRows * this.numberOfCols) - this.numberOfMines)
+            if (this.GameBoard.OpenCellsCounter == (this.numberOfRows * this.numberOfCols) - this.NumberOfMines)
             {
                 this.gameStatus = GameStatus.YouWin;
             }
@@ -114,26 +140,6 @@ namespace Minesweeper.Logic
             Console.WriteLine("GAME OVER - you are dead!");
             Console.WriteLine("{0} {1}", GameEndMessage, score);
             Console.ReadKey();
-        }
-
-        private void SelectLevel(Level level)
-        {
-            this.numberOfRows = level.NumberOfRows;
-            this.numberOfCols = level.NumberOfCols;
-            this.numberOfMines = level.NumberOfMines;
-        }
-
-        private void PrepareGameResourses()
-        {
-            MenuPrinter.ConsoleSetUp();
-            MenuPrinter.PrintBackground();
-
-            this.printer = new Printer();
-            this.userInput = new HandleUserInput();
-            this.OpenCellSaver = new OpenCellSaver();
-            this.coordinates = new Coordinates(this.numberOfRows, this.numberOfCols);
-            this.SelectLevel(MenuPrinter.GameLevelSelector());
-            this.gameStatus = GameStatus.GameOn;
         }
     }
 }

@@ -76,11 +76,13 @@
                         if (this.InputCoordinates[2].ToLower() == "f")
                         {
                             playingField.SetFlag(row, col);
+                            Game.Instance().NumberOfFlags++;
                             break;
                         }
                         else if (this.InputCoordinates[2].ToLower() == "r")
                         {
                             playingField.RemoveFlag(row, col);
+                            Game.Instance().NumberOfFlags--;
                             break;
                         }
                         else

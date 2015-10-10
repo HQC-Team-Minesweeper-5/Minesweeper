@@ -18,8 +18,9 @@
 
         internal void PrintPlayingField(PlayingField playingField, GameStatus gamestatus)
         {
-            MenuPrinter.ConsoleSetUp();
-            MenuPrinter.PrintBackground();
+            MenuPrinter menuPrinter = new MenuPrinter();
+            menuPrinter.ConsoleSetUp();
+            menuPrinter.PrintBackground();
 
             int rows = playingField.Field.GetLength(0);
             int columns = playingField.Field.GetLength(1);
