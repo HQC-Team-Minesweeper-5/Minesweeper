@@ -30,7 +30,7 @@
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public static int GameLevelSelector()
+        public static Level GameLevelSelector()
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", "Exit" };
             int select = 0;
@@ -64,15 +64,13 @@
             switch (select)
             {
                 case 0:
-                    return 1;
+                    return new Level(9, 9, 10);
                 case 1:
-                    return 2;
+                    return new Level(14, 14, 30);
                 case 2:
-                    return 3;
-                case 3:
-                    return 0;
+                    return new Level(14, 20, 70);
                 default:
-                    return 0;
+                    return new Level(20, 20, 0);
             }
         }
 
