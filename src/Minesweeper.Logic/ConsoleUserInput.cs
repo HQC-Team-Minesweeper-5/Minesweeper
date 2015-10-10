@@ -53,7 +53,25 @@
             bool isValid = true;
             if (inputCordinates.Length < 2)
             {
-                isValid = false;
+                if (inputCordinates.Length > 0)
+                {
+                    switch (inputCordinates[0])
+                    {
+                        case "restart":
+                            Game.Instance().RestartGame();
+                            return;
+                        case "exit":
+                            Game.Instance().ChangeToGameOver();
+                            return;
+                        default:
+                            isValid = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    isValid = false;
+                }
             }
             else
             {

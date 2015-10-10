@@ -15,7 +15,7 @@ namespace Minesweeper.Logic
         private const string GameWelcomeText = "Welcome to the game “Minesweeper. Try to reveal all cells without mines. Use 'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
         private const string InvalidCoordinatesText = "Illegal move";
         private const string GameEndMessage = "Your score: ";
-        private const string RestartMessage = "Press 'enter' for new game";
+        private const string ExitOrRestartMessage = "Enter 'restart' for new game or 'exit' to exit the game";
 
         private static Game gameInstance;
         private PlayingField gameBoard;
@@ -28,15 +28,12 @@ namespace Minesweeper.Logic
         {
             //Facade
             PrepareGameResourses();
-            this.StartNewGame();
         }
 
         public static Game Instance()
         {
             if (gameInstance == null)
-            {
                 gameInstance = new Game();
-            }
 
             return gameInstance;
         }
@@ -63,7 +60,7 @@ namespace Minesweeper.Logic
         }
 
         // State pattern?
-        private void StartNewGame()
+        public void StartNewGame()
         {
             this.gameBoard = new PlayingField(numberOfRows, numberOfCols, numberOfMines);
 
@@ -80,6 +77,10 @@ namespace Minesweeper.Logic
                         do
                         {
                             userInput.HandleUserInput();
+                            if (this.gameStatus != GameStatus.GameOn)
+                            {
+                                break;
+                            }
                             areCoordinatesValid = coordinates.AreCordinatesInRange(userInput.ChoosenRow, userInput.ChoosenColumn);
                             if (!areCoordinatesValid)
                             {
@@ -87,6 +88,11 @@ namespace Minesweeper.Logic
                             }
                         }
                         while (!areCoordinatesValid);
+
+                        if(this.gameStatus != GameStatus.GameOn)
+                        {
+                            break;
+                        }
 
                         if ((userInput.InputCoordinates.Length > 2 && userInput.InputCoordinates[2].ToLower() == "f"))
                         {
@@ -129,12 +135,21 @@ namespace Minesweeper.Logic
                         throw new Exception("Invalid game state!");
                 }
             }
+        }
 
-            Console.WriteLine("{0}", RestartMessage);
-            Console.ReadLine();
+        public void RestartGame()
+        {
             Console.Clear();
+
             this.gameStatus = GameStatus.GameOn;
             this.StartNewGame();
+        }
+
+        public void ChangeToGameOver()
+        {
+            Console.Clear();
+
+            this.gameStatus = GameStatus.GameOver;
         }
 
         private void SelectLevel(Level level)

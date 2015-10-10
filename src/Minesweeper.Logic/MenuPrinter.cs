@@ -32,7 +32,7 @@
 
         public static Level GameLevelSelector()
         {
-            string[] menuText = { "Level 1", "Level 2", "Level 3", "Exit" };
+            string[] menuText = { "Level 1", "Level 2", "Level 3", " Exit" };
             int select = 0;
             PrintMenu(select, menuText, ConsoleWidth);
 
@@ -70,7 +70,9 @@
                 case 2:
                     return new Level(14, 20, 70);
                 default:
-                    return new Level(20, 20, 0);
+                    Console.Clear();
+                    Environment.Exit(0);
+                    return new Level(0, 0, 0);
             }
         }
 
