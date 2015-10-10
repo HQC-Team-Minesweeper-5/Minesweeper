@@ -5,14 +5,10 @@ namespace Minesweeper.Logic
 
     public class MineCell : ICloneable
     {
-        private int value;
-        private bool isMine;
-        private FieldStatus status;
-
         public MineCell()
         {
-            this.value = 0;
-            this.status = FieldStatus.Closed;
+            this.Value = 0;
+            this.Status = FieldStatus.Closed;
         }
 
         public int Value { get; set; }
