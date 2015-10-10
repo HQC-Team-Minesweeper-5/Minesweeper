@@ -34,22 +34,18 @@
             }
         }
 
-        internal GameStatus OpenCell(int row, int column)
+        internal void OpenCell(int row, int column)
         {
             MineCell field = this.field[row, column];
-            GameStatus status;
 
-            if (field.Status == FieldStatus.Opened)
+            if (field.Status == FieldStatus.Flagged)
             {
-                status = GameStatus.GameOn;
-            }
-            else if (field.Status == FieldStatus.Flagged)
-            {
-                status = GameStatus.GameOn;
+                Console.Beep();
+                return;
             }
             else if (field.IsMine)
             {
-                status = GameStatus.GameOver;
+                Game.Instance().ChangeToGameOver();
             }
             else
             {
@@ -67,11 +63,8 @@
                     this.OpenSurroundingCells(row, column);
                 }
 
-                status = GameStatus.GameOn;
                 this.openCellsCounter++;
             }
-
-            return status;
         }
 
         internal void SetFlag(int row, int column)

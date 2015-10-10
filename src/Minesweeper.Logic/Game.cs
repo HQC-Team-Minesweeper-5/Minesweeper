@@ -2,7 +2,6 @@ namespace Minesweeper.Logic
 {
     using System;
     using Minesweeper.Logic.Enumerations;
-    using Minesweeper.Logic.Interfaces;
 
     public sealed class Game
     {
@@ -13,7 +12,7 @@ namespace Minesweeper.Logic
         private int numberOfMines = 10;
         private const int MaxTopPlayers = 5;
         private const string GameWelcomeText = "Welcome to the game “Minesweeper. Try to reveal all cells without mines. Use 'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
-        private const string InvalidCoordinatesText = "Illegal move";
+        // private const string InvalidCoordinatesText = "Illegal move";
         private const string GameEndMessage = "Your score: ";
         private const string ExitOrRestartMessage = "Enter 'restart' for new game or 'exit' to exit the game";
 
@@ -22,7 +21,7 @@ namespace Minesweeper.Logic
         private GameStatus gameStatus;
         private Printer printer;
         private Coordinates coordinates;
-        private IUserInput userInput;
+        private HandleUserInput userInput;
 
         private Game()
         {
@@ -56,7 +55,7 @@ namespace Minesweeper.Logic
 
             this.printer = new Printer();
             this.coordinates = new Coordinates(numberOfRows, numberOfCols);
-            this.userInput = new ConsoleUserInput();
+            this.userInput = new HandleUserInput();
         }
 
         // State pattern?
@@ -72,40 +71,9 @@ namespace Minesweeper.Logic
                     case GameStatus.GameOn:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
 
-                        bool areCoordinatesValid;
                         int score;
-                        do
-                        {
-                            userInput.HandleUserInput();
-                            if (this.gameStatus != GameStatus.GameOn)
-                            {
-                                break;
-                            }
-                            areCoordinatesValid = coordinates.AreCordinatesInRange(userInput.ChoosenRow, userInput.ChoosenColumn);
-                            if (!areCoordinatesValid)
-                            {
-                                Console.WriteLine(InvalidCoordinatesText);
-                            }
-                        }
-                        while (!areCoordinatesValid);
 
-                        if(this.gameStatus != GameStatus.GameOn)
-                        {
-                            break;
-                        }
-
-                        if ((userInput.InputCoordinates.Length > 2 && userInput.InputCoordinates[2].ToLower() == "f"))
-                        {
-                            this.gameBoard.SetFlag(coordinates.ChoosenRow, coordinates.ChoosenColumn);
-                        }
-                        else if ((userInput.InputCoordinates.Length > 2 && userInput.InputCoordinates[2].ToLower() == "r"))
-                        {
-                            this.gameBoard.RemoveFlag(coordinates.ChoosenRow, coordinates.ChoosenColumn);
-                        }
-                        else
-                        {
-                            this.gameStatus = this.gameBoard.OpenCell(coordinates.ChoosenRow, coordinates.ChoosenColumn);
-                        }
+                        userInput.HandleInput(this.gameBoard);
 
                         if (this.gameBoard.OpenCellsCounter == (numberOfRows * numberOfCols) - numberOfMines)
                         {
@@ -117,10 +85,11 @@ namespace Minesweeper.Logic
 
                     case GameStatus.GameOver:
                         this.printer.PrintPlayingField(this.gameBoard, this.gameStatus);
-                        Console.ReadKey();
+                        
                         score = this.gameBoard.OpenCellsCounter;
                         Console.WriteLine("GAME OVER - you are dead!");
                         Console.WriteLine("{0} {1}", GameEndMessage, score);
+                        Console.ReadKey();
 
                         Scoreboard.HighScore(this.gameBoard.OpenCellsCounter);
                         this.gameStatus = GameStatus.Restart;

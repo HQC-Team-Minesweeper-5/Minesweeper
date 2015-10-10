@@ -45,9 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleUserInput.cs" />
+    <Compile Include="HandleUserInput.cs" />
     <Compile Include="Coordinates.cs" />
-    <Compile Include="Interfaces\IUserInput.cs" />
     <Compile Include="MenuPrinter.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="MineCalculator.cs" />
@@ -65,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
