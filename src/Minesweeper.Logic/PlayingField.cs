@@ -78,7 +78,10 @@
         {
             MineCell field = this.field[row, column];
 
-            field.Status = FieldStatus.Flagged;
+            if (field.Status != FieldStatus.Opened)
+            {
+                field.Status = FieldStatus.Flagged;
+            }
         }
 
         internal void RemoveFlag(int row, int column)
