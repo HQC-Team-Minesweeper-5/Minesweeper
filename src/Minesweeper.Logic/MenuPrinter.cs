@@ -1,7 +1,7 @@
 ﻿namespace Minesweeper.Logic
 {
-    using Enumerations;
     using System;
+    using Enumerations;
 
     internal class MenuPrinter
     {
@@ -19,24 +19,24 @@
 
         public void PrintBackground()
         {
+            const int PadSize = 34;
+
             int numberOfMines = Game.Instance().NumberOfMines;
             int numberOfFlags = Game.Instance().NumberOfFlags;
             int gameScore = Game.Instance().GameBoard.OpenCellsCounter;
 
             string gameTitle = "Minesweeper";
-            string score = String.Format("Score: {0}", gameScore);
-            string mines = String.Format("Mines: {0}/{1}", numberOfMines - numberOfFlags, numberOfMines);
-
-            int padleft = 34;
+            string score = string.Format("Score: {0}", gameScore);
+            string mines = string.Format("Mines: {0}/{1}", numberOfMines - numberOfFlags, numberOfMines);
 
             Console.WriteLine(new string(' ', ConsoleWidth * ConsoleHeight));
             Console.BackgroundColor = ConsoleColor.Black;
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, 0);
-            Console.Write(score.PadRight(padleft, ' '));
+            Console.Write(score.PadRight(PadSize, ' '));
             Console.Write(gameTitle);
-            Console.Write(mines.PadLeft(padleft + 1, ' '));
+            Console.Write(mines.PadLeft(PadSize + 1, ' '));
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
         }
@@ -45,7 +45,7 @@
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", " Exit" };
             int select = 0;
-            PrintMenu(select, menuText, ConsoleWidth);
+            this.PrintMenu(select, menuText, ConsoleWidth);
 
             while (true)
             {
@@ -69,10 +69,9 @@
                     break;
                 }
 
-                PrintMenu(select, menuText, ConsoleWidth);
+                this.PrintMenu(select, menuText, ConsoleWidth);
             }
-
-
+            
             switch (select)
             {
                 case 0:
@@ -98,13 +97,15 @@
             {
                 // Take care of even lenght situation
                 int n = menu[i].Length % 2 == 0 ? 1 : 0;
-                if (i == s) //set color for the selected option
+
+                // set color for the selected option
+                if (i == s) 
                 {
                     // Set color
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine((">  " + menu[i]).PadLeft(((total - menu[i].Length) / 2)
                                             + menu[i].Length - n)
-                                             .PadRight(total));  //centering text
+                                             .PadRight(total));  // centering text
 
                     // Reset color
                     Console.ForegroundColor = ConsoleColor.White;

@@ -7,19 +7,22 @@
 
     public class PlayingField
     {
-        private List<CellCoordinates> newCells;
         private readonly MineCell[,] field;
+
+        private List<CellCoordinates> newCells;
         private int openCellsCounter;
-        private bool initialState = true;
+        private bool initialState;
         private int minesCount;
-        private int howDeepAmI = 0;
+        private int howDeepAmI;
 
         internal PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new MineCell[rows, cols];
-            this.FillPlayingFieldWithMineCells(this.field);
-            this.minesCount = minesCount;
             this.openCellsCounter = 0;
+            this.initialState = true;
+            this.minesCount = minesCount;
+            this.howDeepAmI = 0;
+            this.FillPlayingFieldWithMineCells(this.field);
         }
 
         internal MineCell[,] Field
@@ -54,14 +57,14 @@
             }
             else
             {
-
-                int currDeepness = howDeepAmI;
+                int currDeepness = this.howDeepAmI;
                 if (currDeepness == 0)
                 {
-                    newCells = new List<CellCoordinates>();
+                    this.newCells = new List<CellCoordinates>();
                 }
+
                 field.Status = FieldStatus.Opened;
-                newCells.Add(new CellCoordinates(row, column));
+                this.newCells.Add(new CellCoordinates(row, column));
 
                 if (this.initialState)
                 {
@@ -72,25 +75,25 @@
 
                 if (field.Value == 0)
                 {
-                    howDeepAmI++;
+                    this.howDeepAmI++;
                     this.OpenSurroundingCells(row, column);
-                    howDeepAmI--;
+                    this.howDeepAmI--;
                 }
 
                 if (currDeepness == 0)
                 {
-                    Game.Instance().OpenCellSaver.addCells(newCells);
+                    Game.Instance().OpenCellSaver.AddCells(this.newCells);
                 }
+
                 this.openCellsCounter++;
             }
         }
 
         internal void SetFlag(int row, int column)
         {
-
-            newCells = new List<CellCoordinates>();
-            newCells.Add(new CellCoordinates(row, column));
-            Game.Instance().OpenCellSaver.addCells(newCells);
+            this.newCells = new List<CellCoordinates>();
+            this.newCells.Add(new CellCoordinates(row, column));
+            Game.Instance().OpenCellSaver.AddCells(this.newCells);
 
             MineCell field = this.field[row, column];
 
@@ -102,9 +105,9 @@
 
         internal void RemoveFlag(int row, int column)
         {
-            newCells = new List<CellCoordinates>();
-            newCells.Add(new CellCoordinates(row, column));
-            Game.Instance().OpenCellSaver.addCells(newCells);
+            this.newCells = new List<CellCoordinates>();
+            this.newCells.Add(new CellCoordinates(row, column));
+            Game.Instance().OpenCellSaver.AddCells(this.newCells);
 
             MineCell field = this.field[row, column];
 

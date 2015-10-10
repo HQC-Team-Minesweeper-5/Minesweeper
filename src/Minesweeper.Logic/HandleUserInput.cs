@@ -1,9 +1,9 @@
 ﻿namespace Minesweeper.Logic
 {
     using System;
-    using Minesweeper.Logic.Structures;
-    using Minesweeper.Logic.Enumerations;
     using System.Collections.Generic;
+    using Minesweeper.Logic.Enumerations;
+    using Minesweeper.Logic.Structures;
 
     public class HandleUserInput
     {
@@ -39,25 +39,27 @@
                             isValid = true;
                             break;
                         case "undo":
-                            List<CellCoordinates> lastTurnCells= Game.Instance().OpenCellSaver.getLastCells();
+                            List<CellCoordinates> lastTurnCells = Game.Instance().OpenCellSaver.GetLastCells();
 
                             if (lastTurnCells == null)
                             {
-                                //Console.WriteLine("You have no moves to undo!");
+                                // Console.WriteLine("You have no moves to undo!");
                             }
                             else
                             {
                                 foreach (var cell in lastTurnCells)
                                 {
-                                    if(playingField.Field[cell.row, cell.col].Status == FieldStatus.Closed)
-                                    playingField.Field[cell.row, cell.col].Status = FieldStatus.Flagged;
+                                    if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Closed)
+                                    playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
                                     else
                                     {
-                                        playingField.Field[cell.row, cell.col].Status = FieldStatus.Closed;
+                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
                                     }
                                 }
+
                                 Game.Instance().OpenCellSaver.RemoveCells();
                             }
+
                             isValid = true;
                             break;
 

@@ -2,14 +2,13 @@
 {
     public struct CellCoordinates
     {
-        public int row;
-        public int col;
+        public int Row;
+        public int Col;
 
         public CellCoordinates(int row, int col)
         {
-            this.row = row;
-            this.col = col;
+            this.Row = row;
+            this.Col = col;
         }
-
     }
 }

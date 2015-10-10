@@ -22,7 +22,6 @@ namespace Minesweeper.Logic
 
         private Game()
         {
-
             this.printer = new Printer();
             this.userInput = new HandleUserInput();
             this.OpenCellSaver = new OpenCellSaver();
@@ -66,7 +65,7 @@ namespace Minesweeper.Logic
                         break;
 
                     case GameStatus.YouWin:
-                        DisplayYouWinSection();
+                        this.DisplayYouWinSection();
                         break;
 
                     default:

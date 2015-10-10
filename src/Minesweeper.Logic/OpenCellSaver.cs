@@ -1,47 +1,45 @@
-﻿
-namespace Minesweeper.Logic
+﻿namespace Minesweeper.Logic
 {
-    using Minesweeper.Logic.Structures;
     using System.Collections.Generic;
     using System.Linq;
+    using Minesweeper.Logic.Structures;
 
     public class OpenCellSaver
     {
         private int turn = -1;
-        public List<List<CellCoordinates>> cells;
+        private List<List<CellCoordinates>> cells;
 
         public OpenCellSaver()
         {
-            cells = new List<List<CellCoordinates>>();
+            this.cells = new List<List<CellCoordinates>>();
         }
 
-        public void addCells(List<CellCoordinates> newCells)
+        public void AddCells(List<CellCoordinates> newCells)
         {
-            cells.Add(newCells);
+            this.cells.Add(newCells);
             this.turn++;
             return;
         }
 
         public void RemoveCells()
         {
-            if (turn >= 0)
+            if (this.turn >= 0)
             {
-                cells.RemoveAt(turn);
+                this.cells.RemoveAt(this.turn);
                 this.turn--;
             }
         }
 
-        public List<CellCoordinates> getLastCells()
+        public List<CellCoordinates> GetLastCells()
         {
-            if (turn >= 0)
+            if (this.turn >= 0)
             {
-                return cells.ElementAt(turn);
+                return this.cells.ElementAt(this.turn);
             }
             else
             {
                 return null;
             }
         }
-
     }
 }
