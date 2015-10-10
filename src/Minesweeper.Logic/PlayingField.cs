@@ -39,18 +39,17 @@
             MineCell field = this.field[row, column];
             GameStatus status;
 
-            if (field.IsMine)
-            {
-                status = GameStatus.GameOver;
-            }
-            else if (field.Status == FieldStatus.Opened)
+            if (field.Status == FieldStatus.Opened)
             {
                 status = GameStatus.GameOn;
             }
             else if (field.Status == FieldStatus.Flagged)
             {
-                Console.WriteLine("This field has been flagged as a mine!");
                 status = GameStatus.GameOn;
+            }
+            else if (field.IsMine)
+            {
+                status = GameStatus.GameOver;
             }
             else
             {

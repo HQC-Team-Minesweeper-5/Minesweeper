@@ -18,15 +18,20 @@
 
         internal void PrintPlayingField(PlayingField playingField, GameStatus gamestatus)
         {
+            MenuPrinter.ConsoleSetUp();
+            MenuPrinter.PrintBackground();
+
             int rows = playingField.Field.GetLength(0);
             int columns = playingField.Field.GetLength(1);
 
+            string formatString = new string(' ', (Console.WindowWidth - (columns + (columns * 2))) / 2);
+
             this.sb.AppendLine();
-            this.sb.Append("    ");
+            this.sb.Append(formatString);
 
             for (int i = 0; i < columns; i++)
             {
-                this.sb.Append(String.Format("{0}", i).PadLeft(2, ' ') + " ");
+                this.sb.Append(string.Format("{0}", i).PadLeft(2, ' ') + " ");
             }
 
             this.sb.AppendLine();
@@ -34,7 +39,8 @@
 
             for (int i = 0; i < rows; i++)
             {
-                this.sb.Append(String.Format("{0}", i).PadLeft(2, ' '));
+                this.sb.Append(new string(' ', ((Console.WindowWidth - (columns + (columns * 2))) / 2) - 4));
+                this.sb.Append(string.Format("{0}", i).PadLeft(2, ' '));
                 this.sb.Append(" | ");
 
                 for (int j = 0; j < columns; j++)
@@ -92,12 +98,14 @@
 
         private void PrintLine(int columns)
         {
-            this.sb.Append("    =");
+            this.sb.Append(new string(' ', (Console.WindowWidth - (columns + (columns * 2))) / 2));
+
             for (int i = 0; i < columns; i++)
             {
                 this.sb.Append("===");
             }
 
+            this.sb.Append("=");
             this.sb.AppendLine();
         }
     }
