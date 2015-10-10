@@ -51,7 +51,6 @@
     <Compile Include="MenuPrinter.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="MineCalculator.cs" />
-    <Compile Include="MineField.cs" />
     <Compile Include="Enumerations\BoardStatus.cs" />
     <Compile Include="Enumerations\FieldStatus.cs" />
     <Compile Include="Enumerations\GameStatus.cs" />
