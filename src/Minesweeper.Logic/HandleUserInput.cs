@@ -49,7 +49,12 @@
                             {
                                 foreach (var cell in lastTurnCells)
                                 {
-                                    playingField.Field[cell.row, cell.col].Status = FieldStatus.Closed;
+                                    if(playingField.Field[cell.row, cell.col].Status == FieldStatus.Closed)
+                                    playingField.Field[cell.row, cell.col].Status = FieldStatus.Flagged;
+                                    else
+                                    {
+                                        playingField.Field[cell.row, cell.col].Status = FieldStatus.Closed;
+                                    }
                                 }
                                 Game.Instance().openCellSaver.RemoveCells();
                             }

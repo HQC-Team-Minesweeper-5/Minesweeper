@@ -45,6 +45,7 @@
             if (field.Status == FieldStatus.Flagged)
             {
                 Console.Beep();
+
                 return;
             }
             else if (field.IsMine)
@@ -86,6 +87,11 @@
 
         internal void SetFlag(int row, int column)
         {
+
+            newCells = new List<CellCoordinates>();
+            newCells.Add(new CellCoordinates(row, column));
+            Game.Instance().openCellSaver.addCells(newCells);
+
             MineCell field = this.field[row, column];
 
             if (field.Status != FieldStatus.Opened)
@@ -96,6 +102,10 @@
 
         internal void RemoveFlag(int row, int column)
         {
+            newCells = new List<CellCoordinates>();
+            newCells.Add(new CellCoordinates(row, column));
+            Game.Instance().openCellSaver.addCells(newCells);
+
             MineCell field = this.field[row, column];
 
             field.Status = FieldStatus.Closed;
