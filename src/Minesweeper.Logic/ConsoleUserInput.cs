@@ -59,15 +59,14 @@
                     {
                         case "restart":
                             Game.Instance().RestartGame();
-                            break;
+                            return;
                         case "exit":
                             Game.Instance().ChangeToGameOver();
-                            break;
+                            return;
                         default:
                             isValid = false;
                             break;
                     }
-                    return;
                 }
                 else
                 {
