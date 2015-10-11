@@ -1,20 +1,57 @@
-﻿namespace Minesweeper.Core.Field
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlayingField.cs" company="Team Minesweeper 5">
+//     No copyright here. You can use whatever you want!
+// </copyright>
+// <summary>This class contains the template for the playing filed of the minesweeper game.</summary>
+//-----------------------------------------------------------------------
+namespace Minesweeper.Core.Field
 {
     using System;
     using System.Collections.Generic;
     using Minesweeper.Core.Mines;
     using Minesweeper.Utils;
 
+    /// <summary>
+    /// The template for the playing filed of the minesweeper game.
+    /// </summary>
     public class PlayingField
     {
+        /// <summary>
+        /// Field containing the playing field with all the cells.
+        /// </summary>
         private readonly Cell[,] field;
 
+        /// <summary>
+        /// List needed for the memento pattern, holding cell coordinates to enable undo functionality.
+        /// </summary>
         private List<Coordinates> newCells;
+
+        /// <summary>
+        /// Counter, holding the number of cells, which are already opened.
+        /// </summary>
         private int openCellsCounter;
+
+        /// <summary>
+        /// This is a helper boolean which indicates whether the game has just been started and this is the first move of the player.
+        /// </summary>
         private bool initialState;
+
+        /// <summary>
+        /// Holds the number of mines set on the playing field.
+        /// </summary>
         private int minesCount;
+
+        /// <summary>
+        /// Holds the depth level of the memento.
+        /// </summary>
         private int howDeepAmI;
 
+        /// <summary>
+        /// Initializes a new instance of the PlayingField class.
+        /// </summary>
+        /// <param name="rows">The number of rows of the playing field.</param>
+        /// <param name="cols">The number of columns of the playing field.</param>
+        /// <param name="minesCount">The number of mines on the playing filed.</param>
         internal PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new Cell[rows, cols];
@@ -25,6 +62,9 @@
             this.FillPlayingFieldWithCells(this.field);
         }
 
+        /// <summary>
+        /// Gets the playing field.
+        /// </summary>
         internal Cell[,] Field
         {
             get
@@ -33,6 +73,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the open cells counter - the number of cells which are already opened.
+        /// </summary>
         internal int OpenCellsCounter
         {
             get
@@ -41,11 +84,20 @@
             }
         }
 
+        /// <summary>
+        /// Reduces the score.
+        /// </summary>
+        /// <param name="count">The amount with which the current score must be reduced.</param>
         public void ReduceScore(int count)
         {
             this.openCellsCounter -= count;
         }
 
+        /// <summary>
+        /// Opens a cell in the playing field.
+        /// </summary>
+        /// <param name="row">The row of the cell, being opened.</param>
+        /// <param name="column">The column of the cell, being opened.</param>
         internal void OpenCell(int row, int column)
         {
             Cell field = this.field[row, column];
@@ -94,6 +146,11 @@
             }
         }
 
+        /// <summary>
+        /// Sets flag on a cell in the playing field.
+        /// </summary>
+        /// <param name="row">The row of the cell, being flagged.</param>
+        /// <param name="column">The column of the cell, being flagged.</param>
         internal void SetFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
@@ -109,6 +166,11 @@
             }
         }
 
+        /// <summary>
+        /// Removes a flag from a cell.
+        /// </summary>
+        /// <param name="row">The row of the cell, from which a flag is being removed.</param>
+        /// <param name="column">The column of the cell, from which a flag is being removed.</param>
         internal void RemoveFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
@@ -124,6 +186,10 @@
             }
         }
 
+        /// <summary>
+        /// This method fills the playing field matrix with cells.
+        /// </summary>
+        /// <param name="emptyPlayingField">An empty playing field matrix.</param>
         private void FillPlayingFieldWithCells(Cell[,] emptyPlayingField)
         {
             int rows = emptyPlayingField.GetLength(0);
@@ -140,6 +206,10 @@
             }
         }
 
+        /// <summary>
+        /// This method seeds mines in random places, after the first cell in the playing field has been opened.
+        /// </summary>
+        /// <param name="minesCount">The number of mines, which will be seeded in the playing field.</param>
         private void SetMines(int minesCount)
         {
             var random = new Random();
@@ -160,6 +230,11 @@
             }
         }
 
+        /// <summary>
+        /// This method opens all surrounding cells if the current cell value is 0.
+        /// </summary>
+        /// <param name="row">The row of the cell, which does not have any mines as neighbors.</param>
+        /// <param name="column">The column of the cell, which does not have any mines as neighbors.</param>
         private void OpenSurroundingCells(int row, int column)
         {
             int minX = 0;
