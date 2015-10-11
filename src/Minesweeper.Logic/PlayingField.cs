@@ -9,7 +9,7 @@
     {
         private readonly MineCell[,] field;
 
-        private List<CellCoordinates> newCells;
+        private List<Coordinates> newCells;
         private int openCellsCounter;
         private bool initialState;
         private int minesCount;
@@ -65,11 +65,11 @@
                 int currDeepness = this.howDeepAmI;
                 if (currDeepness == 0)
                 {
-                    this.newCells = new List<CellCoordinates>();
+                    this.newCells = new List<Coordinates>();
                 }
 
                 field.Status = FieldStatus.Opened;
-                this.newCells.Add(new CellCoordinates(row, column));
+                this.newCells.Add(new Coordinates(row, column));
 
                 if (this.initialState)
                 {
@@ -96,8 +96,8 @@
 
         internal void SetFlag(int row, int column)
         {
-            this.newCells = new List<CellCoordinates>();
-            this.newCells.Add(new CellCoordinates(row, column));
+            this.newCells = new List<Coordinates>();
+            this.newCells.Add(new Coordinates(row, column));
             Game.Instance().OpenCellSaver.AddCells(this.newCells);
 
             MineCell field = this.field[row, column];
@@ -111,8 +111,8 @@
 
         internal void RemoveFlag(int row, int column)
         {
-            this.newCells = new List<CellCoordinates>();
-            this.newCells.Add(new CellCoordinates(row, column));
+            this.newCells = new List<Coordinates>();
+            this.newCells.Add(new Coordinates(row, column));
             Game.Instance().OpenCellSaver.AddCells(this.newCells);
 
             MineCell field = this.field[row, column];

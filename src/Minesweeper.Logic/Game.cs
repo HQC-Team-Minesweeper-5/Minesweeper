@@ -17,7 +17,6 @@ namespace Minesweeper.Logic
 
         private GameStatus gameStatus;
         private Printer printer;
-        private Coordinates coordinates;
         private HandleUserInput userInput;
 
         private Game()
@@ -25,7 +24,6 @@ namespace Minesweeper.Logic
             this.printer = new Printer();
             this.userInput = new HandleUserInput();
             this.OpenCellSaver = new OpenCellSaver();
-            this.coordinates = new Coordinates(this.numberOfRows, this.numberOfCols);
             this.gameStatus = GameStatus.GameOn;
         }
 

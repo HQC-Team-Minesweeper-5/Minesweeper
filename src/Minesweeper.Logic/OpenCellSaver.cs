@@ -7,14 +7,14 @@
     public class OpenCellSaver
     {
         private int turn = -1;
-        private List<List<CellCoordinates>> cells;
+        private List<List<Coordinates>> cells;
 
         public OpenCellSaver()
         {
-            this.cells = new List<List<CellCoordinates>>();
+            this.cells = new List<List<Coordinates>>();
         }
 
-        public void AddCells(List<CellCoordinates> newCells)
+        public void AddCells(List<Coordinates> newCells)
         {
             this.cells.Add(newCells);
             this.turn++;
@@ -30,7 +30,7 @@
             }
         }
 
-        public List<CellCoordinates> GetLastCells()
+        public List<Coordinates> GetLastCells()
         {
             if (this.turn >= 0)
             {
