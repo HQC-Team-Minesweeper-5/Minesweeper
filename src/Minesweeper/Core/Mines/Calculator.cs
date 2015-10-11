@@ -1,7 +1,20 @@
-﻿namespace Minesweeper.Core.Mines
+﻿//-----------------------------------------------------------------------
+// <copyright file="Calculator.cs" company="Team Minesweeper 5">
+//     No copyright here. You can use whatever you want!
+// </copyright>
+// <summary>This class performs calculations with the mines in the minesweeper game.</summary>
+//-----------------------------------------------------------------------
+namespace Minesweeper.Core.Mines
 {
+    /// <summary>
+    /// Class, performing calculations with the mines in the minesweeper game.
+    /// </summary>
     internal static class Calculator
     {
+        /// <summary>
+        /// Calculates the values of all fields without mines in the beginning of the minesweeper game.
+        /// </summary>
+        /// <param name="field">Method accepts the newly constructed playing field, with mines already set in their places.</param>
         internal static void CalculateFieldValues(Cell[,] field)
         {
             int row = field.GetLength(0);
@@ -19,6 +32,13 @@
             }
         }
 
+        /// <summary>
+        /// Method which calculates the number of mines, in the cells surrounding the current cell.
+        /// </summary>
+        /// <param name="field">The playing field.</param>
+        /// <param name="row">The row of the cell which was clicked.</param>
+        /// <param name="column">The column of the cell which was clicked.</param>
+        /// <returns>An integer showing the number of mines in the surrounding cells.</returns>
         internal static int CountSurroundingMines(Cell[,] field, int row, int column)
         {
             int minesCount = 0;
