@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLI\GamePrinter.cs" />
-    <Compile Include="CLI\MenuPrinter.cs" />
+    <Compile Include="CLI\MenuPrinter.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="CLI\UserInput.cs" />
     <Compile Include="Core\Memento.cs" />
     <Compile Include="Core\Mines\Calculator.cs" />

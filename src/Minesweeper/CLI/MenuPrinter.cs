@@ -1,14 +1,33 @@
-﻿namespace Minesweeper.CLI
+﻿//-----------------------------------------------------------------------
+// <copyright file="MenuPrinter.cs" company="Team Minesweeper 5">
+//     No copyright here. You can use whatever you want!
+// </copyright>
+// <summary>This class prints the level selector in the beginning of the minesweeper game & the game menu during each game.</summary>
+//-----------------------------------------------------------------------
+namespace Minesweeper.CLI
 {
     using System;
     using Minesweeper.Core;
     using Minesweeper.Utils;
 
+    /// <summary>
+    /// Prints the level selector and game menu.
+    /// </summary>
     internal class MenuPrinter
     {
+        /// <summary>
+        /// The height of the console.
+        /// </summary>
         private const int ConsoleHeight = 29;
+
+        /// <summary>
+        /// The width of the console.
+        /// </summary>
         private const int ConsoleWidth = 80;
 
+        /// <summary>
+        /// Sets up the console for the game.
+        /// </summary>
         public void ConsoleSetUp()
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -18,6 +37,9 @@
             Console.CursorVisible = false;
         }
 
+        /// <summary>
+        /// Prints the game background.
+        /// </summary>
         public void PrintBackground()
         {
             const int PadSize = 34;
@@ -42,11 +64,15 @@
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
+        /// <summary>
+        /// Prints the level selector in the beginning of the game.
+        /// </summary>
+        /// <returns>The current game level.</returns>
         public Level GameLevelSelector()
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", " Exit" };
             int select = 0;
-            this.PrintMenu(select, menuText, ConsoleWidth);
+            this.PrintSelectionMenu(select, menuText, ConsoleWidth);
 
             while (true)
             {
@@ -70,7 +96,7 @@
                     break;
                 }
 
-                this.PrintMenu(select, menuText, ConsoleWidth);
+                this.PrintSelectionMenu(select, menuText, ConsoleWidth);
             }
             
             switch (select)
@@ -88,10 +114,16 @@
             }
         }
 
-        public void PrintMenu(int s, string[] menu, int w)
+        /// <summary>
+        /// Prints the level selection menu.
+        /// </summary>
+        /// <param name="selected">Current user choice.</param>
+        /// <param name="menu">An array holding the menu items.</param>
+        /// <param name="width">Width of the console.</param>
+        public void PrintSelectionMenu(int selected, string[] menu, int width)
         {
             Console.Clear();
-            var total = w;
+            var totalWidth = width;
             Console.CursorVisible = false;
             Console.WriteLine();
             for (int i = 0; i < menu.Length; i++)
@@ -100,22 +132,22 @@
                 int n = menu[i].Length % 2 == 0 ? 1 : 0;
 
                 // set color for the selected option
-                if (i == s) 
+                if (i == selected) 
                 {
                     // Set color
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine((">  " + menu[i]).PadLeft(((total - menu[i].Length) / 2)
+                    Console.WriteLine((">  " + menu[i]).PadLeft(((totalWidth - menu[i].Length) / 2)
                                             + menu[i].Length - n)
-                                             .PadRight(total));  // centering text
+                                             .PadRight(totalWidth));  // centering text
 
                     // Reset color
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
-                    Console.WriteLine(menu[i].PadLeft(((total - menu[i].Length) / 2)
+                    Console.WriteLine(menu[i].PadLeft(((totalWidth - menu[i].Length) / 2)
                                             + menu[i].Length - n)
-                                            .PadRight(total));
+                                            .PadRight(totalWidth));
                 }
             }
         }
