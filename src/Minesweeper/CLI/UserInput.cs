@@ -52,18 +52,18 @@
                                 int howManyFieldsOpenedLast = 0;
                                 foreach (var cell in lastTurnCells)
                                 {
-                                    if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Closed)
+                                    if (playingField.Field[cell.Row, cell.Col].Status == CellStatus.Closed)
                                     {
-                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
+                                        playingField.Field[cell.Row, cell.Col].Status = CellStatus.Flagged;
                                         Game.Instance().NumberOfFlags += 1;                                    }
-                                    else if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Opened)
+                                    else if (playingField.Field[cell.Row, cell.Col].Status == CellStatus.Opened)
                                     {
-                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
+                                        playingField.Field[cell.Row, cell.Col].Status = CellStatus.Closed;
                                         howManyFieldsOpenedLast++;
                                     }
                                     else
                                     {
-                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
+                                        playingField.Field[cell.Row, cell.Col].Status = CellStatus.Closed;
                                         Game.Instance().NumberOfFlags -= 1;
                                     }
                                 }

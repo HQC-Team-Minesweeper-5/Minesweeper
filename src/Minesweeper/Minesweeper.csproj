@@ -52,7 +52,7 @@
     <Compile Include="Core\Mines\Calculator.cs" />
     <Compile Include="Utils\Level.cs" />
     <Compile Include="Core\Scoreboard.cs" />
-    <Compile Include="Core\Field\FieldStatus.cs" />
+    <Compile Include="Core\Field\CellStatus.cs" />
     <Compile Include="Core\GameStatus.cs" />
     <Compile Include="Core\Mines\Cell.cs" />
     <Compile Include="Core\Game.cs" />

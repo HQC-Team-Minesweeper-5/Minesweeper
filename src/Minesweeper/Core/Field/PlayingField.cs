@@ -50,7 +50,7 @@
         {
             Cell field = this.field[row, column];
 
-            if (field.Status == FieldStatus.Flagged || field.Status == FieldStatus.Opened)
+            if (field.Status == CellStatus.Flagged || field.Status == CellStatus.Opened)
             {
                 Console.Beep();
 
@@ -68,7 +68,7 @@
                     this.newCells = new List<Coordinates>();
                 }
 
-                field.Status = FieldStatus.Opened;
+                field.Status = CellStatus.Opened;
                 this.newCells.Add(new Coordinates(row, column));
 
                 if (this.initialState)
@@ -102,9 +102,9 @@
 
             Cell field = this.field[row, column];
 
-            if (field.Status != FieldStatus.Opened && field.Status != FieldStatus.Flagged)
+            if (field.Status != CellStatus.Opened && field.Status != CellStatus.Flagged)
             {
-                field.Status = FieldStatus.Flagged;
+                field.Status = CellStatus.Flagged;
                 Game.Instance().NumberOfFlags++;
             }
         }
@@ -117,9 +117,9 @@
 
             Cell field = this.field[row, column];
 
-            if (field.Status == FieldStatus.Flagged)
+            if (field.Status == CellStatus.Flagged)
             {
-                field.Status = FieldStatus.Closed;
+                field.Status = CellStatus.Closed;
                 Game.Instance().NumberOfFlags--;
             }
         }
@@ -176,7 +176,7 @@
             {
                 for (int colNum = startPosY; colNum <= endPosY; colNum++)
                 {
-                    if (this.field[rowNum, colNum].Status == FieldStatus.Opened)
+                    if (this.field[rowNum, colNum].Status == CellStatus.Opened)
                     {
                         continue;
                     }

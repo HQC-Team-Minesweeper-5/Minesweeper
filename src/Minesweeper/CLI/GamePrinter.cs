@@ -52,12 +52,12 @@
 
                     if (gamestatus == GameStatus.GameOn)
                     {
-                        if (currentField.Status == FieldStatus.Opened)
+                        if (currentField.Status == CellStatus.Opened)
                         {
                             this.sb.Append(playingField.Field[i, j].Value);
                             this.sb.Append("  ");
                         }
-                        else if (currentField.Status == FieldStatus.Flagged)
+                        else if (currentField.Status == CellStatus.Flagged)
                         {
                             this.sb.Append(Flag);
                         }
@@ -79,7 +79,7 @@
                     }
                     else
                     {
-                        if (currentField.IsMine == true || currentField.Status == FieldStatus.Flagged)
+                        if (currentField.IsMine == true || currentField.Status == CellStatus.Flagged)
                         {
                             this.sb.Append(Flag);
                         }
