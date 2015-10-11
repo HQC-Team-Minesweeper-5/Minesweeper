@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------
+// <copyright file="Game.cs" company="Team Minesweeper 5">
+//     No copyright here. You can use whatever you want!
+// </copyright>
+// <summary>This file contains the core logic for our minesweeper game</summary>
+//-----------------------------------------------------------------------
 namespace Minesweeper.Core
 {
     using System;
