@@ -41,6 +41,11 @@
             }
         }
 
+        public void ReduceScore(int count)
+        {
+            this.openCellsCounter -= count;
+        }
+
         internal void OpenCell(int row, int column)
         {
             MineCell field = this.field[row, column];

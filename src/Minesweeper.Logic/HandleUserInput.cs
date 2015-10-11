@@ -43,23 +43,24 @@
 
                             if (lastTurnCells == null)
                             {
-                                // Console.WriteLine("You have no moves to undo!");
+                                //Console.WriteLine("You have no moves to undo!");
                             }
                             else
                             {
+                                int howManyFieldsOpenedLast = 0;
                                 foreach (var cell in lastTurnCells)
                                 {
                                     if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Closed)
-                                    playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
+                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
                                     else
                                     {
                                         playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
+                                        howManyFieldsOpenedLast++;
                                     }
                                 }
-
                                 Game.Instance().OpenCellSaver.RemoveCells();
+                                playingField.ReduceScore(howManyFieldsOpenedLast);
                             }
-
                             isValid = true;
                             break;
 
