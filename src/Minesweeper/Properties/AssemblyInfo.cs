@@ -1,5 +1,10 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Team Minesweeper 5">
+//     No copyright here. You can use whatever you want!
+// </copyright>
+// <summary>Information for the minesweeper 5 assembly.</summary>
+//-----------------------------------------------------------------------
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
