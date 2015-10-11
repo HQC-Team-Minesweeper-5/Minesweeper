@@ -6,11 +6,12 @@
 
     public class OpenCellSaver
     {
-        private int turn = -1;
+        private int turn;
         private List<List<Coordinates>> cells;
 
         public OpenCellSaver()
         {
+            this.turn = -1;
             this.cells = new List<List<Coordinates>>();
         }
 

@@ -1,6 +1,9 @@
-﻿namespace Minesweeper.Logic
+﻿using System.Threading.Tasks;
+
+namespace Minesweeper.Logic
 {
     using System;
+    using System.Threading;
 
     public static class Startup
     {
@@ -8,6 +11,8 @@
         {
             Game minesweeper = Game.Instance();
             minesweeper.StartNewGame();
+
+            Console.Read();
         }
     }
 }

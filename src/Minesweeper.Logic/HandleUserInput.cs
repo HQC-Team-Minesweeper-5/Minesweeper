@@ -43,7 +43,8 @@
 
                             if (lastTurnCells == null)
                             {
-                                //Console.WriteLine("You have no moves to undo!");
+                                Console.Beep(700, 400);
+                                Console.Beep(700, 400);
                             }
                             else
                             {
@@ -54,7 +55,7 @@
                                     {
                                         playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
                                         Game.Instance().NumberOfFlags += 1;                                    }
-                                    else if(playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Opened)
+                                    else if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Opened)
                                     {
                                         playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
                                         howManyFieldsOpenedLast++;
@@ -65,10 +66,11 @@
                                         Game.Instance().NumberOfFlags -= 1;
                                     }
                                 }
+
                                 Game.Instance().OpenCellSaver.RemoveCells();
                                 playingField.ReduceScore(howManyFieldsOpenedLast);
-
                             }
+
                             isValid = true;
                             break;
 

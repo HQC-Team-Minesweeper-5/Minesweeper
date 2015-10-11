@@ -75,7 +75,7 @@
             switch (select)
             {
                 case 0:
-                    return new Level(9, 9, 10);
+                    return new Level(9, 9, 2);
                 case 1:
                     return new Level(14, 14, 30);
                 case 2:

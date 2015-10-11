@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Minesweeper.Logic
 {
     using System;
@@ -18,12 +20,14 @@ namespace Minesweeper.Logic
         private GameStatus gameStatus;
         private Printer printer;
         private HandleUserInput userInput;
+        private MusicPlayer musicPlayer;
 
         private Game()
         {
             this.printer = new Printer();
             this.userInput = new HandleUserInput();
             this.OpenCellSaver = new OpenCellSaver();
+            this.musicPlayer = new MusicPlayer();
             this.gameStatus = GameStatus.GameOn;
         }
 
@@ -56,6 +60,7 @@ namespace Minesweeper.Logic
                 {
                     case GameStatus.GameOn:
                         this.DisplayGameOnSection();
+
                         break;
 
                     case GameStatus.GameOver:
@@ -120,15 +125,18 @@ namespace Minesweeper.Logic
 
         private void DisplayYouWinSection()
         {
-            Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
             Console.WriteLine("Congratulations General, you won the game!");
+            this.musicPlayer.PlayWinMusic();
+            Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
             Console.ReadKey();
 
             this.gameStatus = GameStatus.Restart;
+
         }
 
         private void DisplayGameOverSection()
         {
+            this.musicPlayer.PlayGameOverMusic();
             Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
             this.printer.PrintPlayingField(this.GameBoard, this.gameStatus);
             this.gameStatus = GameStatus.Restart;

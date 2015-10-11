@@ -50,7 +50,7 @@
         {
             MineCell field = this.field[row, column];
 
-            if (field.Status == FieldStatus.Flagged)
+            if (field.Status == FieldStatus.Flagged || field.Status == FieldStatus.Opened)
             {
                 Console.Beep();
 

@@ -77,7 +77,6 @@
         /// <param name="scoreBoard">The new scores to be written</param>
         private static void WriteHighScore(IEnumerable<Score> scoreBoard)
         {
-            Console.Clear();
             List<string> output = new List<string>();
 
             foreach (var item in scoreBoard)
