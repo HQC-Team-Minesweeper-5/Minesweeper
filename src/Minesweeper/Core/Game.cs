@@ -1,12 +1,9 @@
-
-
 namespace Minesweeper.Core
 {
     using System;
     using System.Threading.Tasks;
     using Minesweeper.CLI;
     using Minesweeper.Core.Field;
-    using Minesweeper.Logic;
     using Minesweeper.Utils;
 
     public sealed class Game
@@ -22,13 +19,13 @@ namespace Minesweeper.Core
         private int numberOfCols;
 
         private GameStatus gameStatus;
-        private GamePrinter _gamePrinter;
+        private GamePrinter gamePrinter;
         private UserInput userInput;
         private MusicPlayer musicPlayer;
 
         private Game()
         {
-            this._gamePrinter = new GamePrinter();
+            this.gamePrinter = new GamePrinter();
             this.userInput = new UserInput();
             this.Memento = new Memento();
             this.musicPlayer = new MusicPlayer();
@@ -116,7 +113,7 @@ namespace Minesweeper.Core
 
         private void DisplayGameOnSection()
         {
-            this._gamePrinter.PrintPlayingField(this.GameBoard, this.gameStatus);
+            this.gamePrinter.PrintPlayingField(this.GameBoard, this.gameStatus);
             this.userInput.HandleInput(this.GameBoard);
 
             if (this.GameBoard.OpenCellsCounter == (this.numberOfRows * this.numberOfCols) - this.NumberOfMines)
@@ -135,14 +132,13 @@ namespace Minesweeper.Core
             Console.ReadKey();
 
             this.gameStatus = GameStatus.Restart;
-
         }
 
         private void DisplayGameOverSection()
         {
             this.musicPlayer.PlayGameOverMusic();
             Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
-            this._gamePrinter.PrintPlayingField(this.GameBoard, this.gameStatus);
+            this.gamePrinter.PrintPlayingField(this.GameBoard, this.gameStatus);
             this.gameStatus = GameStatus.Restart;
 
             int score = this.GameBoard.OpenCellsCounter;

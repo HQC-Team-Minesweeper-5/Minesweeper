@@ -1,6 +1,5 @@
 ﻿namespace Minesweeper.Core.Mines
 {
-
     internal static class Calculator
     {
         internal static void CalculateFieldValues(Cell[,] field)

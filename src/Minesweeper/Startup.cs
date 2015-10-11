@@ -1,6 +1,4 @@
-﻿
-
-namespace Minesweeper.Logic
+﻿namespace Minesweeper
 {
     using System;
     using System.Threading;

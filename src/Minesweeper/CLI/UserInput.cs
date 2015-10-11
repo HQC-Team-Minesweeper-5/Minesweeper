@@ -1,6 +1,4 @@
-﻿
-
-namespace Minesweeper.Logic
+﻿namespace Minesweeper.CLI
 {
     using System;
     using System.Collections.Generic;

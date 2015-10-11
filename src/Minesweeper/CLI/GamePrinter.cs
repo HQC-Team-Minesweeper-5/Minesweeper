@@ -9,7 +9,7 @@
     internal class GamePrinter
     {
         private const string MineOpened = "*  ";
-        private const string MineClosed = "X  ";
+        private const string MineClosed = "\u25A0  ";
         private const string Flag = "F  ";
         private StringBuilder sb;
 
