@@ -102,9 +102,10 @@
 
             MineCell field = this.field[row, column];
 
-            if (field.Status != FieldStatus.Opened)
+            if (field.Status != FieldStatus.Opened && field.Status != FieldStatus.Flagged)
             {
                 field.Status = FieldStatus.Flagged;
+                Game.Instance().NumberOfFlags++;
             }
         }
 
@@ -116,7 +117,11 @@
 
             MineCell field = this.field[row, column];
 
-            field.Status = FieldStatus.Closed;
+            if (field.Status == FieldStatus.Flagged)
+            {
+                field.Status = FieldStatus.Closed;
+                Game.Instance().NumberOfFlags--;
+            }
         }
 
         private void FillPlayingFieldWithMineCells(MineCell[,] emptyPlayingField)
