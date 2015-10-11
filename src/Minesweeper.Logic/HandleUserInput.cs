@@ -51,15 +51,23 @@
                                 foreach (var cell in lastTurnCells)
                                 {
                                     if (playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Closed)
+                                    {
                                         playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Flagged;
-                                    else
+                                        Game.Instance().NumberOfFlags += 1;                                    }
+                                    else if(playingField.Field[cell.Row, cell.Col].Status == FieldStatus.Opened)
                                     {
                                         playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
                                         howManyFieldsOpenedLast++;
                                     }
+                                    else
+                                    {
+                                        playingField.Field[cell.Row, cell.Col].Status = FieldStatus.Closed;
+                                        Game.Instance().NumberOfFlags -= 1;
+                                    }
                                 }
                                 Game.Instance().OpenCellSaver.RemoveCells();
                                 playingField.ReduceScore(howManyFieldsOpenedLast);
+
                             }
                             isValid = true;
                             break;
