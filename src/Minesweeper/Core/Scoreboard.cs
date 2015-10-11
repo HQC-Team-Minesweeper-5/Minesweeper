@@ -7,16 +7,19 @@
     using Minesweeper.Utils;
 
     /// <summary>
-    /// A static class that reads and writes into the scoreboard file
+    /// A static class that reads and writes into the scoreboard file.
     /// </summary>
     internal static class Scoreboard
     {
+        /// <summary>
+        /// Sets the max number of players, kept in the high score list.
+        /// </summary>
         private const int MaxPlayersInHighscore = 3;
 
         /// <summary>
-        /// Takes the currect score and compares it with the existing ones, then decides if it should save it or not
+        /// Takes the current score and compares it with the existing ones, then decides if it should save it or not.
         /// </summary>
-        /// <param name="currentPlayerScore">The player score for the current game</param>
+        /// <param name="currentPlayerScore">The player score for the current game.</param>
         public static void HighScore(int currentPlayerScore)
         {
             try
@@ -45,9 +48,9 @@
         }
 
         /// <summary>
-        /// Helper method that reads the highscore file 
+        /// Helper method that reads the high score file.
         /// </summary>
-        /// <returns>A list of all the saved scores</returns>
+        /// <returns>A list of all the saved scores.</returns>
         private static List<Score> ReadHighScore()
         {
             if (!File.Exists("HighScore.txt"))
@@ -73,9 +76,9 @@
         }
 
         /// <summary>
-        /// Helper method that rewriters the saved highscores
+        /// Helper method that rewriters the saved high scores.
         /// </summary>
-        /// <param name="scoreBoard">The new scores to be written</param>
+        /// <param name="scoreBoard">The new scores to be written.</param>
         private static void WriteHighScore(IEnumerable<Score> scoreBoard)
         {
             List<string> output = new List<string>();
@@ -90,10 +93,10 @@
         }
         
         /// <summary>
-        /// Adds a player to the highscore
+        /// Adds a player to the high score.
         /// </summary>
-        /// <param name="scoreBoard">All currently saved highscores</param>
-        /// <param name="currentPlayerScore">The highscore of the current player</param>
+        /// <param name="scoreBoard">All currently saved high scores.</param>
+        /// <param name="currentPlayerScore">The high score of the current player.</param>
         private static void AddPlayerToHighScore(List<Score> scoreBoard, int currentPlayerScore)
         {
             string playerName;
