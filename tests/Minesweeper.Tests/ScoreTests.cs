@@ -31,7 +31,7 @@ namespace Minesweeper.Tests.UitlsTests
         {
             var score = new Score(this.playerName, this.points, this.time);
             var result = score.ToString();
-            var template = String.Format("{0}\t{1}\t{2}", this.playerName, this.points, this.time);
+            var template = string.Format("{0}\t{1}\t{2}", this.playerName, this.points, this.time);
 
             Assert.AreEqual(result, template);
         }
