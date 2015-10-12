@@ -1,4 +1,4 @@
-﻿namespace Minesweeper.Tests
+namespace Minesweeper.Tests.UitlsTests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,43 +7,85 @@
     [TestClass]
     public class ScoreTests
     {
-        [TestMethod]
-        public void CreatingAScoreShouldCreateANewScore()
-        {
-            Score someScore = new Score("Pesho", 5, new DateTime(2000, 1, 1));
+        private readonly string playerName = "Gosho";
+        private readonly int points = 100;
+        private readonly DateTime time = DateTime.Now;
 
-            Assert.AreEqual(5, someScore.Points);
+        [TestMethod]
+        public void InitializeNewScoreShouldNotThrow()
+        {
+            var score = new Score(this.playerName, this.points, this.time);
         }
 
         [TestMethod]
-        public void ComparingTheSameScoresShouldReturnZero()
+        public void ToStringShouldReturnString()
         {
-            Score someScore = new Score("Pesho", 5, new DateTime(2000, 1, 1));
-            Score otherScore = new Score("Pesho", 5, new DateTime(2000, 1, 1));
-            Assert.AreEqual(0, someScore.CompareTo(otherScore));
+            var score = new Score(this.playerName, this.points, this.time);
+            var result = score.ToString();
+
+            Assert.IsInstanceOfType(result, typeof(string));
         }
 
         [TestMethod]
-        public void ComparingABiggerToSmallerScoreShouldReturnOne()
+        public void ToStringShouldReturnStringInProperFormat()
         {
-            Score biggerScore = new Score("Pesho", 6, new DateTime(2000, 1, 1));
-            Score smallerScore = new Score("Pesho", 5, new DateTime(2000, 1, 1));
-            Assert.AreEqual(1, biggerScore.CompareTo(smallerScore));
+            var score = new Score(this.playerName, this.points, this.time);
+            var result = score.ToString();
+            var template = String.Format("{0}\t{1}\t{2}", this.playerName, this.points, this.time);
+
+            Assert.AreEqual(result, template);
         }
 
         [TestMethod]
-        public void ComparingASmallerToBiggerScoreShouldReturnMinusOne()
+        public void CompareToShouldReturnNumber()
         {
-            Score biggerScore = new Score("Pesho", 6, new DateTime(2000, 1, 1));
-            Score smallerScore = new Score("Pesho", 55, new DateTime(2000, 1, 1));
-            Assert.AreEqual(-1, biggerScore.CompareTo(smallerScore));
+            const int FirstPoints = 100;
+            const int SecondPoints = 100;
+
+            var firstScore = new Score(this.playerName, FirstPoints, this.time);
+            var secondScore = new Score(this.playerName, SecondPoints, this.time);
+
+            var result = firstScore.CompareTo(secondScore);
+            Assert.IsInstanceOfType(result, typeof(int));
         }
 
         [TestMethod]
-        public void ToStringShouldReturnAStringInSelectedFormat()
+        public void CompareToHigerShouldReturnOne()
         {
-            Score someScore = new Score("Pesho", 6, new DateTime(2000, 1, 1));
-            Assert.AreEqual("Pesho" + "\t" + "6" + "\t" + new DateTime(2000, 1, 1).ToString() , someScore.ToString());
+            const int FirstPoints = 100;
+            const int SecondPoints = 200;
+
+            var firstScore = new Score(this.playerName, FirstPoints, this.time);
+            var secondScore = new Score(this.playerName, SecondPoints, this.time);
+
+            var result = firstScore.CompareTo(secondScore);
+            Assert.AreEqual(result, 1);
+        }
+
+        [TestMethod]
+        public void CompareToEqualShouldReturnZero()
+        {
+            const int FirstPoints = 100;
+            const int SecondPoints = 100;
+
+            var firstScore = new Score(this.playerName, FirstPoints, this.time);
+            var secondScore = new Score(this.playerName, SecondPoints, this.time);
+
+            var result = firstScore.CompareTo(secondScore);
+            Assert.AreEqual(result, 0);
+        }
+
+        [TestMethod]
+        public void CompareToLowerShouldReturnNegativeOne()
+        {
+            const int FirstPoints = 100;
+            const int SecondPoints = 50;
+
+            var firstScore = new Score(this.playerName, FirstPoints, this.time);
+            var secondScore = new Score(this.playerName, SecondPoints, this.time);
+
+            var result = firstScore.CompareTo(secondScore);
+            Assert.AreEqual(result, -1);
         }
     }
 }
