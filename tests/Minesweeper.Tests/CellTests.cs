@@ -1,9 +1,8 @@
-﻿using Minesweeper.Core.Field;
-
-namespace Minesweeper.Tests
+﻿namespace Minesweeper.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Minesweeper.Core.Field;
     using Minesweeper.Core.Mines;
 
     [TestClass]
