@@ -4,9 +4,11 @@
 // </copyright>
 // <summary>This class prints the level selector in the beginning of the minesweeper game & the game menu during each game.</summary>
 //-----------------------------------------------------------------------
+
 namespace Minesweeper.CLI
 {
     using System;
+    using System.Text;
     using Minesweeper.Core;
     using Minesweeper.Utils;
 
@@ -72,6 +74,9 @@ namespace Minesweeper.CLI
         {
             string[] menuText = { "Level 1", "Level 2", "Level 3", " Exit" };
             int select = 0;
+
+            this.PrintGameInstructions();
+            Console.ReadKey();
             this.PrintSelectionMenu(select, menuText, ConsoleWidth);
 
             while (true)
@@ -123,6 +128,7 @@ namespace Minesweeper.CLI
         public void PrintSelectionMenu(int selected, string[] menu, int width)
         {
             Console.Clear();
+
             var totalWidth = width;
             Console.CursorVisible = false;
             Console.WriteLine();
@@ -150,6 +156,33 @@ namespace Minesweeper.CLI
                                             .PadRight(totalWidth));
                 }
             }
+        }
+
+        /// <summary>
+        /// Prints the instructions at the beginning of the game.
+        /// </summary>
+        private void PrintGameInstructions()
+        {
+            const int HowToPlayPadSize = 63;
+            const int CommandsIntroPadSize = 59;
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+            var sb = new StringBuilder();
+            string howToPlay = "----- Minesweeper v5 Game instructions -----";
+            string commandsIntro = "To play, use the following commands:";
+
+            sb.AppendLine(howToPlay.PadLeft(HowToPlayPadSize));
+            sb.AppendLine(commandsIntro.PadLeft(CommandsIntroPadSize));
+            sb.AppendLine();
+            sb.AppendLine("To open a cell: \t [Row Col] \t - Example: 1 5");
+            sb.AppendLine("To flag a cell: \t [Row Col] f/F \t - Example: 1 5 f");
+            sb.AppendLine("To unflag a cell: \t [Row Col] r/R \t - Example: 1 5 R");
+            sb.AppendLine("To undo your turn: \t undo");
+            sb.AppendLine("To restart the game: \t restart");
+            sb.AppendLine("To exit the game: \t exit");
+
+            Console.WriteLine(sb.ToString());
         }
     }
 }
