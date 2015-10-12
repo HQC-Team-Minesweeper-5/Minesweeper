@@ -16,6 +16,13 @@
         {
             var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
         }
+        
+        [TestMethod]
+        [ExpectedException(typeof(System.Exception))]
+        public void CreateLevelWithTooLargeNumberOfMinesShouldThrow()
+        {
+            var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
+        }
 
         [TestMethod]
         public void NumberOfRowsShouldBeInt()
@@ -37,23 +44,15 @@
             var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
             Assert.IsInstanceOfType(level.NumberOfMines, typeof(int));
         }
-    }
         
         [TestMethod]
         public void CreateLevelShouldCreateNewLevel()
         {
-            var newLevel = new Level(3, 4, 1);
+            var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
 
-            Assert.AreEqual(3, newLevel.NumberOfRows);
-            Assert.AreEqual(4, newLevel.NumberOfCols);
-            Assert.AreEqual(1, newLevel.NumberOfMines);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(System.Exception))]
-        public void CreateLevelWithTooLargeNumberOfMinesShouldThrow()
-        {
-            var newLevel = new Level(3, 4, 13);
+            Assert.AreEqual(this.numberOfRows, level.NumberOfRows);
+            Assert.AreEqual(this.numberOfCols, level.NumberOfCols);
+            Assert.AreEqual(this.numberOfMines, level.NumberOfMines);
         }
     }
 }

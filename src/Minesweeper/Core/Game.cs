@@ -250,10 +250,10 @@ private const string GameOverMessage = "GAME OVER - you are dead!";
         private void DisplayGameOverSection()
         {
             this.musicPlayer.PlayGameOverMusic();
-            Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
             this.gamePrinter.PrintPlayingField(this.GameBoard, this.gameStatus);
             this.gameStatus = GameStatus.Restart;
 
+            Scoreboard.HighScore(this.GameBoard.OpenCellsCounter);
             int score = this.GameBoard.OpenCellsCounter;
             Console.WriteLine(GameOverMessage);
             Console.WriteLine("{0} {1}", ScoreMessage, score);
