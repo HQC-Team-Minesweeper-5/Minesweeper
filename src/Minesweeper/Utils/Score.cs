@@ -19,11 +19,6 @@ namespace Minesweeper.Utils
         private string name;
 
         /// <summary>
-        /// Holds player points.
-        /// </summary>
-        private int points;
-
-        /// <summary>
         /// Holds the date and time the game has ended.
         /// </summary>
         private DateTime date;
@@ -37,7 +32,7 @@ namespace Minesweeper.Utils
         public Score(string playerName, int points, DateTime dateTime)
         {
             this.name = playerName;
-            this.points = points;
+            this.Points = points;
             this.date = dateTime;
         }
 
@@ -45,13 +40,7 @@ namespace Minesweeper.Utils
         /// Gets the points of the player.
         /// </summary>
         /// <value>Returns the points of the player.</value>
-        public int Points
-        {
-            get
-            {
-                return this.points;
-            }
-        }
+        public int Points { get; }
 
         /// <summary>
         /// Compares one score to another, so players can be ordered in the high score list.
@@ -60,12 +49,12 @@ namespace Minesweeper.Utils
         /// <returns>A value, indicating which score was higher.</returns>
         public int CompareTo(Score otherScore)
         {
-            if (this.points > otherScore.points)
+            if (this.Points > otherScore.Points)
             {
                 return 1;
             }
 
-            if (this.points == otherScore.points)
+            if (this.Points == otherScore.Points)
             {
                 return 0;
             }
@@ -79,7 +68,7 @@ namespace Minesweeper.Utils
         /// <returns>A string with information for player name, score and time the game has ended.</returns>
         public override string ToString()
         {
-            return this.name + "\t" + this.points.ToString() + "\t" + this.date.ToString();
+            return this.name + "\t" + this.Points.ToString() + "\t" + this.date.ToString();
         }
     }
 }
