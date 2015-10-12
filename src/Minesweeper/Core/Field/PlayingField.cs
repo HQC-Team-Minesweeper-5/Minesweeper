@@ -197,13 +197,13 @@ namespace Minesweeper.Core.Field
             int rows = emptyPlayingField.GetLength(0);
             int cols = emptyPlayingField.GetLength(1);
             Cell[,] playingField = emptyPlayingField;
-            Cell mine = new Cell();
+            Cell cell = new Cell();
 
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    playingField[i, j] = mine.Clone() as Cell;
+                    playingField[i, j] = cell.Clone() as Cell;
                 }
             }
         }
