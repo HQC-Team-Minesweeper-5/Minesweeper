@@ -26,7 +26,7 @@ namespace Minesweeper.Core
         /// Game over message.
         /// </summary>
         private const string GameOverMessage = "GAME OVER - you are dead!";
-
+       
         /// <summary>
         /// Win message.
         /// </summary>
@@ -36,7 +36,6 @@ namespace Minesweeper.Core
         /// Message showing current user score.
         /// </summary>
         private const string ScoreMessage = "Your score: ";
-
         /// <summary>
         /// Message helping user with command input.
         /// </summary>
