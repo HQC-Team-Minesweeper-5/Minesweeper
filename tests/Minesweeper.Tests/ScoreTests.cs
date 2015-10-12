@@ -50,7 +50,7 @@ namespace Minesweeper.Tests.UitlsTests
         }
 
         [TestMethod]
-        public void CompareToHigerShouldReturnOne()
+        public void CompareToHigerShouldReturnMinusOne()
         {
             const int FirstPoints = 100;
             const int SecondPoints = 200;
@@ -59,7 +59,7 @@ namespace Minesweeper.Tests.UitlsTests
             var secondScore = new Score(this.playerName, SecondPoints, this.time);
 
             var result = firstScore.CompareTo(secondScore);
-            Assert.AreEqual(result, 1);
+            Assert.AreEqual(result, -1);
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace Minesweeper.Tests.UitlsTests
         }
 
         [TestMethod]
-        public void CompareToLowerShouldReturnNegativeOne()
+        public void CompareToLowerShouldReturnOne()
         {
             const int FirstPoints = 100;
             const int SecondPoints = 50;
@@ -85,7 +85,7 @@ namespace Minesweeper.Tests.UitlsTests
             var secondScore = new Score(this.playerName, SecondPoints, this.time);
 
             var result = firstScore.CompareTo(secondScore);
-            Assert.AreEqual(result, -1);
+            Assert.AreEqual(result, 1);
         }
     }
 }

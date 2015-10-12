@@ -153,7 +153,7 @@ namespace Minesweeper.Core.Field
         /// </summary>
         /// <param name="row">The row of the cell, being flagged.</param>
         /// <param name="column">The column of the cell, being flagged.</param>
-        public void SetFlag(int row, int column)
+        internal void SetFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
             this.newCells.Add(new Coordinates(row, column));
@@ -173,7 +173,7 @@ namespace Minesweeper.Core.Field
         /// </summary>
         /// <param name="row">The row of the cell, from which a flag is being removed.</param>
         /// <param name="column">The column of the cell, from which a flag is being removed.</param>
-        public void RemoveFlag(int row, int column)
+        internal void RemoveFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
             this.newCells.Add(new Coordinates(row, column));

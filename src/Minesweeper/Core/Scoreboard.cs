@@ -128,7 +128,9 @@ namespace Minesweeper.Core
 
             Score current = new Score(playerName, currentPlayerScore, DateTime.Now);
             scoreBoard.Add(current);
-            scoreBoard.Sort((x1, x2) => x1.CompareTo(x2));
+
+            // Sort decreasing
+            scoreBoard.Sort((x1, x2) => x2.CompareTo(x1));
         }
     }
 }
