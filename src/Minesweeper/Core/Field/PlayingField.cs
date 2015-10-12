@@ -52,7 +52,7 @@ namespace Minesweeper.Core.Field
         /// <param name="rows">The number of rows of the playing field.</param>
         /// <param name="cols">The number of columns of the playing field.</param>
         /// <param name="minesCount">The number of mines on the playing filed.</param>
-        internal PlayingField(int rows, int cols, int minesCount)
+        public PlayingField(int rows, int cols, int minesCount)
         {
             this.field = new Cell[rows, cols];
             this.openCellsCounter = 0;
@@ -65,7 +65,8 @@ namespace Minesweeper.Core.Field
         /// <summary>
         /// Gets the playing field.
         /// </summary>
-        internal Cell[,] Field
+        /// <value>Returns the mine field within the playing field.</value>
+        public Cell[,] Field
         {
             get
             {
@@ -76,7 +77,8 @@ namespace Minesweeper.Core.Field
         /// <summary>
         /// Gets the open cells counter - the number of cells which are already opened.
         /// </summary>
-        internal int OpenCellsCounter
+        /// <value>Returns the number of cell, which have been opened.</value>
+        public int OpenCellsCounter
         {
             get
             {
@@ -98,17 +100,17 @@ namespace Minesweeper.Core.Field
         /// </summary>
         /// <param name="row">The row of the cell, being opened.</param>
         /// <param name="column">The column of the cell, being opened.</param>
-        internal void OpenCell(int row, int column)
+        public void OpenCell(int row, int column)
         {
-            Cell field = this.field[row, column];
+            Cell cell = this.field[row, column];
 
-            if (field.Status == CellStatus.Flagged || field.Status == CellStatus.Opened)
+            if (cell.Status == CellStatus.Flagged || cell.Status == CellStatus.Opened)
             {
                 Console.Beep();
 
                 return;
             }
-            else if (field.IsMine)
+            else if (cell.IsMine)
             {
                 Game.Instance().ChangeToGameOver();
             }
@@ -120,7 +122,7 @@ namespace Minesweeper.Core.Field
                     this.newCells = new List<Coordinates>();
                 }
 
-                field.Status = CellStatus.Opened;
+                cell.Status = CellStatus.Opened;
                 this.newCells.Add(new Coordinates(row, column));
 
                 if (this.initialState)
@@ -130,7 +132,7 @@ namespace Minesweeper.Core.Field
                     this.initialState = false;
                 }
 
-                if (field.Value == 0)
+                if (cell.Value == 0)
                 {
                     this.howDeepAmI++;
                     this.OpenSurroundingCells(row, column);
@@ -151,7 +153,7 @@ namespace Minesweeper.Core.Field
         /// </summary>
         /// <param name="row">The row of the cell, being flagged.</param>
         /// <param name="column">The column of the cell, being flagged.</param>
-        internal void SetFlag(int row, int column)
+        public void SetFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
             this.newCells.Add(new Coordinates(row, column));
@@ -171,7 +173,7 @@ namespace Minesweeper.Core.Field
         /// </summary>
         /// <param name="row">The row of the cell, from which a flag is being removed.</param>
         /// <param name="column">The column of the cell, from which a flag is being removed.</param>
-        internal void RemoveFlag(int row, int column)
+        public void RemoveFlag(int row, int column)
         {
             this.newCells = new List<Coordinates>();
             this.newCells.Add(new Coordinates(row, column));
