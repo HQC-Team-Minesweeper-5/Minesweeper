@@ -1,4 +1,4 @@
-namespace Minesweeper.Tests.UitlsTests
+namespace Minesweeper.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
