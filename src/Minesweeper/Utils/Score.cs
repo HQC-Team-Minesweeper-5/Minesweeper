@@ -11,7 +11,7 @@ namespace Minesweeper.Utils
     /// <summary>
     /// Holds the score from the game.
     /// </summary>
-    internal class Score : IComparable<Score>
+    public class Score : IComparable<Score>
     {
         /// <summary>
         /// Holds player name.
@@ -61,7 +61,7 @@ namespace Minesweeper.Utils
         {
             if (this.points > otherScore.points)
             {
-                return -1;
+                return 1;
             }
 
             if (this.points == otherScore.points)
@@ -69,7 +69,7 @@ namespace Minesweeper.Utils
                 return 0;
             }
 
-            return 1;
+            return -1;
         }
 
         /// <summary>
