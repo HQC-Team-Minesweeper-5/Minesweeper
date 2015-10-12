@@ -6,6 +6,8 @@
 //-----------------------------------------------------------------------
 namespace Minesweeper.Utils
 {
+    using System;
+
     /// <summary>
     /// Utility class that holds the parameters of the chosen level in the beginning of the game.
     /// </summary>
@@ -19,6 +21,8 @@ namespace Minesweeper.Utils
         /// <param name="numberOfMines">The number of mines in the playing field for this level.</param>
         public Level(int numberOfRows, int numberOfCols, int numberOfMines)
         {
+            this.ValidateNumberOfMines(numberOfRows, numberOfCols, numberOfMines);
+
             this.NumberOfRows = numberOfRows;
             this.NumberOfCols = numberOfCols;
             this.NumberOfMines = numberOfMines;
@@ -41,5 +45,20 @@ namespace Minesweeper.Utils
         /// </summary>
         /// <value>The number of mines in the field.</value>
         public int NumberOfMines { get; private set; }
+
+        /// <summary>
+        /// Checks if the number of mines in the level is less than or equal to the number of cells on the playing field.
+        /// </summary>
+        /// <param name="rows">The number of rows on the playing field.</param>
+        /// <param name="cols">The number of columns on the playing field.</param>
+        /// <param name="numberOfMines">The number of mines, which will be set.</param>
+        private void ValidateNumberOfMines(int rows, int cols, int numberOfMines)
+        {
+            bool isValidNumberOrMines = numberOfMines <= rows * cols;
+            if (!isValidNumberOrMines)
+            {
+                throw new Exception("The number of mines cannot be greater than the number of cells in the field!");
+            }
+        }
     }
 }
