@@ -44,6 +44,7 @@ namespace Minesweeper.Utils
         /// <summary>
         /// Gets the points of the player.
         /// </summary>
+        /// <value>Returns the points of the player.</value>
         public int Points
         {
             get

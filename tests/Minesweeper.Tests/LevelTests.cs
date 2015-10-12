@@ -37,7 +37,6 @@
             var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
             Assert.IsInstanceOfType(level.NumberOfMines, typeof(int));
         }
-    }
         
         [TestMethod]
         public void CreateLevelShouldCreateNewLevel()
