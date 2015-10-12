@@ -31,12 +31,11 @@ namespace Minesweeper.Core
         /// Win message.
         /// </summary>
         private const string YouWinMessage = "Congratulations General, you just won the game!";
-        
+
         /// <summary>
         /// Message showing current user score.
         /// </summary>
         private const string ScoreMessage = "Your score: ";
-        
         /// <summary>
         /// Message helping user with command input.
         /// </summary>

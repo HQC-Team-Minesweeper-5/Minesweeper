@@ -40,7 +40,7 @@ namespace Minesweeper.Utils
         /// Gets the points of the player.
         /// </summary>
         /// <value>Returns the points of the player.</value>
-        public int Points { get; }
+        public int Points { get; private set; }
 
         /// <summary>
         /// Compares one score to another, so players can be ordered in the high score list.
