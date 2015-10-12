@@ -21,7 +21,7 @@
         [ExpectedException(typeof(System.Exception))]
         public void CreateLevelWithTooLargeNumberOfMinesShouldThrow()
         {
-            var level = new Level(this.numberOfRows, this.numberOfCols, this.numberOfMines);
+            var level = new Level(this.numberOfRows, this.numberOfCols, 425);
         }
 
         [TestMethod]
